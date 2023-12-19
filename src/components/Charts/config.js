@@ -81,9 +81,9 @@ export const areaChartOptions = {
         },
         ticks: {
           beginAtZero: true,
-          stepSize: 3000,
+          stepSize: 5000,
           min: 0,
-          max: 9000,
+          max: 20000,
           padding: 20,
           callback: function(value, index, ticks) {
             return '£' + value;
