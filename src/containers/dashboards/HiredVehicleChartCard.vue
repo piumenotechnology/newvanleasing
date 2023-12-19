@@ -81,7 +81,7 @@ export default {
         labels: this.dataLabel,
         datasets: [
           {
-            label: '',
+            label: 'test deh',
             data: this.datasets.data,
             borderColor: colors.themeColor1,
             pointBorderColor: colors.themeColor1,
