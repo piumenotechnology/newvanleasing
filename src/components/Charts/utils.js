@@ -14,11 +14,11 @@ export const chartTooltip = {
   xPadding: 15,
   yPadding: 15,
   cornerRadius: 0.15,
-  // callbacks: {
-  //   label: function(tooltipItems, data) { 
-  //     return '£' + tooltipItems.yLabel;
-  //   }
-  // }
+  callbacks: {
+    label: function(tooltipItems, data) { 
+      return '£ ' + tooltipItems.yLabel;
+    }
+  }
 }
 
 
