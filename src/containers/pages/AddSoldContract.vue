@@ -194,6 +194,17 @@ export default {
       }
     }
   },
+  computed: {
+    dataAgreement() {
+      return this.form.id_sales_order
+    }
+  },
+  watch: {
+    dataAgreement(newVal, oldVal) {
+      this.form.id_purchase_order = newVal.vehicle_registration
+      this.getSalesId(newVal.agreement_number)
+    },
+  },
   methods: {
     formatDate(date) {
       return new Date(date).toISOString().substr(0, 10)
@@ -208,7 +219,7 @@ export default {
       return formData;
     },
     fetchOptions(search, loading) {
-      let url = apiUrl + "/showagreementnumberinvehiclesold";
+      let url = apiUrl + "/showagreementnumberinvehiclesold?per_page=15&search=" + encodeURI(search);
       loading(true);
       setTimeout(() => {
         axios
@@ -218,9 +229,8 @@ export default {
             let latestContract = res.data.filter(x =>
               x.id == Math.max(...res.data.map(o => o.id))
             )
-            this.optionData = latestContract
-            this.getSalesId(latestContract[0].agreement_number)
-            this.form.id_purchase_order = latestContract[0].vehicle_registration
+            this.optionData = res.data
+            // this.getSalesId(latestContract[0].agreement_number)
           }).catch(_error => {
             console.log(_error)
           }).finally(() => {
