@@ -37,7 +37,7 @@
         <gradient-with-radial-progress-card
           icon="iconsminds-inbox-out"
           :title="`${totalHiredVehicle}`"
-          :detail="`Total Vehicles: ${cars.length}`"
+          :detail="`Total Vehicles: ${total}`"
           :suffix="'Hire Contract'"
           :percent="`${totalHiredVehicle}`*100/`${cars.length}`"
           :progressText="`${hirePercentage}%`"
@@ -79,12 +79,12 @@
           :detail="$t('performance.loan-outstanding')"
         />
       </b-colxx>
-      <b-colxx sm="12" md="6" class="mb-4">
+      <b-colxx sm="12" lg="12" class="mb-4">
         <hired-vehicle-chart-card :data="items"></hired-vehicle-chart-card>
       </b-colxx>
-      <b-colxx sm="12" md="6" class="mb-4">
+      <!-- <b-colxx sm="12" md="6" class="mb-4">
         <sold-vehicle-chart-card></sold-vehicle-chart-card>
-      </b-colxx>
+      </b-colxx> -->
     </b-row>
     <b-row>
       <b-colxx xxs="12" class="mb-4">
@@ -138,7 +138,7 @@ export default {
       sort: "",
       order: "",
       page: 1,
-      perPage: 8,
+      perPage: 15,
       search: "",
       from: 0,
       to: 0,
