@@ -17,7 +17,7 @@
         <span v-show="props.rowData.cust_name" @click.prevent="showPerformanceModal(props.rowData)" class="cursor-pointer">{{ props.rowData.cust_name }}</span>
       </template>
       <template slot="income" slot-scope="props">
-        <span v-if="props.rowData.next_step_status_sales === 'Sold'">£ {{ props.rowData.rental_income | withcoma }} + {{ props.rowData.sold_price | withcoma }}</span>
+        <span v-if="props.rowData.next_step_status_sales === 'Sold'">{{ getTotalIncome(props.rowData.rental_income, props.rowData.sold_price) }}</span>
         <span v-else>£ {{ props.rowData.total_income | withcoma }}</span>
       </template>
       <template slot="mileage" slot-scope="props">
@@ -135,6 +135,9 @@ export default {
   methods: {
     showPerformanceModal(obj) {
       this.$refs.performanceDetail.openModal(obj);
+    },
+    getTotalIncome(val1, val2) {
+      return `£ ${Math.abs(val1 + val2)}`;
     }
   }
 }
