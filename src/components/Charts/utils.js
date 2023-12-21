@@ -21,7 +21,6 @@ export const chartTooltip = {
   }
 }
 
-
 export const centerTextPlugin = {
   afterDatasetsUpdate: function (chart) {},
   beforeDraw: function (chart) {
