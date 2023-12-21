@@ -39,7 +39,7 @@
           :title="`${totalHiredVehicle}`"
           :detail="`Total Vehicles: ${total}`"
           :suffix="'Hire Contract'"
-          :percent="`${totalHiredVehicle}`*100/`${cars.length}`"
+          :percent="`${totalHiredVehicle}`*100/`${total}`"
           :progressText="`${hirePercentage}%`"
         />
       </b-colxx>
@@ -305,7 +305,7 @@ export default {
       return Number(num)
     },
     hirePercentage() {
-      return Math.round(this.totalHiredVehicle*100/this.cars.length)
+      return Math.round(this.totalHiredVehicle*100/this.total)
     },
     pastDate: {
       get (val) {
