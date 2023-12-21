@@ -15,8 +15,10 @@
         <span class="d-flex align-items-center text-muted text-small font-weight-light float-right">{{ $t("pages.status") }}
           <b-badge v-if="report.next_step_status_sales == 'Hired'" pill variant="primary"
             class="font-weight-normal ml-2">{{ report.next_step_status_sales }}</b-badge>
-          <b-badge v-else pill variant="light"
+          <b-badge v-else-if="report.next_step_status_sales == 'Innactive'" pill variant="light"
             class="font-weight-normal ml-2">{{ report.next_step_status_sales }}</b-badge>
+          <b-badge v-else pill variant="dark"
+          class="font-weight-normal ml-2">{{ report.next_step_status_sales }}</b-badge>
         </span>
       </li>
     </ul>
@@ -46,7 +48,7 @@
     </p>
     <p class="font-weight-semibold mb-3">
       <span class="text-muted text-small font-weight-light mr-1">{{ $t("performance.total-income") }}
-      </span>£ {{ report.total_income | withcoma }}
+      </span>£ {{ totalIncome | withcoma }}
     </p>
     <p class="font-weight-semibold mb-3">
       <span class="text-muted text-small font-weight-light mr-1">{{ $t("performance.rental-income") }}
@@ -74,6 +76,11 @@ export default {
     },
     withcoma: function(num) {
       return Number(num).toLocaleString()
+    }
+  },
+  computed: {
+    totalIncome() {
+      return (report.next_step_status_sales !== "Sold") ? this.report.total_income : Math.round(this.report.rental_income + this.report.sold_price) ;
     }
   },
   methods: {
