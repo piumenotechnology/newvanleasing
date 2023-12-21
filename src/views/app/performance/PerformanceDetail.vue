@@ -82,7 +82,7 @@ export default {
         .then(res => {
           this.isLoading = false
           let subTotal = res.data.filter(x => x.next_step_status_sales !== "Hired").map(x => x.total_income)
-          console.log(subTotal);
+          // console.log(subTotal);
           if(subTotal.length > 0) {
             this.subTotal = subTotal.reduce(this.getSum, 0)
           } else {
