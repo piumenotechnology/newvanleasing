@@ -261,7 +261,7 @@ export default {
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          this.cars = res.data.data
+          this.cars = res.data
         }).catch(_error => {
           console.log(_error)
         })
