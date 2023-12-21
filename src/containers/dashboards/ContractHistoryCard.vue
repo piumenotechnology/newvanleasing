@@ -137,7 +137,9 @@ export default {
       this.$refs.performanceDetail.openModal(obj);
     },
     getTotalIncome(val1, val2) {
-      return `£ ${Math.abs(val1 + val2)}`;
+      const total = Math.abs(val1 + val2);
+      const totalComa = Number(total).toLocaleString();
+      return `£ ${totalComa}`;
     }
   }
 }
