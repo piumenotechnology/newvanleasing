@@ -37,9 +37,9 @@
         <gradient-with-radial-progress-card
           icon="iconsminds-inbox-out"
           :title="`${totalHiredVehicle}`"
-          :detail="`Total Vehicles: ${total}`"
+          :detail="`Total Vehicles: ${totalCars}`"
           :suffix="'Hire Contract'"
-          :percent="`${totalHiredVehicle}`*100/`${total}`"
+          :percent="`${totalHiredVehicle}`*100/`${totalCars}`"
           :progressText="`${hirePercentage}%`"
         />
       </b-colxx>
@@ -256,7 +256,7 @@ export default {
         })
     },
     async fetchCars() {
-      let url = apiUrl + "/purchaseorderall";
+      let url = apiUrl + "/purchaseorder";
       axios
         .get(url)
         .then(r => r.data)
@@ -300,6 +300,10 @@ export default {
     },
   },
   computed: {
+    totalCars() {
+      const sold = this.cars.filter(x => x.status_next_step == 'Sold').length
+      return Number(sold)
+    },
     totalHiredVehicle() {
       let num = this.items.filter(x => x.status_next_step == 'Hired').length
       return Number(num)
