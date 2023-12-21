@@ -301,7 +301,7 @@ export default {
   },
   computed: {
     totalCars() {
-      const sold = this.cars.filter(x => x.status_next_step == 'Sold').length
+      const sold = this.cars.filter(x => x.status_next_step !== 'Sold').length
       return Number(sold)
     },
     totalHiredVehicle() {
@@ -309,7 +309,7 @@ export default {
       return Number(num)
     },
     hirePercentage() {
-      return Math.round(this.totalHiredVehicle*100/this.total)
+      return Math.round(this.totalHiredVehicle*100/this.totalCars)
     },
     pastDate: {
       get (val) {
