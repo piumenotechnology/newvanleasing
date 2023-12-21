@@ -80,7 +80,7 @@ export default {
   },
   computed: {
     totalIncome() {
-      return (report.next_step_status_sales !== "Sold") ? this.report.total_income : Math.round(this.report.rental_income + this.report.sold_price) ;
+      return (this.report.next_step_status_sales !== "Sold") ? this.report.total_income : Math.round(this.report.rental_income + this.report.sold_price) ;
     }
   },
   methods: {
