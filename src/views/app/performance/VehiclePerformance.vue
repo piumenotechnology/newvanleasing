@@ -305,7 +305,7 @@ export default {
       return Number(sold)
     },
     totalHiredVehicle() {
-      let num = this.items.filter(x => x.status_next_step == 'Hired').length
+      let num = this.items.filter(x => x.next_step_status_sales == 'Hired').length
       return Number(num)
     },
     hirePercentage() {
