@@ -1,6 +1,6 @@
 <template>
   <b-card>
-    <p class="list-heading text-uppercase mb-4">{{ $t("performance.contract-history") }}</p>]
+    <p class="list-heading text-uppercase mb-4">{{ $t("performance.contract-history") }}</p>
     <vuetable
       table-height="350px"
       ref="vuetable-scrollable"
