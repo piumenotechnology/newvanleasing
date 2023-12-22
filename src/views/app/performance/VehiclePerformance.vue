@@ -259,6 +259,10 @@ export default {
           console.log(_error)
         })
     },
+    changePageSize(perPage) {
+      this.perPage = perPage;
+      this.$refs.vuetable.refresh();
+    },
     searchChange(val) {
       this.search = val;
       this.$refs.vuetable.refresh();
