@@ -1,6 +1,8 @@
 <template>
   <b-card>
     <p class="list-heading text-uppercase mb-4">{{ $t("performance.contract-history") }}</p>
+    <datatable-heading :title="$t('performance.contract-history')" :changePageSize="changePageSize"
+      :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
     <vuetable
       table-height="350px"
       ref="vuetable-scrollable"
