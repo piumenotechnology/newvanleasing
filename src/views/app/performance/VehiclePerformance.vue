@@ -90,7 +90,7 @@
       <b-colxx xxs="12" class="mb-4">
         <b-card :title="$t('performance.top-hired')">
           <datatable-heading :title="$t('performance.contract-history')" :changePageSize="changePageSize" 
-          :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" noBreadcrumbs />
+          :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" :noBreadcrumbs="true" />
           <vuetable ref="vuetable" class="responsive-table" :api-url="apiBase" :query-params="makeQueryParams"
             :per-page="perPage" :reactive-api-url="true" :fields="fields" data-path="data.data" pagination-path="data"
             @vuetable:pagination-data="onPaginationData">
