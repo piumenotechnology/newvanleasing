@@ -89,6 +89,8 @@
     <b-row>
       <b-colxx xxs="12" class="mb-4">
         <b-card :title="$t('performance.top-hired')">
+          <datatable-heading :title="$t('performance.contract-history')" :changePageSize="changePageSize" 
+          :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
           <vuetable ref="vuetable" class="responsive-table" :api-url="apiBase" :query-params="makeQueryParams"
             :per-page="perPage" :reactive-api-url="true" :fields="fields" data-path="data.data" pagination-path="data"
             @vuetable:pagination-data="onPaginationData">
@@ -116,6 +118,7 @@ import GradientWithRadialProgressCard from "../../../components/Cards/GradientWi
 import GradientWithGrowthProgressCard from "../../../components/Cards/GradientWithGrowthProgressCard";
 import SoldVehicleChartCard from "../../../containers/dashboards/SoldVehicleChartCard";
 import HiredVehicleChartCard from "../../../containers/dashboards/HiredVehicleChartCard";
+import DatatableHeading from "../../../containers/datatable/DatatableHeading";
 import Datepicker from "vuejs-datepicker";
 
 export default {
@@ -126,6 +129,7 @@ export default {
     "gradient-with-growth-progress-card": GradientWithGrowthProgressCard,
     "sold-vehicle-chart-card": SoldVehicleChartCard,
     "hired-vehicle-chart-card": HiredVehicleChartCard,
+    "datatable-heading": DatatableHeading,
     "datepicker": Datepicker
   },
   data() {
