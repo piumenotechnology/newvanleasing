@@ -1,8 +1,6 @@
 <template>
   <b-card>
-    <p class="list-heading text-uppercase mb-4">{{ $t("performance.contract-history") }}</p>
-    <datatable-heading :title="$t('performance.contract-history')" :changePageSize="changePageSize"
-      :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
+    <p class="list-heading text-uppercase mb-4">{{ $t("performance.contract-history") }}</p>]
     <vuetable
       table-height="350px"
       ref="vuetable-scrollable"
@@ -53,7 +51,6 @@ import { apiUrl } from "../../constants/config";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../components/Common/VuetablePaginationBootstrap";
 import ViewPerformanceDetails from "../pages/ViewPerformanceDetail";
-import DatatableHeading from "../datatable/DatatableHeading";
 
 export default {
   props: ["id"],
@@ -61,7 +58,6 @@ export default {
     vuetable: Vuetable,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
     "view-performance-details": ViewPerformanceDetails,
-    "datatable-heading": DatatableHeading,
   },
   data() {
     return {
