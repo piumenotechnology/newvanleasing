@@ -163,9 +163,9 @@
         this.to = paginationData.to;
         this.total = paginationData.total;
         this.lastPage = paginationData.last_page;
-        this.items = paginationData.data;
-        this.itemsCount = this.items.length;
-        this.$emit("mounted-return-tab", this.itemsCount);
+        // this.items = paginationData.data;
+        // this.itemsCount = this.items.length;
+        this.$emit("mounted-return-tab", this.total);
         this.$refs.pagination.setPaginationData(paginationData);
       },
       onChangePage(page) {
