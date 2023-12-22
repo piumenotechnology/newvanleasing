@@ -53,6 +53,7 @@ import { apiUrl } from "../../constants/config";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../components/Common/VuetablePaginationBootstrap";
 import ViewPerformanceDetails from "../pages/ViewPerformanceDetail";
+import DatatableHeading from "../datatable/DatatableHeading";
 
 export default {
   props: ["id"],
@@ -60,6 +61,7 @@ export default {
     vuetable: Vuetable,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
     "view-performance-details": ViewPerformanceDetails,
+    "datatable-heading": DatatableHeading,
   },
   data() {
     return {
