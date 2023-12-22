@@ -43,7 +43,7 @@
           :progressText="`${hirePercentage}%`"
         />
       </b-colxx>
-      <b-colxx xs="6" lg="2" class="mb-3">
+      <b-colxx xs="6" lg="4" class="mb-3">
         <gradient-with-growth-progress-card
           icon="iconsminds-financial"
           :title="`${theIncome}`"
@@ -52,7 +52,7 @@
           :detail="$t('performance.total-income')"
         />
       </b-colxx>
-      <b-colxx xs="6" lg="2" class="mb-3">
+      <b-colxx xs="6" lg="4" class="mb-3">
         <gradient-with-growth-progress-card
           icon="iconsminds-billing"
           :title="`${theCost}`"
@@ -61,7 +61,7 @@
           :detail="$t('performance.total-cost')"
         />
       </b-colxx>
-      <b-colxx xs="6" lg="2" class="mb-3">
+      <!-- <b-colxx xs="6" lg="2" class="mb-3">
         <gradient-with-growth-progress-card
           icon="iconsminds-basket-coins"
           :title="`${potentialIncome}`"
@@ -78,7 +78,7 @@
           :prefix="'£'"
           :detail="$t('performance.loan-outstanding')"
         />
-      </b-colxx>
+      </b-colxx> -->
       <b-colxx sm="12" lg="12" class="mb-4">
         <hired-vehicle-chart-card :data="items"></hired-vehicle-chart-card>
       </b-colxx>
