@@ -472,8 +472,8 @@ export default {
                await this.addInterest(vehicle.id)
             }
             this.isProcessing = false;
-            this.status = "Great!";
-            this.message = "Your data was saved!";
+            this.status = "Great";
+            this.message = "Your vehicle was added";
             setTimeout(() => {
                this.isProcessing = false;
                this.$emit('add-modal-hide');
