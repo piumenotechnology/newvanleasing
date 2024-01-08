@@ -3,10 +3,10 @@
     <datatable-heading :title="$t('contract.active')" :changePageSize="changePageSize" :searchChange="searchChange"
       :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
       <div class="top-right-button-container">
-        <b-button v-show="isLoad" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new') }}</b-button>
+        <b-button v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new') }}</b-button>
       </div>
       <add-new-contract @added-data-table="onAddedDataTable" :key="componentKey"/>
-    <b-colxx v-show="isLoad" xxs="12">
+    <b-colxx xxs="12">
       <b-card>
         <vuetable ref="vuetable" class="order-with-arrow responsive-table" :api-url="apiBase" :query-params="makeQueryParams"
           :per-page="perPage" :reactive-api-url="true" :fields="fields" data-path="data.data" pagination-path="data"
@@ -44,7 +44,6 @@ export default {
   },
   data() {
     return {
-      isLoad: false,
       apiBase: apiUrl + "/showactivesales",
       sort: "",
       order: "",
