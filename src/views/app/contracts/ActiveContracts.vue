@@ -2,8 +2,12 @@
   <b-row>
     <datatable-heading :title="$t('contract.active')" :changePageSize="changePageSize" :searchChange="searchChange"
       :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
-    
-    <b-colxx xxs="12">
+      <div class="top-right-button-container">
+        <b-button v-show="isLoad" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new')
+        }}</b-button>
+      </div>
+      <add-new-contract @added-data-table="onAddedDataTable" :key="componentKey"/>
+    <b-colxx v-show="isLoad" xxs="12">
       <b-card>
         <vuetable ref="vuetable" class="order-with-arrow responsive-table" :api-url="apiBase" :query-params="makeQueryParams"
           :per-page="perPage" :reactive-api-url="true" :fields="fields" data-path="data.data" pagination-path="data"
@@ -23,10 +27,12 @@
   </b-row>
 </template>
 <script>
+import axios  from "axios";
+import { apiUrl } from "../../../constants/config";
 import moment from "moment";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
-import { apiUrl } from "../../../constants/config";
+import AddNewContract from "../../../containers/pages/AddNewContract";
 import DatatableHeading from "../../../containers/datatable/DatatableHeading";
 
 export default {
@@ -50,6 +56,7 @@ export default {
       total: 0,
       lastPage: 0,
       items: [],
+      componentKey: 0,
       fields: [
         {
           name: "agreement_number",
