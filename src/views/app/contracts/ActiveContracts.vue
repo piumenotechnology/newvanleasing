@@ -141,12 +141,14 @@ export default {
     onChangePage(page) {
       this.$refs.vuetable.changePage(page);
     },
-
     changePageSize(perPage) {
       this.perPage = perPage;
       this.$refs.vuetable.refresh();
     },
-
+    onAddedDataTable() {
+      this.componentKey++;
+      this.updateTableRow()
+    },
     searchChange(val) {
       this.search = val;
       this.$refs.vuetable.refresh();
