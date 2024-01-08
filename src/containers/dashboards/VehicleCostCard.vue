@@ -2,65 +2,65 @@
   <b-card-body>
     <p class="list-heading text-uppercase mb-4">{{ $t("performance.cost") }}</p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("performance.otr-price") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.otr-price") }}
       </span>£ {{ vehicle.price_otr | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("performance.installment") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.installment") }}
       </span>£ {{ vehicle.total_cost | withcoma }}
       <!-- </span><i id="other-cost" >£ {{ getInterest(vehicle.price_otr, vehicle.hp_interest_per_annum, period) | withcoma }}</i>
       <b-tooltip target="other-cost" placement="left" :title="$t('performance.tooltip-cost')">
       </b-tooltip> -->
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("performance.other-cost") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.other-cost") }}
       </span>£ {{ otherCost| withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("performance.total-cost") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.total-cost") }}
       </span>£ {{ theCost | withcoma }}
     </p>
     
     <div class="separator mb-4" />
     <p class="list-heading text-uppercase mb-4">{{ $t("performance.funding") }}</p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.provider-name") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.provider-name") }}
       </span>{{ purchaseProvider }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.purchase-date") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.purchase-date") }}
       </span>{{ vehicle.hire_purchase_starting_date | datetime }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.interest-rate") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.interest-rate") }}
       </span>{{ vehicle.hp_interest_per_annum | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.terms") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.terms") }}
       </span>{{ vehicle.hp_term }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.deposit") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.deposit") }}
       </span>£ {{ vehicle.hp_deposit_amount | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.documentation-fee") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.documentation-fee") }}
       </span>£ {{ vehicle.documentation_fees_pu | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.final-fee") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.final-fee") }}
       </span>£ {{ vehicle.final_fees | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.other-fee") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.other-fee") }}
       </span>£ {{ vehicle.other_fees | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.monthly-repayment") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.monthly-repayment") }}
       </span>£ {{ vehicle.monthly_payment | withcoma }}
     </p>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.final-payment") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.final-payment") }}
       </span>£ {{ vehicle.final_payment | withcoma }}
     </p>
   </b-card-body>
