@@ -147,7 +147,7 @@ export default {
     },
     onAddedDataTable() {
       this.componentKey++;
-      this.updateTableRow()
+      this.$refs.vuetable.refresh();
     },
     searchChange(val) {
       this.search = val;
