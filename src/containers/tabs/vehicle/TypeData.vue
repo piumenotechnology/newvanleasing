@@ -41,22 +41,22 @@
       <currency-field v-model="$v.methodsData.monthlyRepay.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.monthlyRepay.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.monthlyRepay.decimal">Must be a number</b-form-invalid-feedback>
     </b-form-group>
-    <b-form-group v-show="methodsType === 'hire' || methodsType === 'cash'"
+    <b-form-group v-show="methodsType === 'hire'"
     :label="$t('vehicle.final-payment')"  class="has-top-label">
       <currency-field v-model="$v.methodsData.finalPay.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.finalPay.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.finalPay.decimal">Must be a number</b-form-invalid-feedback>
     </b-form-group>
-    <b-form-group v-show="methodsType === 'hire' || methodsType === 'cash'"
+    <b-form-group v-show="methodsType === 'hire'"
     :label="$t('vehicle.documentation-fee')"  class="has-top-label">
       <currency-field v-model="$v.methodsData.docFee.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.docFee.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.docFee.decimal">Must be a number</b-form-invalid-feedback>
     </b-form-group>
-    <b-form-group v-show="methodsType === 'hire' || methodsType === 'cash'"
+    <b-form-group v-show="methodsType === 'hire'"
     :label="$t('vehicle.final-fee')"  class="has-top-label">
       <currency-field v-model="$v.methodsData.finalFee.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.finalFee.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.finalFee.decimal">Must be a number</b-form-invalid-feedback>
     </b-form-group>
-    <b-form-group v-show="methodsType === 'hire' || methodsType === 'cash'"
+    <b-form-group v-show="methodsType === 'hire'"
     :label="$t('vehicle.other-fee')"  class="has-top-label">
       <currency-field v-model="$v.methodsData.otherFee.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.otherFee.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.otherFee.decimal">Must be a number</b-form-invalid-feedback>
