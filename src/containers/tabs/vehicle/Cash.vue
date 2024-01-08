@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="d-none">
     <b-form-group :label="$t('vehicle.final-payment')"  class="has-float-label">
       <b-form-input
           type="text"
