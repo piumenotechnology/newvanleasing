@@ -130,7 +130,7 @@
                      </b-form-group>
                   </b-colxx>
                </b-form-row>
-               <b-form-group :label="$t('vehicle.service-intervals')" class="has-top-label">
+               <b-form-group :label="$t('vehicle.service-intervals')" class="has-top-label d-none">
                   <money v-model="$v.vehicleForm.serviceMaintenance.$model" v-bind="locale" class="form-control" :state="!$v.vehicleForm.serviceMaintenance.$error"></money>
                   <div v-if="!$v.vehicleForm.serviceMaintenance.numeric"
                      :class="{ 'invalid-feedback': true, 'd-block': $v.vehicleForm.serviceMaintenance.$error && !$v.vehicleForm.serviceMaintenance.numeric }"
