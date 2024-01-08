@@ -3,8 +3,7 @@
     <datatable-heading :title="$t('contract.active')" :changePageSize="changePageSize" :searchChange="searchChange"
       :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
       <div class="top-right-button-container">
-        <b-button v-show="isLoad" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new')
-        }}</b-button>
+        <b-button v-show="isLoad" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new') }}</b-button>
       </div>
       <add-new-contract @added-data-table="onAddedDataTable" :key="componentKey"/>
     <b-colxx v-show="isLoad" xxs="12">
@@ -40,7 +39,8 @@ export default {
   components: {
     vuetable: Vuetable,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
-    "datatable-heading": DatatableHeading
+    "datatable-heading": DatatableHeading,
+    "add-new-contract": AddNewContract,
   },
   data() {
     return {
