@@ -22,23 +22,23 @@
     <div class="separator mb-4" />
     <p class="list-heading text-uppercase mb-4">{{ $t("vehicle.service-maintenance") }}</p>
     <p class="font-weight-semibold mb-3">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.service-intervals") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.service-intervals") }}
       </span>{{ vehicle.service_maintenance | withcoma }} miles
     </p>
     <p class="font-weight-semibold mb-3">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.service-last") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.service-last") }}
       </span>{{ vehicle.last_service_mileage | withcoma }} miles
     </p>
     <p class="font-weight-semibold mb-3">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.service-due") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.service-due") }}
       </span>{{ vehicle.service_schedule_miles | withcoma }} miles
     </p>
     <p class="font-weight-semibold mb-3">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.mot-date") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.mot-date") }}
       </span>{{ vehicle.mot_due_date | datetime }}
     </p>
     <p class="font-weight-semibold mb-3">
-      <span class="text-muted text-small font-weight-light mr-1">{{ $t("vehicle.rfl-date") }}
+      <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.rfl-date") }}
       </span>{{ vehicle.rfl_due_date | datetime }}
     </p>
   </b-card-body>
