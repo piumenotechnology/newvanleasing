@@ -283,6 +283,7 @@ export default {
             let allowed = res.data.data.filter(function (el) {
               return el.status_next_step === "Available"
             });
+            console.log(allowed)
             this.dynamicDataOptions = allowed
           }).catch(_error => {
             console.log(_error)
