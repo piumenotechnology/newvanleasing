@@ -273,7 +273,7 @@ export default {
       this.$notify(type, title, message, { duration: 2000, permanent: false });
     },
     fetchOptions(search, loading) {
-      let url = apiUrl + "/purchaseorderall?&search=" + encodeURI(search);
+      let url = apiUrl + "/purchaseorderall?per_page=300&search=" + encodeURI(search);
       loading(true);
       setTimeout(() => {
         axios
