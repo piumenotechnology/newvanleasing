@@ -181,8 +181,9 @@ export default {
           .then(res =>  {
             // console.log(res.data)
             if(search) {
-              return res.data.filter((item)=>{
-                this.optionData = search.toLowerCase().split(' ').every(v => item.agreement_number.toLowerCase().includes(v))
+              this.optionData = res.data.filter((item)=>{
+                console.log(item)
+                return search.toLowerCase().split(' ').every(v => item.agreement_number.toLowerCase().includes(v))
               })
             } else {
               this.optionData = res.data
