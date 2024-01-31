@@ -182,7 +182,6 @@ export default {
             // console.log(res.data)
             if(search) {
               this.optionData = res.data.filter((item)=>{
-                console.log(item)
                 return search.toLowerCase().split(' ').every(v => item.agreement_number.toLowerCase().includes(v))
               })
             } else {
