@@ -180,7 +180,13 @@ export default {
           .then(r => r.data)
           .then(res =>  {
             // console.log(res.data)
-            this.optionData = res.data
+            if(search) {
+              return res.data.filter((item)=>{
+                this.optionData = search.toLowerCase().split(' ').every(v => item.agreement_number.toLowerCase().includes(v))
+              })
+            } else {
+              this.optionData = res.data
+            }
           }).catch(_error => {
             console.log(_error)
           }).finally(() => {
