@@ -50,7 +50,8 @@ export default {
   },
   methods: {
     formatDate(date) {
-      return moment(new Date(date)).format('MMM, YYYY')
+      // return moment(new Date(date)).format('MMM, YYYY')
+      return moment(new Date(date)).format('D, MMM')
     },
     refreshCart(val) {
       this.datasets.data = val
