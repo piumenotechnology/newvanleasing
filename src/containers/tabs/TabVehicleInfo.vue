@@ -10,8 +10,7 @@
                   <b-form-input
                   v-model.trim="$v.vehicleForm.vehicleRegistration.$model"
                   :state="!$v.vehicleForm.vehicleRegistration.$error"
-                  :placeholder="'i.e GF23 WSN'"
-                  v-mask="'AA## AAA'" />
+                  :placeholder="'i.e GF23 WSN'" />
                   <div v-if="!$v.vehicleForm.vehicleRegistration.required"
                      :class="{ 'invalid-feedback': true, 'd-block': $v.vehicleForm.vehicleRegistration.$error && !$v.vehicleForm.vehicleRegistration.required }"
                   >This field is required!</div>
