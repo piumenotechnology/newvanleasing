@@ -369,7 +369,7 @@ export default {
          return moment(newDate).format("Y-MM-DD");
       },
       uppercase() {
-        this.$v.vehicleForm.vehicleRegistration = this.$v.vehicleForm.vehicleRegistration.toUpperCase();
+        this.vehicleForm.vehicleRegistration = this.vehicleForm.vehicleRegistration.toUpperCase();
       },
       getActiveInterest() {
          let url = `${apiUrl}/findbaseinterest`;
