@@ -10,7 +10,8 @@
                   <b-form-input
                   v-model.trim="$v.vehicleForm.vehicleRegistration.$model"
                   :state="!$v.vehicleForm.vehicleRegistration.$error"
-                  :placeholder="'i.e GF23 WSN'" />
+                  :placeholder="'i.e GF23 WSN'"
+                  @keyup="uppercase" />
                   <div v-if="!$v.vehicleForm.vehicleRegistration.required"
                      :class="{ 'invalid-feedback': true, 'd-block': $v.vehicleForm.vehicleRegistration.$error && !$v.vehicleForm.vehicleRegistration.required }"
                   >This field is required!</div>
@@ -366,6 +367,9 @@ export default {
       formatDate(date) {
          let newDate = new Date(date);
          return moment(newDate).format("Y-MM-DD");
+      },
+      uppercase() {
+        this.$v.vehicleForm.vehicleRegistration = this.$v.vehicleForm.vehicleRegistration.toUpperCase();
       },
       getActiveInterest() {
          let url = `${apiUrl}/findbaseinterest`;
