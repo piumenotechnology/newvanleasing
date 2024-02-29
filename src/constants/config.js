@@ -36,7 +36,7 @@ export const firebaseConfig = {
 // }
 
 export const currentUser = {
-  role: UserRole.Admin
+  // role: UserRole.Admin
 }
 
 export const isAuthGuardActive = true;
