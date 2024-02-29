@@ -76,13 +76,15 @@ const routes = [
       {
         path: "additional",
         component: () =>
-          import(/* webpackChunkName: "additional" */ "./views/app/additional/Additional")
+          import(/* webpackChunkName: "additional" */ "./views/app/additional/Additional"),
+        meta: { loginRequired: true, roles: [UserRole.Admin] }
       },
       {
         path: "performance",
         component: () =>
           import(/* webpackChunkName: "performance" */ "./views/app/performance"),
         redirect: `${adminRoot}/performance/all`,
+        meta: { loginRequired: true, roles: [UserRole.Admin] },
         children: [
           {
             path: 'all', component: () => import(/* webpackChunkName: "contracts" */ './views/app/performance/VehiclePerformance')
@@ -98,6 +100,10 @@ const routes = [
       //     import(/* webpackChunkName: "single" */ "./views/app/single")
       // }
     ]
+  },
+  {
+    path: "/unauthorized",
+    component: () => import(/* webpackChunkName: "unauthorized" */ "./views/Unauthorized")
   },
   {
     path: "/error",
