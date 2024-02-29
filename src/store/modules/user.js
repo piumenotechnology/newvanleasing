@@ -68,11 +68,12 @@ export default {
         .then(res => res.data)
         .then(
           user => {
-            const item = { 
+            const item = {
               id: user.user.id,
               uid: user.user.id,
               username: user.user.username,
-              role: 1,
+              name: user.user.name,
+              role: (user.user.position == 'admin') ? 0 : 1,
               ...currentUser
             }
             setCurrentUser(item)
