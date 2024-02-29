@@ -1,6 +1,6 @@
 <template>
   <div id="root">
-    <div class="fixed-background">
+    <div class="fixed-background blank">
       <main>
         <div class="container">
           <b-row class="h-100">
