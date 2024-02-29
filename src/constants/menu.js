@@ -48,13 +48,15 @@ const data = [
   id: "additional",
   icon: "simple-icon-calculator",
   label: "menu.additional",
-  to: `${adminRoot}/additional`
+  to: `${adminRoot}/additional`,
+  roles: [UserRole.Admin]
 },
 {
   id: "performance",
   icon: "simple-icon-rocket",
   label: "menu.performance",
-  to: `${adminRoot}/performance/all`
+  to: `${adminRoot}/performance/all`,
+  roles: [UserRole.Admin]
 }
 // {
 //   id: "single",
