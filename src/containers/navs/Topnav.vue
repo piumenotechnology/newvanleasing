@@ -163,7 +163,7 @@
           no-caret
         >
           <template slot="button-content">
-            <span class="name mr-1">{{currentUser.username}}</span>
+            <span class="name mr-1">{{currentUser.name}}</span>
             <span>
               <img v-if="currentUser.img" :alt="currentUser.title" :src="currentUser.img" />
               <img v-else alt="Profile picture" src="/assets/img/profiles/no-picture.jpg" />
