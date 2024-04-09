@@ -352,7 +352,7 @@
     "vehicle": "Selected vehicle number",
     "cost-description": "Additional cost description",
     "income-description": "Additional income description",
-    "vendor": "Vendor name",
+    "vendor": "Customer name",
     "payment-profile": "Payment profile",
     "amount": "Amount (GBP)"
 
