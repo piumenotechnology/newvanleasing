@@ -61,7 +61,9 @@
         <b-form-input
           type="text"
           v-model.trim="$v.vendor_name.$model"
+          :state="!$v.vendor_name.$error"
         />
+        <b-form-invalid-feedback v-if="!$v.vendor_name.required">Customer name is required!</b-form-invalid-feedback>
       </b-form-group>
       <b-form-group :label="$t('additional.amount')" class="has-top-label">
         <b-input-group>
@@ -155,7 +157,8 @@ export default {
     amount_oc: {
       required,
       maxValue: greaterThanZero
-    }
+    },
+    vendor_name: { required }
   },
   methods: {
     formatDate(date) {
@@ -235,4 +238,3 @@ export default {
   }
 };
 </script>
-
