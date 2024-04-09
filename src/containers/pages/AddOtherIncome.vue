@@ -61,7 +61,9 @@
         <b-form-input
           type="text"
           v-model.trim="$v.payment_profile.$model"
+          :state="!$v.payment_profile.$error"
         />
+        <b-form-invalid-feedback v-if="!$v.payment_profile.required">Customer name is required!</b-form-invalid-feedback>
       </b-form-group>
       <b-form-group :label="$t('additional.amount')" class="has-top-label">
         <b-input-group>
@@ -155,7 +157,8 @@ export default {
     amount_oi: {
       required,
       maxValue: greaterThanZero
-    }
+    },
+    payment_profile: { required }
   },
   methods: {
     formatDate(date) {
