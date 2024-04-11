@@ -96,7 +96,7 @@
           },
           {
             name: "__slot:date",
-            sortField: "vehicle_return_date",
+            sortField: "__slot:date",
             title: "Vehicle Return Date",
             titleClass: "center aligned",
             dataClass: "align-middle text-muted",
