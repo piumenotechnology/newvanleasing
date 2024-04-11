@@ -144,7 +144,7 @@
               ? sortOrder[0].direction
               : "",
             sort: sortOrder[0]
-              ? sortOrder[0].field
+              ? sortOrder[0].sortField
               : "",
             page: currentPage,
             per_page: this.perPage,
@@ -154,7 +154,7 @@
             page: currentPage,
             per_page: this.perPage,
             order: this.sortOrder[0].direction,
-            sort: this.sortOrder[0].field,
+            sort: this.sortOrder[0].sortField,
             search: this.search
           };
       },
