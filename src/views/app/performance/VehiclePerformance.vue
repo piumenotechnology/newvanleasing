@@ -39,7 +39,7 @@
           :title="`${currentHiredVehicle}`"
           :detail="`Total Vehicles: ${totalCars}`"
           :suffix="'Hire Contract'"
-          :percent="`${currentHiredVehicle}`*100/`${totalCars}`"
+          :percent="`${currentHiredVehicle}`*100/`${totalContract}`"
           :progressText="`${hirePercentage}%`"
         />
       </b-colxx>
@@ -149,6 +149,7 @@ export default {
       total: 0,
       lastPage: 0,
       returnCount: 0,
+      totalContract: 0,
       selectedItem: "",
       componentKey: 0,
       startDate: null,
@@ -229,6 +230,17 @@ export default {
         .then(r => r.data)
         .then(res =>  {
           this.items = res.data
+        }).catch(_error => {
+          console.log(_error)
+        })
+    },
+    async fetchContract() {
+      url = apiUrl + `/showactivesales?per_page=1`;
+      axios
+        .get(url)
+        .then(r => r.data)
+        .then(res =>  {
+          this.totalContract = res.total
         }).catch(_error => {
           console.log(_error)
         })
@@ -438,6 +450,7 @@ export default {
   },
   mounted() {
     this.fetchData()
+    this.fetchContract()
     this.fetchCars()
   }
 }
