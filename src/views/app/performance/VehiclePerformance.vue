@@ -236,7 +236,7 @@ export default {
         })
     },
     async fetchContract() {
-      url = apiUrl + `/showactivesales?per_page=1`;
+      let url = apiUrl + "/showactivesales?per_page=1";
       axios
         .get(url)
         .then(r => r.data)
