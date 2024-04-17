@@ -36,10 +36,10 @@
       <b-colxx sm="12" lg="4" class="mb-4">
         <gradient-with-radial-progress-card
           icon="iconsminds-inbox-out"
-          :title="`${totalHiredVehicle}`"
+          :title="`${currentHiredVehicle}`"
           :detail="`Total Vehicles: ${totalCars}`"
           :suffix="'Hire Contract'"
-          :percent="`${totalHiredVehicle}`*100/`${totalCars}`"
+          :percent="`${currentHiredVehicle}`*100/`${totalCars}`"
           :progressText="`${hirePercentage}%`"
         />
       </b-colxx>
@@ -316,12 +316,12 @@ export default {
       const sold = this.cars.filter(x => x.status_next_step !== 'Sold').length
       return Number(sold)
     },
-    totalHiredVehicle() {
+    currentHiredVehicle() {
       let num = this.items.filter(x => x.next_step_status_sales == 'Hired').length
       return Number(num)
     },
     hirePercentage() {
-      return Math.round(this.totalHiredVehicle*100/this.totalCars)
+      return Math.round(this.currentHiredVehicle*100/this.totalCars)
     },
     pastDate: {
       get (val) {
