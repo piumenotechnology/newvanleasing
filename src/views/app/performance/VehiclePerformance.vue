@@ -20,6 +20,7 @@
         <!-- <div class="separator mb-5"></div> -->
       </b-colxx>
     </b-row>
+    {{ totalContract }}
     <!-- <b-row >
       <b-colxx sm="12">
         <b-card class="bg-dark text-white mb-3">
