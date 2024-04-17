@@ -333,7 +333,7 @@ export default {
       return Number(num)
     },
     hirePercentage() {
-      return Math.round(this.currentHiredVehicle*100/this.totalCars)
+      return Math.round(this.currentHiredVehicle*100/this.totalContract)
     },
     pastDate: {
       get (val) {
