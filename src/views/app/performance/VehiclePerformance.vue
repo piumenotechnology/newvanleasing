@@ -20,7 +20,6 @@
         <!-- <div class="separator mb-5"></div> -->
       </b-colxx>
     </b-row>
-    {{ totalContract }}
     <!-- <b-row >
       <b-colxx sm="12">
         <b-card class="bg-dark text-white mb-3">
@@ -241,8 +240,7 @@ export default {
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          console.log(res.data.total)
-          this.totalContract = res.total
+          this.totalContract = res.data.total
         }).catch(_error => {
           console.log(_error)
         })
