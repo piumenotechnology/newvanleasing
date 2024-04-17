@@ -241,7 +241,7 @@ export default {
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          console.log(res)
+          console.log(res.data.total)
           this.totalContract = res.total
         }).catch(_error => {
           console.log(_error)
