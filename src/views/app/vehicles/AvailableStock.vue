@@ -24,11 +24,11 @@
                         <span>{{ $t('pages.details') }}</span>
                      </b-button> -->
                   </template>
-                  <template slot="status" slot-scope="props">
+                  <!-- <template slot="status" slot-scope="props">
                      <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
                      <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
                      <b-badge v-show="props.rowData.status_next_step === 'Sold'" pill variant="dark">{{ props.rowData.status_next_step }}</b-badge>
-                  </template>
+                  </template> -->
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
                      variant="light"
@@ -114,14 +114,14 @@ export default {
                titleClass: "center aligned",
                dataClass: ""
             },
-            {
-               name: "__slot:status",
-               sortField: "status_next_step",
-               title: "Status",
-               titleClass: "center aligned text-center",
-               dataClass: "text-center",
-               width: "10%"
-            },
+            // {
+            //    name: "__slot:status",
+            //    sortField: "status_next_step",
+            //    title: "Status",
+            //    titleClass: "center aligned text-center",
+            //    dataClass: "text-center",
+            //    width: "10%"
+            // },
             {
                name: "__slot:action",
                title: "",
