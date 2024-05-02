@@ -11,11 +11,6 @@
                   data-path="data.data"
                   pagination-path="data"
                   @vuetable:pagination-data="onPaginationData">
-                  <template slot="status" slot-scope="props">
-                     <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
-                     <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
-                     <b-badge v-show="props.rowData.status_next_step === 'Sold'" pill variant="dark">{{ props.rowData.status_next_step }}</b-badge>
-                  </template>
                   <template slot="date" slot-scope="props">
                      <span>
                         {{ props.rowData.tgl_available | datetime }}
@@ -28,6 +23,11 @@
                         <i class="simple-icon-magnifier mr-1" />
                         <span>{{ $t('pages.details') }}</span>
                      </b-button> -->
+                  </template>
+                  <template slot="status" slot-scope="props">
+                     <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
+                     <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
+                     <b-badge v-show="props.rowData.status_next_step === 'Sold'" pill variant="dark">{{ props.rowData.status_next_step }}</b-badge>
                   </template>
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
@@ -108,19 +108,19 @@ export default {
                dataClass: "text-muted"
             },
             {
+               name: "__slot:date",
+               sortField: "tgl_available",
+               title: "Available Date",
+               titleClass: "center aligned",
+               dataClass: ""
+            },
+            {
                name: "__slot:status",
                sortField: "status_next_step",
                title: "Status",
                titleClass: "center aligned text-center",
                dataClass: "text-center",
                width: "10%"
-            },
-            {
-               name: "__slot:date",
-               sortField: "tgl_available",
-               title: "Available Date",
-               titleClass: "center aligned",
-               dataClass: ""
             },
             {
                name: "__slot:action",
