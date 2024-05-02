@@ -11,6 +11,11 @@
                   data-path="data.data"
                   pagination-path="data"
                   @vuetable:pagination-data="onPaginationData">
+                  <template slot="status" slot-scope="props">
+                     <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
+                     <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
+                     <b-badge v-show="props.rowData.status_next_step === 'Sold'" pill variant="dark">{{ props.rowData.status_next_step }}</b-badge>
+                  </template>
                   <template slot="date" slot-scope="props">
                      <span>
                         {{ props.rowData.tgl_available | datetime }}
@@ -103,6 +108,14 @@ export default {
                dataClass: "text-muted"
             },
             {
+               name: "__slot:status",
+               sortField: "status_next_step",
+               title: "Status",
+               titleClass: "center aligned text-center",
+               dataClass: "text-center",
+               width: "10%"
+            },
+            {
                name: "__slot:date",
                sortField: "tgl_available",
                title: "Available Date",
@@ -119,6 +132,7 @@ export default {
          sortOrder: [
             {
                field: 'updated_at',
+               sortField: "updated_at",
                direction: 'desc'
             }
          ]
@@ -133,7 +147,7 @@ export default {
                   ? sortOrder[0].direction
                   : "",
                sort: sortOrder[0]
-                  ? sortOrder[0].field
+                  ? sortOrder[0].sortField
                   : "",
                page: currentPage,
                per_page: this.perPage,
@@ -143,7 +157,7 @@ export default {
                page: currentPage,
                per_page: this.perPage,
                order: this.sortOrder[0].direction,
-               sort: this.sortOrder[0].field,
+               sort: this.sortOrder[0].sortField,
                search: this.search
             };
       },
