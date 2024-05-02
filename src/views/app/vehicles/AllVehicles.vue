@@ -106,7 +106,7 @@ export default {
             {
                name: "vehicle_manufactur",
                sortField: "vehicle_manufactur",
-               title: "Manufacture",
+               title: "Manufacturer",
                titleClass: "center aligned",
                dataClass: "text-muted",
                width: "auto"
