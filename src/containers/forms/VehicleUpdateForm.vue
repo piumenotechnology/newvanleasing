@@ -390,7 +390,7 @@ export default {
         this.vehicleForm.interestType = null;
         this.vehicleForm.interestRate = "";
         this.vehicleForm.deposit = "";
-        this.vehicleForm.monthlyRepay = "";
+        // this.vehicleForm.monthlyRepay = "";
         this.vehicleForm.finalPay = "";
         this.vehicleForm.docFee = "";
         this.vehicleForm.finalFee = "";
@@ -439,7 +439,7 @@ export default {
             setTimeout(() => {
               this.$emit('update-vehicle', 'success');
               // this.addNotification(this.status, "Yay!", this.message);
-              console.log("form submitting : ", newData);
+              // console.log("form submitting : ", newData);
               // this.$emit('add-modal-hide');
             }, 1500)
           }).catch(_error => {
