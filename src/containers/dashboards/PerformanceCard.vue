@@ -252,7 +252,7 @@ export default {
     //   } else {
     //     return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_rental + this.vehicle.first_payment + this.subTotal : this.theIncome - this.residualValue
     //   }
-    // },
+    },
     actualCost() {
       let v = this.vehicle
       // let interest = 1 + (v.hp_interest_per_annum / 100)
