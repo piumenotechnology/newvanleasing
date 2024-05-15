@@ -245,7 +245,7 @@ export default {
       // const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date()) -1
       const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date())
       // console.log(`month: ${ongoing} ${this.subTotal} `);
-      console.log(this.vehicle.monthly_payment * this.vehicle.hp_term)
+      console.log(this.vehicle.hp_term)
     //   if(this.vehicle.purchase_method == 'Rent/Return') {
     //     let repayment = this.vehicle.monthly_payment * this.vehicle.hp_term
     //     return (ongoing <= this.vehicle.term_months) ? ongoing * repayment + this.subTotal
