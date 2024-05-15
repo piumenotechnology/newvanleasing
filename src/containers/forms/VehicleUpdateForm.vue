@@ -215,32 +215,32 @@
             <b-form-invalid-feedback v-if="!$v.vehicleForm.terms.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group v-show="methodsType === 'Hire Purchase'"
-          :label="$t('vehicle.deposit')"  class="has-top-label">
+          :label="$t('vehicle.deposit')" class="has-top-label">
             <currency-field v-model="$v.vehicleForm.deposit.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.deposit.$error" />
             <b-form-invalid-feedback v-if="!$v.vehicleForm.deposit.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
-          <b-form-group v-show="methodsType === 'Hire Purchase'"
-          :label="$t('vehicle.monthly-repayment')"  class="has-top-label">
+          <b-form-group v-show="methodsType === 'Hire Purchase' || methodsType === 'Rent/Return'"
+          :label="$t('vehicle.monthly-repayment')" class="has-top-label">
             <currency-field v-model="$v.vehicleForm.monthlyRepay.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.monthlyRepay.$error" />
             <b-form-invalid-feedback v-if="!$v.vehicleForm.monthlyRepay.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group v-show="methodsType === 'Hire Purchase' || methodsType === 'Cash'"
-          :label="$t('vehicle.final-payment')"  class="has-top-label">
+          :label="$t('vehicle.final-payment')" class="has-top-label">
             <currency-field v-model="$v.vehicleForm.finalPay.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.finalPay.$error" />
             <b-form-invalid-feedback v-if="!$v.vehicleForm.finalPay.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group v-show="methodsType === 'Hire Purchase' || methodsType === 'Cash'"
-          :label="$t('vehicle.documentation-fee')"  class="has-top-label">
+          :label="$t('vehicle.documentation-fee')" class="has-top-label">
             <currency-field v-model="$v.vehicleForm.docFee.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.docFee.$error" />
             <b-form-invalid-feedback v-if="!$v.vehicleForm.docFee.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group v-show="methodsType === 'Hire Purchase' || methodsType === 'Cash'"
-          :label="$t('vehicle.final-fee')"  class="has-top-label">
+          :label="$t('vehicle.final-fee')" class="has-top-label">
             <currency-field v-model="$v.vehicleForm.finalFee.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.finalFee.$error" />
             <b-form-invalid-feedback v-if="!$v.vehicleForm.finalFee.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
           <b-form-group v-show="methodsType === 'Hire Purchase' || methodsType === 'Cash'"
-          :label="$t('vehicle.other-fee')"  class="has-top-label">
+          :label="$t('vehicle.other-fee')" class="has-top-label">
             <currency-field v-model="$v.vehicleForm.otherFee.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.otherFee.$error" />
             <b-form-invalid-feedback v-if="!$v.vehicleForm.otherFee.numeric">Must be a number</b-form-invalid-feedback>
           </b-form-group>
