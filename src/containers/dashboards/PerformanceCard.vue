@@ -247,7 +247,7 @@ export default {
       let repayment = this.vehicle.monthly_payment * this.vehicle.hp_term
       // console.log(`month: ${ongoing} ${this.subTotal} `);
       if(this.vehicle.purchase_method == 'Rent/Return') {
-        return (ongoing <= this.vehicle.term_months) ? ongoing * repayment + this.subTotal : this.theIncome - this.residualValue
+        return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_payment + this.subTotal : this.theIncome - this.residualValue
       } else {
         return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_rental + this.vehicle.first_payment + this.subTotal : this.theIncome - this.residualValue
       }
