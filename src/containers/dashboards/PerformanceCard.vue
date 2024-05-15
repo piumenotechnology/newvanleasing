@@ -245,11 +245,14 @@ export default {
       // const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date()) -1
       const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date())
       // console.log(`month: ${ongoing} ${this.subTotal} `);
-      if(this.vehicle.purchase_method == 'Rent/Return') {
-        let repayment = this.vehicle.monthly_payment * this.vehicle.hp_term
-        return (ongoing <= this.vehicle.term_months) ? ongoing * repayment + this.subTotal
-      } 
-    },
+      console.log(this.vehicle.monthly_payment * this.vehicle.hp_term)
+    //   if(this.vehicle.purchase_method == 'Rent/Return') {
+    //     let repayment = this.vehicle.monthly_payment * this.vehicle.hp_term
+    //     return (ongoing <= this.vehicle.term_months) ? ongoing * repayment + this.subTotal
+    //   } else {
+    //     return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_rental + this.vehicle.first_payment + this.subTotal : this.theIncome - this.residualValue
+    //   }
+    // },
     actualCost() {
       let v = this.vehicle
       // let interest = 1 + (v.hp_interest_per_annum / 100)
