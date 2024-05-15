@@ -36,7 +36,7 @@
       <currency-field v-model="$v.methodsData.deposit.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.deposit.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.deposit.numeric">Must be a number</b-form-invalid-feedback>
     </b-form-group>
-    <b-form-group v-show="methodsType === 'hire'"
+    <b-form-group v-show="methodsType === 'hire' || methodsType === 'rent'"
     :label="$t('vehicle.monthly-repayment')"  class="has-top-label">
       <currency-field v-model="$v.methodsData.monthlyRepay.$model" :options="{ currency: 'GBP'}" :state="!$v.methodsData.monthlyRepay.$error" />
       <b-form-invalid-feedback v-if="!$v.methodsData.monthlyRepay.decimal">Must be a number</b-form-invalid-feedback>
