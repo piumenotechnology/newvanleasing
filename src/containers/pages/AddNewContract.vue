@@ -371,10 +371,13 @@ export default {
       } : {
         to: new Date()
       }
+    },
+    registration() {
+      return this.contractForm.vehicleRegistration
     }
   },
   watch: {
-    contactForm[vehicleRegistration](newId, oldId) {
+    registration(newId, oldId) {
       if (newId) {
         this.getResidual(newId)
       }
