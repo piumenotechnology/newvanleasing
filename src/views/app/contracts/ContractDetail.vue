@@ -100,7 +100,9 @@ export default {
         .then(r => r.data)
         .then(res => {
           this.items = res.data[0];
-          this.getAvailableDate(this.items.id_purchase_order)
+          this.$nextTick(() => {
+            this.getAvailableDate(this.items.id_purchase_order)
+          })
           // this.message = res.message;
         })
         .catch(err => {
