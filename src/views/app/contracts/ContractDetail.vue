@@ -33,7 +33,7 @@
         </div>
       </page-header>
     </b-row>
-    <contract-update-form :items="items" :residual="vehicle.residual_value" :minDate="vehicle.tgl_available" ref="updateForm" @update-contract="vehicleContract"></contract-update-form>
+    <contract-update-form :items="items" :minDate="vehicle.tgl_available" ref="updateForm" @update-contract="vehicleContract"></contract-update-form>
     <contract-application-menu v-if="isLoading" :vehicle="items" :key="componentKey" />
     <b-card class="float-save-button mx-auto z-index-10" :class="(!isVisible)?'show':''">
       <b-button
@@ -100,9 +100,7 @@ export default {
         .then(r => r.data)
         .then(res => {
           this.items = res.data[0];
-          this.$nextTick(() => {
-            this.getAvailableDate(this.items.id_purchase_order)
-          })
+          this.getAvailableDate(this.items.id_purchase_order)
           // this.message = res.message;
         })
         .catch(err => {
