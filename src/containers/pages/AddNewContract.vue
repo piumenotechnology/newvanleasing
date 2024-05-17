@@ -343,18 +343,8 @@ export default {
         })
     },
     async getResidual(obj) {
-      console.log(obj)
-      // let url = apiUrl + "/purchaseorder/" + id
-      // axios
-      //   .get(url)
-      //   .then(r => r.data)
-      //   .then(res =>  {
-      //     console.log(res.data)
-          // let item = res.data.data
-          // this.contractForm.otherIncome = item.residual_value
-        // }).catch(_error => {
-        //   console.log(_error)
-        // })
+      // console.log(obj)
+      this.contractForm.residualValue = obj.residual_value
     },
     hideModal(refname) {
       this.status = "default"
