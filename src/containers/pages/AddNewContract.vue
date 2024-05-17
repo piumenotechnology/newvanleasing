@@ -138,6 +138,14 @@
           :class="{ 'invalid-feedback': true, 'd-block': $v.contractForm.otherIncome.$error && !$v.contractForm.otherIncome.required }"
         >This field is required!</div>
       </b-form-group>
+      <b-form-group :label="$t('vehicle.residual-value')" class="has-top-label">
+        <b-input-group>
+          <currency-field v-model="$v.contractForm.residualValue.$model" :options="{ currency: 'GBP'}" :state="!$v.contractForm.residualValue.$error" />
+        </b-input-group>
+        <div v-if="!$v.contractForm.residualValue.required"
+          :class="{ 'invalid-feedback': true, 'd-block': $v.contractForm.residualValue.$error && !$v.contractForm.residualValue.required }"
+        >This field is required!</div>
+      </b-form-group>
     </b-form>
 
     <template slot="modal-footer">
@@ -219,6 +227,7 @@ export default {
         initialRental: 0,
         monthlyRental: 0,
         otherIncome: 0,
+        residualValue: 0,
       },
       direction: getDirection().direction,
       selectData: [
@@ -251,7 +260,8 @@ export default {
       docFee: { required },
       initialRental: { required },
       monthlyRental: { required },
-      otherIncome: { required }
+      otherIncome: { required },
+      residualValue: { required }
     }
   },
   methods: {
@@ -332,6 +342,20 @@ export default {
           }, 1000)
         })
     },
+    async getResidual(obj) {
+      console.log(obj)
+      // let url = apiUrl + "/purchaseorder/" + id
+      // axios
+      //   .get(url)
+      //   .then(r => r.data)
+      //   .then(res =>  {
+      //     console.log(res.data)
+          // let item = res.data.data
+          // this.contractForm.otherIncome = item.residual_value
+        // }).catch(_error => {
+        //   console.log(_error)
+        // })
+    },
     hideModal(refname) {
       this.status = "default"
       this.$refs[refname].hide()
@@ -346,6 +370,13 @@ export default {
         to: new Date(this.contractForm.vehicleRegistration.tgl_available)
       } : {
         to: new Date()
+      }
+    }
+  },
+  watch: {
+    contactForm.vehicleRegistration(newId, oldId) {
+      if (newId) {
+        this.getResidual(newId)
       }
     }
   }
