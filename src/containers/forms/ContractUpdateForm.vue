@@ -329,7 +329,7 @@ export default {
         return this.items.vehicle_registration
       }
     },
-    registrationData() {
+    registrationPreData() {
       return this.contractForm.vehicleRegistration
     },
     availableDate() {
@@ -344,8 +344,9 @@ export default {
     this.getResidual(this.items.id_purchase_order)
   },
   watch: {
-    registrationData(newId, oldId) {
+    registrationPreData(newId, oldId) {
       if (newId) {
+        this.contractForm.residualValue = newId.residual_value
         console.log(newId)
         // this.getResidual(this.items.id_purchase_order)
         // this.getRegistration(newId)
