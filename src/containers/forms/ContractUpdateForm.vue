@@ -323,6 +323,9 @@ export default {
         to: new Date()
       }
     }
+  },
+  mounted() {
+    console.log(this.residualValue)
   }
 };
 </script>
