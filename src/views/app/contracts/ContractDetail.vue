@@ -3,12 +3,12 @@
     <b-row class="app-row">
       <page-header :title="$t('contract.edit-contract')">
         <div class="top-right-button-container">
-          <b-button variant="primary" size="lg" class="mr-2 top-right-button" @click.prevent="cancelForm">
+          <b-button variant="danger" size="lg" class="mr-2 top-right-button" @click.prevent="cancelForm">
             <span class="label">
               <i class="simple-icon-close mr-2" />{{ $t('pages.cancel') }}
             </span>
           </b-button>
-          <b-button variant="primary" size="lg" class="top-right-button" @click.prevent="submitForm" :class="{
+          <b-button variant="success" size="lg" class="top-right-button" @click.prevent="submitForm" :class="{
             'btn-multiple-state': true,
             'show-spinner': status === 'processing',
             'show-success': status === 'success',
