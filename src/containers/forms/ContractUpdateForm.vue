@@ -182,7 +182,7 @@ export default {
     "money": Money,
     "currency-field": CurrencyField
   },
-  props: ["items", "minDate"],
+  props: ["items", "residualValue", "minDate"],
   data() {
     return {
       direction: getDirection().direction,
@@ -199,7 +199,7 @@ export default {
         initialRental: this.items.initial_rental,
         monthlyRental: this.items.monthly_rental,
         otherIncome: this.items.other_income,
-        residualValue: this.items.residual_value
+        residualValue: this.residualValue
       },
       selectData: [
         "Contract Hire (Unregulated)",
@@ -282,7 +282,8 @@ export default {
         documentation_fees: this.contractForm.docFee,
         initial_rental: this.contractForm.initialRental,
         monthly_rental: this.contractForm.monthlyRental,
-        other_income: this.contractForm.otherIncome
+        other_income: this.contractForm.otherIncome,
+        residual_value: this.contractForm.residualValue
       }
       // console.log(newContract)
       let url = apiUrl + "/salesorder/" + this.items.id;
