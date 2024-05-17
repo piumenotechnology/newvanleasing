@@ -338,6 +338,15 @@ export default {
   },
   mounted() {
     this.getResidual(this.items.id_purchase_order)
+  },
+  watch: {
+    registration(newId, oldId) {
+      if (newId) {
+        console.log(newId)
+        // this.getResidual(this.items.id_purchase_order)
+        // this.getRegistration(newId)
+      }
+    }
   }
 };
 </script>
