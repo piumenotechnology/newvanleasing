@@ -274,8 +274,8 @@ export default {
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          console.log(res.data)
-          // this.contractForm.residualValue = res.data.residual_value
+          // console.log(res.data)
+          this.contractForm.residualValue = res.data.residual_value
         }).catch(_error => {
           console.log(_error)
         })
