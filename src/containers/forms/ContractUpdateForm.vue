@@ -337,7 +337,7 @@ export default {
     }
   },
   mounted() {
-    getResidual(this.items.id_purchase_order)
+    this.getResidual(this.items.id_purchase_order)
   }
 };
 </script>
