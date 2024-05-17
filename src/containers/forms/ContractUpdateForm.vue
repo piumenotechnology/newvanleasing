@@ -182,7 +182,7 @@ export default {
     "money": Money,
     "currency-field": CurrencyField
   },
-  props: ["items", "residualValue", "minDate"],
+  props: ["items", "residual", "minDate"],
   data() {
     return {
       direction: getDirection().direction,
@@ -199,7 +199,7 @@ export default {
         initialRental: this.items.initial_rental,
         monthlyRental: this.items.monthly_rental,
         otherIncome: this.items.other_income,
-        residualValue: this.residualValue
+        residualValue: this.residual
       },
       selectData: [
         "Contract Hire (Unregulated)",
