@@ -141,6 +141,14 @@
               </b-form-group>
             </b-colxx>
           </b-form-row>
+          <b-form-group :label="$t('contract.residual-value')" class="has-top-label">
+            <b-input-group>
+              <currency-field v-model="$v.contractForm.residualValue.$model" :options="{ currency: 'GBP'}" :state="!$v.contractForm.residualValue.$error" />
+            </b-input-group>
+            <div v-if="!$v.contractForm.residualValue.required"
+              :class="{ 'invalid-feedback': true, 'd-block': $v.contractForm.residualValue.$error && !$v.contractForm.residualValue.required }"
+            >This field is required!</div>
+          </b-form-group>
         </b-form>
       </b-card>
     </b-colxx>
@@ -190,7 +198,8 @@ export default {
         docFee: this.items.documentation_fees,
         initialRental: this.items.initial_rental,
         monthlyRental: this.items.monthly_rental,
-        otherIncome: this.items.other_income
+        otherIncome: this.items.other_income,
+        residualValue: this.items.residual_value
       },
       selectData: [
         "Contract Hire (Unregulated)",
@@ -229,7 +238,8 @@ export default {
       docFee: { required },
       initialRental: { required },
       monthlyRental: { required },
-      otherIncome: { required }
+      otherIncome: { required },
+      residualValue: { required }
     }
   },
   methods: {
