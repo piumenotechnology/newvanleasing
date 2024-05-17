@@ -261,7 +261,7 @@ export default {
               return el.status_next_step == "Available"
             });
             this.dynamicDataOptions = allowed
-            console.log(allowed)
+            console.log(this.dynamicDataOptions)
           }).catch(_error => {
             console.log(_error)
           }).finally(() => {
@@ -329,6 +329,9 @@ export default {
         return this.items.vehicle_registration
       }
     },
+    registrationData() {
+      return this.contractForm.vehicleRegistration
+    },
     availableDate() {
       return (this.minDate !== null) ? {
         to: new Date(this.minDate )
@@ -341,7 +344,7 @@ export default {
     this.getResidual(this.items.id_purchase_order)
   },
   watch: {
-    registration(newId, oldId) {
+    registrationData(newId, oldId) {
       if (newId) {
         console.log(newId)
         // this.getResidual(this.items.id_purchase_order)
