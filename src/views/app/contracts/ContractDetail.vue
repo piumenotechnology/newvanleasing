@@ -138,7 +138,7 @@ export default {
       this.$refs.updateForm.onValitadeFormSubmit();
     },
     cancelForm() {
-      router.go();
+      this.$router.go();
     },
     vehicleContract(status) {
       this.isProcessing = true
