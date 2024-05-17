@@ -374,7 +374,7 @@ export default {
     }
   },
   watch: {
-    contactForm.vehicleRegistration(newId, oldId) {
+    contactForm[vehicleRegistration](newId, oldId) {
       if (newId) {
         this.getResidual(newId)
       }
