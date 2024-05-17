@@ -261,6 +261,7 @@ export default {
               return el.status_next_step == "Available"
             });
             this.dynamicDataOptions = allowed
+            console.log(allowed)
           }).catch(_error => {
             console.log(_error)
           }).finally(() => {
