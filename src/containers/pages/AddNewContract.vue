@@ -315,7 +315,8 @@ export default {
         documentation_fees: this.contractForm.docFee,
         initial_rental: this.contractForm.initialRental,
         monthly_rental: this.contractForm.monthlyRental,
-        other_income: this.contractForm.otherIncome
+        other_income: this.contractForm.otherIncome,
+        residualValue: this.contractForm.residualValue
       }
       // console.log("adding item : ", newContract);
       this.salesorders = this.objectToFormData(newContract);
