@@ -182,7 +182,7 @@ export default {
     "money": Money,
     "currency-field": CurrencyField
   },
-  props: ["items", "residual", "minDate"],
+  props: ["items", "minDate"],
   data() {
     return {
       direction: getDirection().direction,
@@ -199,7 +199,7 @@ export default {
         initialRental: this.items.initial_rental,
         monthlyRental: this.items.monthly_rental,
         otherIncome: this.items.other_income,
-        residualValue: this.residual
+        residualValue: 0
       },
       selectData: [
         "Contract Hire (Unregulated)",
@@ -268,6 +268,18 @@ export default {
           })
       }, 1000);
     },
+    getResidual(id) {
+      let url = apiUrl + "/purchaseorder/" + id;
+      axios
+        .get(url)
+        .then(r => r.data)
+        .then(res =>  {
+          console.log(res.data)
+          // this.contractForm.residualValue = res.data.residual_value
+        }).catch(_error => {
+          console.log(_error)
+        })
+    }, 
     onValitadeFormSubmit() {
       this.$v.contractForm.$touch();
       let purchaseId = this.contractForm.vehicleRegistration.id
@@ -325,7 +337,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.residualValue)
+    getResidual(this.items.id_purchase_order)
   }
 };
 </script>
