@@ -138,7 +138,7 @@
           :class="{ 'invalid-feedback': true, 'd-block': $v.contractForm.otherIncome.$error && !$v.contractForm.otherIncome.required }"
         >This field is required!</div>
       </b-form-group>
-      <b-form-group :label="$t('vehicle.residual-value')" class="has-top-label">
+      <b-form-group :label="$t('contract.residual-value')" class="has-top-label">
         <b-input-group>
           <currency-field v-model="$v.contractForm.residualValue.$model" :options="{ currency: 'GBP'}" :state="!$v.contractForm.residualValue.$error" />
         </b-input-group>
