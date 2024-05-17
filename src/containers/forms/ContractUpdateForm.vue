@@ -347,9 +347,6 @@ export default {
     registrationPreData(newId, oldId) {
       if (newId) {
         this.contractForm.residualValue = newId.residual_value
-        console.log(newId)
-        // this.getResidual(this.items.id_purchase_order)
-        // this.getRegistration(newId)
       }
     }
   }
