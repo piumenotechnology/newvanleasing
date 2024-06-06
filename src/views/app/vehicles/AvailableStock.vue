@@ -28,7 +28,7 @@
                   </template>
                   <template slot="stock_status" slot-scope="props">
                     <b-input-group>
-                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" />
+                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="stockStatus" :value="props.rowData.stock_status" />
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
@@ -211,32 +211,38 @@ export default {
             this.selectedItems = this.items.map(x => x.id);
          }
       },
+      addNotification(type, title, message) {
+        this.$notify(type, title, message, { duration: 2000, permanent: false });
+      },
       changeStatus(obj) {
-        // console.log(`change status of ${obj.id} to ${obj.stock_status}`);
-        let url = apiUrl + "/purchaseorder/" + obj.id;
-        this.isSaving = true;
+        const newData = {
+          stock_status: this.stockStatus,
+        }
+        let url = apiUrl + "/changeStockStatus/" + obj.id;
         
-        console.log(url);
+        console.log(`edit${obj.id} with ${newData}`);
+        this.isSaving = true;
         setTimeout(() => {
           this.isSaving = false;
           this.addNotification("success filled", "Yo!", "Succesfully added!");
-        }, 4500)
-      //   axios
-      //     .put(url, newData)
-      //     .then(r => r.data)
-      //     .then(res => {
-      //       this.isSaving = true;
-      //       this.status = "success filled";
-      //       this.message = "Your data was saved!";
-      //       setTimeout(() => {
-      //         this.addNotification(this.status, "Great!", this.message);
-      //         this.$refs.vuetable.refresh();
-      //       }, 1500)
-      //     }).catch(_error => {
-      //       this.status = "error filled";
-      //       this.message = "An error occured while saving the data. Please try again later.";
-      //       this.addNotification(this.status, "Oppss!", this.message);
-      //     })
+        }, 1500);
+        // axios
+        //   .put(url, newData)
+        //   .then(r => r.data)
+        //   .then(res => {
+        //     this.isSaving = true;
+        //     this.status = "success filled";
+        //     this.message = "Your data was saved!";
+        //     setTimeout(() => {
+        //       this.addNotification(this.status, "Great!", this.message);
+        //       this.$refs.vuetable.refresh();
+        //       this.isSaving = false;
+        //     }, 1500)
+        //   }).catch(_error => {
+        //     this.status = "error filled";
+        //     this.message = "An error occured while saving the data. Please try again later.";
+        //     this.addNotification(this.status, "Oppss!", this.message);
+        //   })
       }
    }
 };
