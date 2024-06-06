@@ -52,12 +52,6 @@
       </b-row>
    </div>
 </template>
-<style scoped>
-  .center-aligned {
-    vertical-align: middle;
-  }
-</style>
-
 <script>
 import axios from 'axios';
 import moment from "moment";
@@ -193,7 +187,10 @@ export default {
             };
       },
       onRowClass(dataItem, index) {
-        console.log(dataItem);
+        const itemId = dataItem.id;
+        let itemsForToggle = this.items;
+        var rowClass = this.getIndex(itemId, itemsForToggle, "id");
+        console.log(rowClass);
         // if (this.selectedItems.includes(dataItem.id)) {
         //   return "selected";
         // }
@@ -227,6 +224,14 @@ export default {
       },
       addNotification(type, title, message) {
         this.$notify(type, title, message, { duration: 2000, permanent: false });
+      },
+      getIndex(value, arr, prop) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i][prop] === value) {
+            return i;
+          }
+        }
+        return -1;
       },
       changeStatus(obj) {
         const newData = {
