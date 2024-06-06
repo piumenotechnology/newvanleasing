@@ -26,7 +26,7 @@
                   </template>
                   <template slot="stock_status" slot-scope="props">
                     <b-input-group>
-                      <v-select @input="changeStatus(props.rowData.id)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" />
+                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" />
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
@@ -207,8 +207,8 @@ export default {
             this.selectedItems = this.items.map(x => x.id);
          }
       },
-      changeStatus(id) {
-        console.log(`change status of ${id} to ${this.props.rowData.stock_status}`);
+      changeStatus(obj) {
+        console.log(`change status of ${obj.id} to ${obj.stock_status}`);
       }
    }
 };
