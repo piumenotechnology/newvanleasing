@@ -28,7 +28,7 @@
                   </template>
                   <template slot="stock_status" slot-scope="props">
                     <b-input-group>
-                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="stockStatus" :value="props.rowData.stock_status" />
+                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" />
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
@@ -216,7 +216,7 @@ export default {
       },
       changeStatus(obj) {
         const newData = {
-          stock_status: this.stockStatus,
+          stock_status: this.props.rowData.stock_status,
         }
         let url = apiUrl + "/changeStockStatus/" + obj.id;
         console.log(this.items);
