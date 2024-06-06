@@ -12,6 +12,7 @@
                   :query-params="makeQueryParams" :per-page="perPage" :reactive-api-url="true" :fields="fields"
                   data-path="data.data"
                   pagination-path="data"
+                  :row-class="onRowClass"
                   @vuetable:pagination-data="onPaginationData">
                   <template slot="date" slot-scope="props">
                      <span>
@@ -51,6 +52,12 @@
       </b-row>
    </div>
 </template>
+<style scoped>
+  .center-aligned {
+    vertical-align: middle;
+  }
+</style>
+
 <script>
 import axios from 'axios';
 import moment from "moment";
@@ -101,42 +108,42 @@ export default {
                sortField: "vehicle_registration",
                title: "Vehicle Registration",
                titleClass: "center aligned",
-               dataClass: "list-item-heading text-uppercase align-text-center"
+               dataClass: "list-item-heading text-uppercase center-aligned"
             },
             {
                name: "vehicle_manufactur",
                sortField: "vehicle_manufactur",
                title: "Manufacturer",
                titleClass: "center aligned",
-               dataClass: "text-muted align-text-center"
+               dataClass: "text-muted center-aligned"
             },
             {
                name: "vehicle_model",
                sortField: "vehicle_model",
                title: "Model",
                titleClass: "center aligned",
-               dataClass: "text-muted align-text-center"
+               dataClass: "text-muted center-aligned"
             },
             {
                name: "vehicle_variant",
                sortField: "vehicle_variant",
                title: "Variant",
                titleClass: "center aligned",
-               dataClass: "text-muted align-text-center"
+               dataClass: "text-muted center-aligned"
             },
             {
                name: "__slot:stock_status",
                sortField: "stock_status",
                title: "Status",
                titleClass: "center aligned",
-               dataClass: "align-text-center"
+               dataClass: "center-aligned"
             },
             {
                name: "__slot:date",
                sortField: "tgl_available",
                title: "Available Date",
                titleClass: "center aligned",
-               dataClass: "align-text-center"
+               dataClass: "center-aligned"
             },
             // {
             //    name: "__slot:status",
@@ -150,7 +157,7 @@ export default {
                name: "__slot:action",
                title: "",
                titleClass: "",
-               dataClass: "center aligned align-text-center text-right"
+               dataClass: "text-right center-aligned"
             }
          ],
          sortOrder: [
@@ -184,6 +191,13 @@ export default {
                sort: this.sortOrder[0].sortField,
                search: this.search
             };
+      },
+      onRowClass(dataItem, index) {
+        console.log(dataItem);
+        // if (this.selectedItems.includes(dataItem.id)) {
+        //   return "selected";
+        // }
+        // return "";
       },
       onPaginationData(paginationData) {
          this.from = paginationData.from;
