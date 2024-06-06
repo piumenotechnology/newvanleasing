@@ -219,7 +219,7 @@ export default {
           stock_status: this.stockStatus,
         }
         let url = apiUrl + "/changeStockStatus/" + obj.id;
-        
+        console.log(this.items);
         console.log(`edit${obj.id} with ${newData}`);
         this.isSaving = true;
         setTimeout(() => {
