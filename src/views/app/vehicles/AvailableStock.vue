@@ -26,7 +26,7 @@
                   </template>
                  <template slot="stock_status" slot-scope="props">
                    <b-input-group>
-                     <v-select :options="statusOptions" v-model="props.rowData.stock_status" @change="changeStatus(props.rowData.id)">
+                     <v-select :options="statusOptions" v-model="props.rowData.stock_status" @selected="changeStatus(props.rowData.id)" >
                        <template slot="option" slot-scope="option">
                          {{ option.label }}
                          </template>
