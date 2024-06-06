@@ -210,11 +210,6 @@ export default {
       changeStatus(id) {
         console.log(`change status of ${id} to ${this.props.rowData.stock_status}`);
       }
-   },
-   watch: {
-     props.rowData.stock_status: function (newVal) {
-       this.changeStatus(newVal);
-     }
    }
 };
 </script>
