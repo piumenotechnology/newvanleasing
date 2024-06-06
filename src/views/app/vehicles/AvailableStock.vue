@@ -25,14 +25,12 @@
                      </b-button> -->
                   </template>
                  <template slot="stock_status" slot-scope="props">
-                   <b-form @submit.prevent="changeStatus">
-                    <b-input-group>
-                      <b-input-group-prepend>
-                        <b-button variant="outline-secondary" type="submit">Submit</b-button>
-                      </b-input-group-prepend>
-                      <v-select v-model.trim="stockStatus" :options="selectData" />
-                      </b-input-group>
-                    </b-form>
+                  <b-input-group>
+                    <v-select :options="selectData" />
+                    <b-input-group-append>
+                      <b-button variant="outline-secondary" @click="changeStatus(props.rowData.id)">Submit</b-button>
+                    </b-input-group-append>
+                    </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
                      <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
@@ -91,7 +89,6 @@ export default {
          total: 0,
          lastPage: 0,
          items: [],
-         stockStatus: null,
          selectData: [
            "Potential",
            "Available",
@@ -213,8 +210,8 @@ export default {
             this.selectedItems = this.items.map(x => x.id);
          }
       },
-      changeStatus() {
-        console.log(this.stockStatus)
+      changeStatus(id) {
+        console.log(id)
       }
    }
 };
