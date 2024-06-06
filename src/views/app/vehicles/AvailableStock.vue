@@ -26,11 +26,7 @@
                   </template>
                  <template slot="stock_status" slot-scope="props">
                    <b-input-group>
-                     <v-select :options="statusOptions" v-model="props.rowData.stock_status" @selected="changeStatus(props.rowData.id)" >
-                       <template slot="option" slot-scope="option">
-                         {{ option.label }}
-                         </template>
-                      </v-select>
+                     <v-select :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" @selected="changeStatus(props.rowData.id)" />
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
@@ -101,42 +97,42 @@ export default {
                sortField: "vehicle_registration",
                title: "Vehicle Registration",
                titleClass: "center aligned",
-               dataClass: "list-item-heading text-uppercase"
+               dataClass: "list-item-heading text-uppercase align-text-center"
             },
             {
                name: "vehicle_manufactur",
                sortField: "vehicle_manufactur",
                title: "Manufacturer",
                titleClass: "center aligned",
-               dataClass: "text-muted"
+               dataClass: "text-muted align-text-center"
             },
             {
                name: "vehicle_model",
                sortField: "vehicle_model",
                title: "Model",
                titleClass: "center aligned",
-               dataClass: "text-muted"
+               dataClass: "text-muted align-text-center"
             },
             {
                name: "vehicle_variant",
                sortField: "vehicle_variant",
                title: "Variant",
                titleClass: "center aligned",
-               dataClass: "text-muted"
+               dataClass: "text-muted align-text-center"
             },
             {
                name: "__slot:stock_status",
                sortField: "stock_status",
                title: "Status",
                titleClass: "center aligned",
-               dataClass: ""
+               dataClass: "align-text-center"
             },
             {
                name: "__slot:date",
                sortField: "tgl_available",
                title: "Available Date",
                titleClass: "center aligned",
-               dataClass: ""
+               dataClass: "align-text-center"
             },
             // {
             //    name: "__slot:status",
@@ -150,7 +146,7 @@ export default {
                name: "__slot:action",
                title: "",
                titleClass: "",
-               dataClass: "center aligned align-text-top text-right"
+               dataClass: "center aligned align-text-center text-right"
             }
          ],
          sortOrder: [
@@ -214,6 +210,11 @@ export default {
       changeStatus(id) {
         console.log(`change status of ${id} to ${this.props.rowData.stock_status}`);
       }
+   },
+   watch: {
+     months: function (newVal) {
+       this.changeStatus(newVal);
+     }
    }
 };
 </script>
