@@ -218,7 +218,7 @@ export default {
         const newData = {
           stock_status: obj.stock_status,
         }
-        let url = apiUrl + "/changeStockStatus/" + obj.id;
+        let url = apiUrl + "/changestockstatus/" + obj.id;
         // console.log(`edit${obj.id} with ${newData}`);
         axios
           .put(url, newData)
