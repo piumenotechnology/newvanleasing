@@ -2,7 +2,7 @@
    <div>
       <datatable-heading :title="$t('menu.available-stock')" :changePageSize="changePageSize"
       :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
-      <div v-if="isSaving" class="loading-overlay">
+      <div v-if="isSaving" class="loading-overlay card-img-overlay">
         <div class="loading"></div>
       </div>
       <b-row :class="isSaving ? 'disabled' : ''">
