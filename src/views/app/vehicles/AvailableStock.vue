@@ -25,19 +25,12 @@
                      </b-button> -->
                   </template>
                  <template slot="stock_status" slot-scope="props">
-                  <b-input-group>
-                    <v-select
-                      v-model="defaultSelected"
-                      :items="chapters"
-                      item-text="props.rowData.stock_status"
-                      item-value="props.rowData.stock_status"
-                      return-object
-                      label="Filter by Chapter"
-                      @change="changeStatus(props.rowData.id)"
-                    />
-                    <b-input-group-append>
-                      <b-button variant="outline-secondary" @click="changeStatus(props.rowData.id)">Submit</b-button>
-                    </b-input-group-append>
+                   <b-input-group>
+                     <v-select :options="statusOptions" v-model="props.rowData.stock_status" @change="changeStatus(props.rowData.id)">
+                       <template slot="option" slot-scope="option">
+                         {{ option.label }}
+                         </template>
+                      </v-select>
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
@@ -97,12 +90,11 @@ export default {
          total: 0,
          lastPage: 0,
          items: [],
-         selectData: [
+         statusOptions: [
            "Potential",
            "Available",
            "Booked"
          ],
-         defaultSelected: "Potential",
          fields: [
             {
                name: "vehicle_registration",
@@ -220,7 +212,7 @@ export default {
          }
       },
       changeStatus(id) {
-        console.log(id)
+        console.log(`change status of ${id} to ${this.props.rowData.stock_status}`);
       }
    }
 };
