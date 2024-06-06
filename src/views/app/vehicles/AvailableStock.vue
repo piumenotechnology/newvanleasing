@@ -53,7 +53,6 @@
 </template>
 <script>
 import axios from 'axios';
-import { apiUrl } from "../../constants/config";
 import moment from "moment";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
