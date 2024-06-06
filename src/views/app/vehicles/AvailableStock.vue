@@ -24,9 +24,11 @@
                         <span>{{ $t('pages.details') }}</span>
                      </b-button> -->
                   </template>
-                 <template slot="stock_status" slot-scope="props">
-                   <b-input-group>
-                     <v-select :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" @selected="changeStatus(props.rowData.id)" />
+                  <template slot="stock_status" slot-scope="props">
+                    <b-input-group>
+                      <v-select v-model="props.rowData.stock_status" :value="props.rowData.stock_status" @selected="changeStatus(props.rowData.id)">
+                        <v-option v-for="item of statusOptions" :value="item">{{item}}</v-option>
+                      </v-select>
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
@@ -212,7 +214,7 @@ export default {
       }
    },
    watch: {
-     months: function (newVal) {
+     props.rowData.stock_status: function (newVal) {
        this.changeStatus(newVal);
      }
    }
