@@ -214,7 +214,7 @@ export default {
       changeStatus(obj) {
         // console.log(`change status of ${obj.id} to ${obj.stock_status}`);
         let url = apiUrl + "/purchaseorder/" + obj.id;
-        
+        this.isSaving = true;
         
         console.log(url);
         setTimeout(() => {
