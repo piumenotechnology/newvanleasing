@@ -190,7 +190,7 @@ export default {
         const itemId = dataItem.id;
         let itemsForToggle = this.items;
         var rowClass = this.getIndex(itemId, itemsForToggle, "id");
-        console.log(rowClass);
+        // console.log(rowClass);
         // if (this.selectedItems.includes(dataItem.id)) {
         //   return "selected";
         // }
