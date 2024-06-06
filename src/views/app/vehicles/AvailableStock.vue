@@ -219,30 +219,23 @@ export default {
           stock_status: obj.stock_status,
         }
         let url = apiUrl + "/changeStockStatus/" + obj.id;
-        console.log(this.items);
-        console.log(`edit${obj.id} with ${newData}`);
-        this.isSaving = true;
-        setTimeout(() => {
-          this.isSaving = false;
-          this.addNotification("success filled", "Yo!", "Succesfully added!");
-        }, 1500);
-        // axios
-        //   .put(url, newData)
-        //   .then(r => r.data)
-        //   .then(res => {
-        //     this.isSaving = true;
-        //     this.status = "success filled";
-        //     this.message = "Your data was saved!";
-        //     setTimeout(() => {
-        //       this.addNotification(this.status, "Great!", this.message);
-        //       this.$refs.vuetable.refresh();
-        //       this.isSaving = false;
-        //     }, 1500)
-        //   }).catch(_error => {
-        //     this.status = "error filled";
-        //     this.message = "An error occured while saving the data. Please try again later.";
-        //     this.addNotification(this.status, "Oppss!", this.message);
-        //   })
+        // console.log(`edit${obj.id} with ${newData}`);
+        axios
+          .put(url, newData)
+          .then(r => r.data)
+          .then(res => {
+            this.isSaving = true;
+            this.status = "success filled";
+            this.message = "Your data was saved!";
+            setTimeout(() => {
+              this.$refs.vuetable.refresh();
+              this.isSaving = false;
+            }, 1000)
+          }).catch(_error => {
+            this.status = "error filled";
+            this.message = "An error occured while saving the data. Please try again later.";
+            this.addNotification(this.status, "Oppss!", this.message);
+          })
       }
    }
 };
