@@ -2,7 +2,9 @@
    <div>
       <datatable-heading :title="$t('menu.available-stock')" :changePageSize="changePageSize"
       :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
-
+      <div v-if="isSaving">
+         <b-spinner variant="primary" label="Spinning" class="mb-1"></b-spinner>
+      </div>
       <b-row>
          <b-colxx xxs="12">
             <b-card>
@@ -50,6 +52,8 @@
    </div>
 </template>
 <script>
+import axios from 'axios';
+import { apiUrl } from "../../constants/config";
 import moment from "moment";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
@@ -86,6 +90,7 @@ export default {
          total: 0,
          lastPage: 0,
          items: [],
+         isSaving: false,
          statusOptions: [
            "Potential",
            "Available",
@@ -208,8 +213,27 @@ export default {
          }
       },
       changeStatus(obj) {
-        console.log(`change status of ${obj.id} to ${obj.stock_status}`);
-      }
+        // console.log(`change status of ${obj.id} to ${obj.stock_status}`);
+        let url = apiUrl + "/purchaseorder/" + obj.id;
+        this.isSaving = true;
+        console.log(url);
+      //   axios
+      //     .put(url, newData)
+      //     .then(r => r.data)
+      //     .then(res => {
+      //       this.isSaving = true;
+      //       this.status = "success filled";
+      //       this.message = "Your data was saved!";
+      //       setTimeout(() => {
+      //         this.addNotification(this.status, "Great!", this.message);
+      //         this.$refs.vuetable.refresh();
+      //       }, 1500)
+      //     }).catch(_error => {
+      //       this.status = "error filled";
+      //       this.message = "An error occured while saving the data. Please try again later.";
+      //       this.addNotification(this.status, "Oppss!", this.message);
+      //     })
+      // }
    }
 };
 </script>
