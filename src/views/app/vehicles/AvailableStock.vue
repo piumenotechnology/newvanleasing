@@ -232,7 +232,7 @@ export default {
       //       this.message = "An error occured while saving the data. Please try again later.";
       //       this.addNotification(this.status, "Oppss!", this.message);
       //     })
-      // }
+      }
    }
 };
 </script>
