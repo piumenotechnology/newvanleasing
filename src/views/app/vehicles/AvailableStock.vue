@@ -91,7 +91,7 @@ export default {
          total: 0,
          lastPage: 0,
          items: [],
-         stockStatus: this.items.stock_status,
+         stockStatus: null,
          selectData: [
            "Potential",
            "Available",
