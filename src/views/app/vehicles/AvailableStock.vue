@@ -216,7 +216,7 @@ export default {
       },
       changeStatus(obj) {
         const newData = {
-          stock_status: this.props.rowData.stock_status,
+          stock_status: obj.stock_status,
         }
         let url = apiUrl + "/changeStockStatus/" + obj.id;
         console.log(this.items);
