@@ -2,7 +2,7 @@
    <div>
       <datatable-heading :title="$t('menu.available-stock')" :changePageSize="changePageSize"
       :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
-      <div v-if="isSaving">
+      <div v-if="isSaving" class="loading">
          <b-spinner variant="primary" label="Spinning" class="mb-1"></b-spinner>
       </div>
       <b-row>
@@ -214,8 +214,12 @@ export default {
       changeStatus(obj) {
         // console.log(`change status of ${obj.id} to ${obj.stock_status}`);
         let url = apiUrl + "/purchaseorder/" + obj.id;
-        this.isSaving = true;
+        
+        
         console.log(url);
+        setTimeout(() => {
+          this.isSaving = false;
+        }, 1500)
       //   axios
       //     .put(url, newData)
       //     .then(r => r.data)
