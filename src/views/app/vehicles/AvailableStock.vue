@@ -27,7 +27,7 @@
                  <template slot="stock_status" slot-scope="props">
                   <b-input-group>
                     <v-select
-                      item-value="`${props.rowData.stock_status}`"
+                      value="props.rowData.stock_status"
                       :options="selectData"
                       v-model="defaultSelected" />
                     <b-input-group-append>
