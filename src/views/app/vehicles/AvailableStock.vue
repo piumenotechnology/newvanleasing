@@ -27,9 +27,14 @@
                  <template slot="stock_status" slot-scope="props">
                   <b-input-group>
                     <v-select
-                      value="props.rowData.stock_status"
-                      :options="selectData"
-                      v-model="defaultSelected" />
+                      v-model="defaultSelected"
+                      :items="chapters"
+                      item-text="props.rowData.stock_status"
+                      item-value="props.rowData.stock_status"
+                      return-object
+                      label="Filter by Chapter"
+                      @change="changeStatus(props.rowData.id)"
+                    />
                     <b-input-group-append>
                       <b-button variant="outline-secondary" @click="changeStatus(props.rowData.id)">Submit</b-button>
                     </b-input-group-append>
@@ -97,9 +102,7 @@ export default {
            "Available",
            "Booked"
          ],
-         defaultSelected: {
-            "Potential"
-         },
+         defaultSelected: "Potential",
          fields: [
             {
                name: "vehicle_registration",
