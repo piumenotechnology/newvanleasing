@@ -24,6 +24,16 @@
                         <span>{{ $t('pages.details') }}</span>
                      </b-button> -->
                   </template>
+                 <template slot="stock_status" slot-scope="props">
+                   <b-form @submit.prevent="changeStatus">
+                    <b-input-group>
+                      <b-input-group-prepend>
+                        <b-button variant="outline-secondary" type="submit">Submit</b-button>
+                      </b-input-group-prepend>
+                      <v-select v-model.trim="stockStatus" :options="selectData" />
+                      </b-input-group>
+                    </b-form>
+                  </template>
                   <!-- <template slot="status" slot-scope="props">
                      <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
                      <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
@@ -46,6 +56,8 @@
 </template>
 <script>
 import moment from "moment";
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
 import { apiUrl } from "../../../constants/config";
@@ -56,6 +68,7 @@ export default {
    components: {
       vuetable: Vuetable,
       "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
+      "v-select": vSelect,
       "datatable-heading": DatatableHeading
    },
    filters: {
@@ -78,6 +91,12 @@ export default {
          total: 0,
          lastPage: 0,
          items: [],
+         stockStatus: this.items.stock_status,
+         selectData: [
+           "Potential",
+           "Available",
+           "Booked"
+         ],
          fields: [
             {
                name: "vehicle_registration",
@@ -106,6 +125,13 @@ export default {
                title: "Variant",
                titleClass: "center aligned",
                dataClass: "text-muted"
+            },
+            {
+               name: "__slot:stock_status",
+               sortField: "stock_status",
+               title: "Status",
+               titleClass: "center aligned",
+               dataClass: ""
             },
             {
                name: "__slot:date",
@@ -172,23 +198,23 @@ export default {
       onChangePage(page) {
          this.$refs.vuetable.changePage(page);
       },
-
       changePageSize(perPage) {
          this.perPage = perPage;
          this.$refs.vuetable.refresh();
       },
-
       searchChange(val) {
          this.search = val;
          this.$refs.vuetable.refresh();
       },
-
       selectAll(isToggle) {
          if (this.selectedItems.length >= this.items.length) {
             if (isToggle) this.selectedItems = [];
          } else {
             this.selectedItems = this.items.map(x => x.id);
          }
+      },
+      changeStatus() {
+        console.log(this.stockStatus)
       }
    }
 };
