@@ -217,7 +217,7 @@ export default {
         console.log(url);
         setTimeout(() => {
           this.isSaving = false;
-          this.addNotification"success filled", "Yo!", "Succesfully added!");
+          this.addNotification("success filled", "Yo!", "Succesfully added!");
         }, 4500)
       //   axios
       //     .put(url, newData)
