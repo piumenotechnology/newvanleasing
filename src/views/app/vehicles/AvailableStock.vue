@@ -2,8 +2,10 @@
    <div>
       <datatable-heading :title="$t('menu.available-stock')" :changePageSize="changePageSize"
       :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
-      <div v-if="isSaving" class="card-img-overlay loading"></div>
-      <b-row>
+      <div v-if="isSaving" class="loading-overlay">
+        <div class="loading"></div>
+      </div>
+      <b-row :class="isSaving ? 'disabled' : ''">
          <b-colxx xxs="12">
             <b-card>
                <vuetable ref="vuetable" class="order-with-arrow" :api-url="apiBase"
