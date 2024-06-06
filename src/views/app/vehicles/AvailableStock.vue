@@ -2,9 +2,7 @@
    <div>
       <datatable-heading :title="$t('menu.available-stock')" :changePageSize="changePageSize"
       :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" />
-      <div v-if="isSaving" class="loading">
-         <b-spinner variant="primary" label="Spinning" class="mb-1"></b-spinner>
-      </div>
+      <div v-if="isSaving" class="card-img-overlay loading"></div>
       <b-row>
          <b-colxx xxs="12">
             <b-card>
@@ -219,7 +217,8 @@ export default {
         console.log(url);
         setTimeout(() => {
           this.isSaving = false;
-        }, 1500)
+          this.addNotification"success filled", "Yo!", "Succesfully added!");
+        }, 4500)
       //   axios
       //     .put(url, newData)
       //     .then(r => r.data)
