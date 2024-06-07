@@ -253,8 +253,8 @@ export default {
             this.status = "success filled";
             this.message = "Your data was saved!";
             setTimeout(() => {
-              this.$refs.vuetable.refresh();
               this.isSaving = false;
+              this.$refs.vuetable.refresh();
             }, 1000)
           }).catch(_error => {
             this.status = "error filled";
