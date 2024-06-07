@@ -163,22 +163,18 @@
                 td {
                     &:first-child {
                         border-top-left-radius: $border-radius-rounded;
-                        border-bottom-left-radius: $border-radius-rounded;
                     }
                     &:last-child {
                         border-top-right-radius: $border-radius-rounded;
-                        border-bottom-right-radius: $border-radius-rounded;
                     }
                 }
             }
 		    &:last-child {
                 td {
                     &:first-child {
-                        border-top-left-radius: $border-radius-rounded;
                         border-bottom-left-radius: $border-radius-rounded;
                     }
                     &:last-child {
-                        border-top-right-radius: $border-radius-rounded;
                         border-bottom-right-radius: $border-radius-rounded;
                     }
                 }
