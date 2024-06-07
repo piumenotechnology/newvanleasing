@@ -8,7 +8,7 @@
       <b-row :class="isSaving ? 'disabled' : ''">
          <b-colxx xxs="12">
             <b-card>
-               <vuetable ref="vuetable" class="order-with-arrow" :api-url="apiBase"
+               <vuetable ref="vuetable" class="order-with-arrow colored" :api-url="apiBase"
                   :query-params="makeQueryParams" :per-page="perPage" :reactive-api-url="true" :fields="fields"
                   data-path="data.data"
                   pagination-path="data"
