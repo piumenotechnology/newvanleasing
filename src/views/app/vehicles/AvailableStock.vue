@@ -39,7 +39,7 @@
                   </template> -->
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
-                     variant="light"
+                     variant="dark"
                      size="sm"
                      >
                      <i class="simple-icon-magnifier mr-1" />  {{ $t('contract.detail') }}
@@ -109,21 +109,21 @@ export default {
                sortField: "vehicle_manufactur",
                title: "Manufacturer",
                titleClass: "center aligned",
-               dataClass: "text-muted center-aligned"
+               dataClass: "center-aligned"
             },
             {
                name: "vehicle_model",
                sortField: "vehicle_model",
                title: "Model",
                titleClass: "center aligned",
-               dataClass: "text-muted center-aligned"
+               dataClass: "center-aligned"
             },
             {
                name: "vehicle_variant",
                sortField: "vehicle_variant",
                title: "Variant",
                titleClass: "center aligned",
-               dataClass: "text-muted center-aligned"
+               dataClass: "center-aligned"
             },
             {
                name: "__slot:stock_status",
