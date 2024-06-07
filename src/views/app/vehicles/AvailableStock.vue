@@ -187,9 +187,15 @@ export default {
             };
       },
       onRowClass(dataItem, index) {
-        const itemId = dataItem.id;
-        let itemsForToggle = this.items;
-        var rowClass = this.getIndex(itemId, itemsForToggle, "id");
+        // const itemId = dataItem.id;
+        // let itemsForToggle = this.items;
+        // var rowClass = this.getIndex(itemId, itemsForToggle, "id");
+        if(dataItem.stock_status == "Available") {
+          return "light-success";
+        } else if (dataItem.stock_status == "Booked")) {
+          return "light-danger";
+        }
+        return "light-warning";
         // console.log(rowClass);
         // if (this.selectedItems.includes(dataItem.id)) {
         //   return "selected";
