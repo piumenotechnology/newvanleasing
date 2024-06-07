@@ -191,11 +191,11 @@ export default {
         // let itemsForToggle = this.items;
         // var rowClass = this.getIndex(itemId, itemsForToggle, "id");
         if(dataItem.stock_status == "Available") {
-          return "colored light-success";
+          return "light-success";
         } else if (dataItem.stock_status == "Booked") {
-          return "colored light-danger";
+          return "light-danger";
         }
-        return "colored light-warning";
+        return "light-warning";
         // console.log(rowClass);
         // if (this.selectedItems.includes(dataItem.id)) {
         //   return "selected";
