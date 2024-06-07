@@ -192,7 +192,7 @@ export default {
         // var rowClass = this.getIndex(itemId, itemsForToggle, "id");
         if(dataItem.stock_status == "Available") {
           return "light-success";
-        } else if (dataItem.stock_status == "Booked")) {
+        } else if (dataItem.stock_status == "Booked") {
           return "light-danger";
         }
         return "light-warning";
