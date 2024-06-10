@@ -273,7 +273,8 @@ export default {
             serviceMiles: 0,
             serviceYears: 0,
             serviceMileage: 0,
-            serviceLast: null
+            serviceLast: null,
+            stock_status: null
          },
          purchaseForm: {
             purchaseDate: null,
@@ -324,7 +325,8 @@ export default {
          serviceMiles: { numeric },
          serviceYears: { numeric },
          serviceMileage: { numeric },
-         serviceLast: {}
+         serviceLast: {},
+         stock_status: {}
       },
       purchaseForm: {
          purchaseDate: { required },
@@ -436,6 +438,7 @@ export default {
             service_schedule_miles: this.vehicleForm.serviceMiles,
             service_schedule_years: this.vehicleForm.serviceYears,
             last_service_mileage: this.vehicleForm.serviceMileage,
+            stock_status: this.vehicleForm.stock_status,
             last_service_date: this.formatDate(this.vehicleForm.serviceLast),
             hire_purchase_starting_date: this.formatDate(this.purchaseForm.purchaseDate),
             purchase_method: this.purchaseForm.fundingMethods.label,
