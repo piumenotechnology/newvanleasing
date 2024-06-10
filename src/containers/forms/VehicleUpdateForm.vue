@@ -309,7 +309,8 @@ export default {
         finalPay: this.items.final_payment,
         docFee: this.items.documentation_fees_pu,
         finalFee: this.items.final_fees,
-        otherFee: this.items.other_fees
+        otherFee: this.items.other_fees,
+        stockStatus: this.items.stock_status
       },
       fundingMethodData: [
         { label: "Hire Purchase", value: "hire" },
@@ -368,7 +369,8 @@ export default {
       finalPay: { },
       docFee: { },
       finalFee: { },
-      otherFee: { }
+      otherFee: { },
+      stockStatus: { }
     }
   },
   methods: {
@@ -424,7 +426,8 @@ export default {
         final_payment: this.vehicleForm.finalPay,
         documentation_fees_pu: this.vehicleForm.docFee,
         final_fees: this.vehicleForm.finalFee,
-        other_fees: this.vehicleForm.otherFee
+        other_fees: this.vehicleForm.otherFee,
+        stock_status: this.vehicleForm.stockStatus
       };
       let url = apiUrl + "/purchaseorder/" + this.items.id;
       this.$emit('update-vehicle', 'processing');
