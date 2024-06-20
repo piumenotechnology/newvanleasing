@@ -67,8 +67,13 @@
                 &.center-aligned {
                     vertical-align: middle;
                 }
-                .v-select .vs__selected {
-                    padding:6px!important;
+                .v-select {
+		            .vs__selected {
+                        padding:6px!important;
+                    }
+                    .vs__selected-options > input {
+                        display:none
+                    }
                 }
             }
         }
