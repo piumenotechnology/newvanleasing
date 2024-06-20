@@ -130,7 +130,8 @@ export default {
                sortField: "stock_status",
                title: "Status",
                titleClass: "center aligned",
-               dataClass: "center-aligned"
+               dataClass: "center-aligned",
+               width: "18%"
             },
             {
                name: "__slot:date",
