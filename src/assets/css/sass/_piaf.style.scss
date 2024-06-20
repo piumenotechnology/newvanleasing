@@ -6694,6 +6694,9 @@ i.large-icon {
     right: initial;
     left: 1.5em;
   }
+  .dataTable .v-select .vs__selected {
+    padding:6px!important;
+  }
 
   .ck-editor {
     direction: rtl;
