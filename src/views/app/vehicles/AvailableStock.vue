@@ -29,7 +29,7 @@
                   </template>
                   <template slot="stock_status" slot-scope="props">
                     <b-input-group>
-                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status" />
+                      <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status"  :searchable="false"/>
                     </b-input-group>
                   </template>
                   <!-- <template slot="status" slot-scope="props">
