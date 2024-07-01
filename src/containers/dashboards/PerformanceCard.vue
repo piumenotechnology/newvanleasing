@@ -235,8 +235,11 @@ export default {
       }
     },
     theCost() {
-      return (this.otherCost !== null) ? Math.abs(Number(this.totalCost) + Number(this.otherCost) + Number(this.baseInterest))
-      : this.totalCost + this.baseInterest
+      if(this.vehicle.purchase_methods == "cash") {
+        return Number(this.vehicle.price_otr)
+      } else {
+        return (this.otherCost !== null) ? Math.abs(Number(this.totalCost) + Number(this.otherCost) + Number(this.baseInterest)) : this.totalCost + this.baseInterest
+      }
     },
     theMargin() {
       return Number(this.theIncome) - Number(this.theCost)
