@@ -235,7 +235,7 @@ export default {
       }
     },
     theCost() {
-      if(this.vehicle.purchase_methods == "cash") {
+      if(this.vehicle.purchase_method == "Cash") {
         return Number(this.vehicle.price_otr)
       } else {
         return (this.otherCost !== null) ? Math.abs(Number(this.totalCost) + Number(this.otherCost) + Number(this.baseInterest)) : this.totalCost + this.baseInterest
