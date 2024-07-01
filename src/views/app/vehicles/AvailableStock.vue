@@ -14,19 +14,19 @@
                   pagination-path="data"
                   :row-class="onRowClass"
                   @vuetable:pagination-data="onPaginationData">
-                  <template slot="date" slot-scope="props">
+                  <!-- <template slot="date" slot-scope="props">
                      <span>
                         {{ props.rowData.tgl_available | datetime }}
                      </span>
-                     <!-- <b-button
+                     <b-button
                         v-b-modal.modalright
                         variant="outline-secondary"
                         size="sm"
                      >
                         <i class="simple-icon-magnifier mr-1" />
                         <span>{{ $t('pages.details') }}</span>
-                     </b-button> -->
-                  </template>
+                     </b-button>
+                  </template> -->
                   <template slot="stock_status" slot-scope="props">
                     <b-input-group>
                       <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status"  :searchable="false"/>
@@ -126,6 +126,13 @@ export default {
                dataClass: "center-aligned"
             },
             {
+               name: "colour",
+               sortField: "colour",
+               title: "Colour",
+               titleClass: "center aligned",
+               dataClass: "center-aligned"
+            },
+            {
                name: "__slot:stock_status",
                sortField: "stock_status",
                title: "Status",
@@ -133,13 +140,13 @@ export default {
                dataClass: "center-aligned",
                width: "18%"
             },
-            {
-               name: "__slot:date",
-               sortField: "tgl_available",
-               title: "Available Date",
-               titleClass: "center aligned",
-               dataClass: "center-aligned"
-            },
+            // {
+            //    name: "__slot:date",
+            //    sortField: "tgl_available",
+            //    title: "Available Date",
+            //    titleClass: "center aligned",
+            //    dataClass: "center-aligned"
+            // },
             // {
             //    name: "__slot:status",
             //    sortField: "status_next_step",
