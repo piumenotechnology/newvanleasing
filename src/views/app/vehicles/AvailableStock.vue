@@ -100,7 +100,7 @@ export default {
             {
                name: "vehicle_registration",
                sortField: "vehicle_registration",
-               title: "Vehicle Registration",
+               title: "Registration",
                titleClass: "center aligned",
                dataClass: "list-item-heading text-uppercase center-aligned"
             },
