@@ -40,8 +40,8 @@
 		              </b-colxx>
 		              <b-colxx md="6" class="text-white d-flex flex-column justify-content-center">
 		                 <div class="px-md-5 mt-3 mt-md-0">
-		                    <h2 class="font-weight-bold align-text-bottom lead">0 vehicle</h2>
-                        <p class="mb-5">No potential stock found.</p>
+		                    <h2 class="font-weight-bold align-text-bottom lead">0 Vehicle</h2>
+                        <p class="mb-5">No Potential stock found.</p>
 		                 </div>
 		              </b-colxx>
 		           </b-row>
