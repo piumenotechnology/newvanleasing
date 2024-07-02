@@ -152,7 +152,7 @@ export default {
                title: "Status",
                titleClass: "center aligned",
                dataClass: "center-aligned",
-               width: "18%"
+               width: "17%"
             },
             // {
             //    name: "__slot:date",
