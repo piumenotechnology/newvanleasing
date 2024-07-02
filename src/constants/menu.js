@@ -21,12 +21,10 @@ const data = [
     icon: "iconsminds-check",
     label: "menu.available-stock",
     to: `${adminRoot}/vehicles/available-stock`
-  }]
   }, {
     icon: "iconsminds-sand-watch-2",
     label: "menu.potential-stock",
     to: `${adminRoot}/vehicles/potential-stock`
-  }]
   }, {
     icon: "iconsminds-notepad",
     label: "menu.booked-stock",
