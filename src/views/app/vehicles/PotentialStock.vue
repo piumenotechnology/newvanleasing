@@ -61,6 +61,7 @@ export default {
    data() {
       return {
          isLoad: false,
+         fullyLoaded: false,
          apiBase: apiUrl + "/potentialstock",
          sort: "",
          order: "",
@@ -197,6 +198,7 @@ export default {
          this.total = paginationData.total;
          this.lastPage = paginationData.last_page;
          this.items = paginationData.data;
+          console.log(this.items);
          this.$refs.pagination.setPaginationData(paginationData);
       },
       onChangePage(page) {
