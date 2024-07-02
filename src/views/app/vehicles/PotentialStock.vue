@@ -193,12 +193,14 @@ export default {
         // return "";
       },
       onPaginationData(paginationData) {
+         if(paginationData == undefined) {
+           console.log('data is undefined');
+         }
          this.from = paginationData.from;
          this.to = paginationData.to;
          this.total = paginationData.total;
          this.lastPage = paginationData.last_page;
          this.items = paginationData.data;
-          console.log(this.items);
          this.$refs.pagination.setPaginationData(paginationData);
       },
       onChangePage(page) {
