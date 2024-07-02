@@ -6,7 +6,7 @@
         <div class="loading"></div>
       </div>
       <b-row :class="isSaving ? 'disabled' : ''">
-         <b-colxx xxs="12">
+         <b-colxx v-show="isLoad" xxs="12">
             <b-card>
                <vuetable ref="vuetable" class="order-with-arrow colored" :api-url="apiBase"
                   :query-params="makeQueryParams" :per-page="perPage" :reactive-api-url="true" :fields="fields"
@@ -14,29 +14,12 @@
                   pagination-path="data"
                   :row-class="onRowClass"
                   @vuetable:pagination-data="onPaginationData">
-                  <!-- <template slot="date" slot-scope="props">
-                     <span>
-                        {{ props.rowData.tgl_available | datetime }}
-                     </span>
-                     <b-button
-                        v-b-modal.modalright
-                        variant="outline-secondary"
-                        size="sm"
-                     >
-                        <i class="simple-icon-magnifier mr-1" />
-                        <span>{{ $t('pages.details') }}</span>
-                     </b-button>
-                  </template> -->
                   <template slot="stock_status" slot-scope="props">
                     <b-input-group>
                       <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status"  :searchable="false"/>
                     </b-input-group>
                   </template>
-                  <!-- <template slot="status" slot-scope="props">
-                     <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
-                     <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
-                     <b-badge v-show="props.rowData.status_next_step === 'Sold'" pill variant="dark">{{ props.rowData.status_next_step }}</b-badge>
-                  </template> -->
+                 
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
                      variant="dark"
@@ -49,6 +32,21 @@
             </b-card>
             <vuetable-pagination-bootstrap class="mt-4" ref="pagination" @vuetable-pagination:change-page="onChangePage" />
          </b-colxx>
+				 <b-colxx xxs="12" v-show="fullyLoaded">
+		        <b-card class="card-placeholder align-items-center" :class="(isLoad)?'':'show'">
+		           <b-row>
+		              <b-colxx md="4">
+		                 <img src="/assets/img/cards/big-1.png" alt="No items" class="img-fluid">
+		              </b-colxx>
+		              <b-colxx md="6" class="text-white d-flex flex-column justify-content-center">
+		                 <div class="px-md-5 mt-3 mt-md-0">
+		                    <h2 class="font-weight-bold align-text-bottom lead">0 Vehicle</h2>
+                        <p class="mb-5">No Available stock found.</p>
+		                 </div>
+		              </b-colxx>
+		           </b-row>
+		        </b-card>
+		     </b-colxx>
       </b-row>
    </div>
 </template>
@@ -73,12 +71,12 @@ export default {
    filters: {
       datetime: function (date) {
          return moment(date).format("LL")
-         // return moment(date).startOf('day').fromNow()
       }
    },
    data() {
       return {
          isLoad: false,
+         fullyLoaded: false,
          apiBase: apiUrl + "/availablestock",
          sort: "",
          order: "",
@@ -154,21 +152,6 @@ export default {
                dataClass: "center-aligned",
                width: "17%"
             },
-            // {
-            //    name: "__slot:date",
-            //    sortField: "tgl_available",
-            //    title: "Available Date",
-            //    titleClass: "center aligned",
-            //    dataClass: "center-aligned"
-            // },
-            // {
-            //    name: "__slot:status",
-            //    sortField: "status_next_step",
-            //    title: "Status",
-            //    titleClass: "center aligned text-center",
-            //    dataClass: "text-center",
-            //    width: "10%"
-            // },
             {
                name: "__slot:action",
                title: "",
@@ -186,6 +169,23 @@ export default {
       };
    },
    methods: {
+			fetchData() {
+				let url = apiUrl + "/availablestock?per_page=1"
+				axios
+				.get(url)
+				.then(r => r.data)
+				.then(res => {
+				   if(res.data.data.length > 0){
+					  this.isLoad = true
+				   }
+				})
+				.catch(err => {
+				   this.isLoad = false
+				   setTimeout(() => {
+					  this.fullyLoaded = true
+				   }, 300)
+				})
+			},
       makeQueryParams(sortOrder, currentPage, perPage) {
          this.isLoading = false;
          return sortOrder[0]
@@ -276,14 +276,21 @@ export default {
             this.message = "Your data was saved!";
             setTimeout(() => {
               this.isSaving = false;
-              this.$refs.vuetable.refresh();
+              this.updateTableRow();
             }, 1000)
           }).catch(_error => {
             this.status = "error filled";
             this.message = "An error occured while saving the data. Please try again later.";
             this.addNotification(this.status, "Oppss!", this.message);
           })
-      }
-   }
+      },
+			updateTableRow() {
+				this.fetchData()
+				this.$refs.vuetable.refresh();
+			}
+   },
+	 mounted() {
+		 this.fetchData()
+	 }
 };
 </script>
