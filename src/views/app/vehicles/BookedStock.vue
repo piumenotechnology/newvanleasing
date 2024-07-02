@@ -6,7 +6,7 @@
         <div class="loading"></div>
       </div>
       <b-row :class="isSaving ? 'disabled' : ''">
-         <b-colxx xxs="12">
+         <b-colxx v-show="isLoad" xxs="12">
             <b-card>
                <vuetable ref="vuetable" class="order-with-arrow colored" :api-url="apiBase"
                   :query-params="makeQueryParams" :per-page="perPage" :reactive-api-url="true" :fields="fields"
@@ -19,6 +19,7 @@
                       <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status"  :searchable="false"/>
                     </b-input-group>
                   </template>
+                 
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
                      variant="dark"
@@ -31,6 +32,21 @@
             </b-card>
             <vuetable-pagination-bootstrap class="mt-4" ref="pagination" @vuetable-pagination:change-page="onChangePage" />
          </b-colxx>
+				 <b-colxx xxs="12" v-show="fullyLoaded">
+		        <b-card class="card-placeholder align-items-center" :class="(isLoad)?'':'show'">
+		           <b-row>
+		              <b-colxx md="4">
+		                 <img src="/assets/img/cards/big-1.png" alt="No items" class="img-fluid">
+		              </b-colxx>
+		              <b-colxx md="6" class="text-white d-flex flex-column justify-content-center">
+		                 <div class="px-md-5 mt-3 mt-md-0">
+		                    <h2 class="font-weight-bold align-text-bottom lead">0 Vehicle</h2>
+                        <p class="mb-5">No Booked stock found.</p>
+		                 </div>
+		              </b-colxx>
+		           </b-row>
+		        </b-card>
+		     </b-colxx>
       </b-row>
    </div>
 </template>
@@ -60,6 +76,7 @@ export default {
    data() {
       return {
          isLoad: false,
+         fullyLoaded: false,
          apiBase: apiUrl + "/bookedstock",
          sort: "",
          order: "",
@@ -152,6 +169,23 @@ export default {
       };
    },
    methods: {
+			fetchData() {
+				let url = apiUrl + "/bookedstock?per_page=1"
+				axios
+				.get(url)
+				.then(r => r.data)
+				.then(res => {
+				   if(res.data.data.length > 0){
+					  this.isLoad = true
+				   }
+				})
+				.catch(err => {
+				   this.isLoad = false
+				   setTimeout(() => {
+					  this.fullyLoaded = true
+				   }, 300)
+				})
+			},
       makeQueryParams(sortOrder, currentPage, perPage) {
          this.isLoading = false;
          return sortOrder[0]
@@ -232,6 +266,7 @@ export default {
           stock_status: obj.stock_status,
         }
         let url = apiUrl + "/changestockstatus/" + obj.id;
+        // console.log(`edit${obj.id} with ${newData}`);
         axios
           .put(url, newData)
           .then(r => r.data)
@@ -241,14 +276,21 @@ export default {
             this.message = "Your data was saved!";
             setTimeout(() => {
               this.isSaving = false;
-              this.$refs.vuetable.refresh();
+              this.updateTableRow();
             }, 1000)
           }).catch(_error => {
             this.status = "error filled";
             this.message = "An error occured while saving the data. Please try again later.";
             this.addNotification(this.status, "Oppss!", this.message);
           })
-      }
-   }
+      },
+			updateTableRow() {
+				this.fetchData()
+				this.$refs.vuetable.refresh();
+			}
+   },
+	 mounted() {
+		 this.fetchData()
+	 }
 };
 </script>
