@@ -1,4 +1,3 @@
-
 <template>
    <div>
       <datatable-heading :title="$t('menu.booked-stock')" :changePageSize="changePageSize"
@@ -233,7 +232,6 @@ export default {
           stock_status: obj.stock_status,
         }
         let url = apiUrl + "/changestockstatus/" + obj.id;
-        // console.log(`edit${obj.id} with ${newData}`);
         axios
           .put(url, newData)
           .then(r => r.data)
