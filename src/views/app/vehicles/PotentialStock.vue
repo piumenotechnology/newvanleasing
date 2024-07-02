@@ -276,14 +276,18 @@ export default {
             this.message = "Your data was saved!";
             setTimeout(() => {
               this.isSaving = false;
-              this.$refs.vuetable.refresh();
+              this.updateTableRow();
             }, 1000)
           }).catch(_error => {
             this.status = "error filled";
             this.message = "An error occured while saving the data. Please try again later.";
             this.addNotification(this.status, "Oppss!", this.message);
           })
-      }
+      },
+			updateTableRow() {
+				this.fetchData()
+				this.$refs.vuetable.refresh();
+			}
    },
 	 mounted() {
 		 this.fetchData()
