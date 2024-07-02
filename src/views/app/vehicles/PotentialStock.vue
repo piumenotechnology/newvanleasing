@@ -6,7 +6,7 @@
         <div class="loading"></div>
       </div>
       <b-row :class="isSaving ? 'disabled' : ''">
-         <b-colxx xxs="12">
+         <b-colxx v-show="isLoad" xxs="12">
             <b-card>
                <vuetable ref="vuetable" class="order-with-arrow colored" :api-url="apiBase"
                   :query-params="makeQueryParams" :per-page="perPage" :reactive-api-url="true" :fields="fields"
@@ -32,6 +32,22 @@
             </b-card>
             <vuetable-pagination-bootstrap class="mt-4" ref="pagination" @vuetable-pagination:change-page="onChangePage" />
          </b-colxx>
+				 <b-colxx xxs="12" v-show="fullyLoaded">
+		        <b-card class="card-placeholder align-items-center" :class="(isLoad)?'':'show'">
+		           <b-row>
+		              <b-colxx md="4">
+		                 <img src="/assets/img/cards/big-1.png" alt="No items" class="img-fluid">
+		              </b-colxx>
+		              <b-colxx md="6" class="text-white d-flex flex-column justify-content-center">
+		                 <div class="px-md-5 mt-3 mt-md-0">
+		                    <h2 class="font-weight-bold align-text-bottom lead">No vehicles found!</h2>
+		                    <p class="mb-5">Start adding your first vehicle</p>
+		                    <b-button v-b-modal.modallg size="xl" variant="light default" class="placeholder-button">{{ $t('vehicle.add-new') }}</b-button>
+		                 </div>
+		              </b-colxx>
+		           </b-row>
+		        </b-card>
+		     </b-colxx>
       </b-row>
    </div>
 </template>
@@ -154,6 +170,23 @@ export default {
       };
    },
    methods: {
+			fetchData() {
+				let url = apiUrl + "/potentialstock?per_page=1"
+				axios
+				.get(url)
+				.then(r => r.data)
+				.then(res => {
+				   if(res.data.data.length > 0){
+					  this.isLoad = true
+				   }
+				})
+				.catch(err => {
+				   this.isLoad = false
+				   setTimeout(() => {
+					  this.fullyLoaded = true
+				   }, 300)
+				})
+			},
       makeQueryParams(sortOrder, currentPage, perPage) {
          this.isLoading = false;
          return sortOrder[0]
@@ -193,9 +226,6 @@ export default {
         // return "";
       },
       onPaginationData(paginationData) {
-         if(paginationData == undefined) {
-           console.log('data is undefined');
-         }
          this.from = paginationData.from;
          this.to = paginationData.to;
          this.total = paginationData.total;
@@ -255,6 +285,9 @@ export default {
             this.addNotification(this.status, "Oppss!", this.message);
           })
       }
-   }
+   },
+	 mounted() {
+		 this.fetchData()
+	 }
 };
 </script>
