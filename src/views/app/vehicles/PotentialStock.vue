@@ -41,8 +41,6 @@
 		              <b-colxx md="6" class="text-white d-flex flex-column justify-content-center">
 		                 <div class="px-md-5 mt-3 mt-md-0">
 		                    <h2 class="font-weight-bold align-text-bottom lead">No vehicles found!</h2>
-		                    <p class="mb-5">Start adding your first vehicle</p>
-		                    <b-button v-b-modal.modallg size="xl" variant="light default" class="placeholder-button">{{ $t('vehicle.add-new') }}</b-button>
 		                 </div>
 		              </b-colxx>
 		           </b-row>
