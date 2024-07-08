@@ -58,7 +58,7 @@ export default {
   },
   actions: {
     login({ commit }, payload) {
-      let config = {
+      const config = {
         headers: {
           'Access-Control-Allow-Origin': '*',
         }
