@@ -58,13 +58,19 @@ export default {
   },
   actions: {
     login({ commit }, payload) {
+      const headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, OPTION",
+        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, X-Requested-With"
+      };
+
       commit('clearError')
       commit('setProcessing', true)
       axios
         .post(apiUrl + "/login", {
           username: payload.username,
           password: payload.password
-        })
+        }, headers)
         .then(res => res.data)
         .then(
           user => {
