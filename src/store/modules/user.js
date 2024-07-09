@@ -60,7 +60,7 @@ export default {
     login({ commit }, payload) {
       let config = {
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'https://apivl.piumenosystem.com',
         }
       }
       commit('clearError')
