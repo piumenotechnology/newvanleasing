@@ -5,7 +5,7 @@ export const adminRoot = '/app';
 export const searchPath = `${adminRoot}/#`
 export const buyUrl = 'https://1.envato.market/nEyZa'
 //export const apiUrl = 'http://127.0.0.1:8000/api';
-export const apiUrl = 'https://apivl.piumenosystem.com/api';
+export const apiUrl = 'http://apivl.piumenosystem.com/api';
 
 export const subHiddenBreakpoint = 1440
 export const menuHiddenBreakpoint = 768
