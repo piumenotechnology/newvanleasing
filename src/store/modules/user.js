@@ -58,19 +58,13 @@ export default {
   },
   actions: {
     login({ commit }, payload) {
-      let config = {
-        headers: {
-          'Access-Control-Allow-Origin': 'https://apivl.piumenosystem.com',
-          'Access-Control-Allow-Credentials': true
-        }
-      }
       commit('clearError')
       commit('setProcessing', true)
       axios
         .post(apiUrl + "/login", {
           username: payload.username,
           password: payload.password
-        }, config)
+        })
         .then(res => res.data)
         .then(
           user => {
