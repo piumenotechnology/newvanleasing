@@ -61,6 +61,7 @@ export default {
       let config = {
         headers: {
           'Access-Control-Allow-Origin': 'https://apivl.piumenosystem.com',
+          'Access-Control-Allow-Credentials': true
         }
       }
       commit('clearError')
