@@ -235,10 +235,10 @@ export default {
           console.log(res.data)
           // let item = res.data.data.filter(x => x.agreement_number == obj.agreement_number)
           let item = res.data
-          this.vehicle_registration = item.vehicle_registration
-          this.id_purchase_order = item.id_purchase_order
+          this.vehicle_registration = item[0].vehicle_registration
+          this.id_purchase_order = item[0].id_purchase_order
           this.availableDate = {
-            to: new Date(item.contract_start_date)
+            to: new Date(item[0].contract_start_date)
           }
         }).catch(_error => {
           console.log(_error)
