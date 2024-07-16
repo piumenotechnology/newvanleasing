@@ -226,19 +226,19 @@ export default {
         })
     },
     async getRegistration(obj) {
-      console.log(obj)
-      let url = apiUrl + "/showactivesales?per_page=99"
-      // let url = apiUrl + "/salesorder/226per_page=99"
+      // let url = apiUrl + "/showactivesales?per_page=99"
+      let url = apiUrl + `/salesorder/${obj.id}`
       axios
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          let item = res.data.data.filter(x => x.agreement_number == obj.agreement_number)
-          this.vehicle_registration = item[0].vehicle_registration
-          this.id_purchase_order = item[0].id_purchase_order
-          this.availableDate = {
-            to: new Date(item[0].contract_start_date)
-          }
+          console.log(res.data)
+          // let item = res.data.data.filter(x => x.agreement_number == obj.agreement_number)
+          // this.vehicle_registration = item[0].vehicle_registration
+          // this.id_purchase_order = item[0].id_purchase_order
+          // this.availableDate = {
+          //   to: new Date(item[0].contract_start_date)
+          // }
         }).catch(_error => {
           console.log(_error)
         })
