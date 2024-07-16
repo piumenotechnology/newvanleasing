@@ -226,7 +226,9 @@ export default {
         })
     },
     async getRegistration(obj) {
+      console.log(obj)
       let url = apiUrl + "/showactivesales?per_page=99"
+      // let url = apiUrl + "/salesorder/226per_page=99"
       axios
         .get(url)
         .then(r => r.data)
