@@ -232,7 +232,6 @@ export default {
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          console.log(res.data)
           // let item = res.data.data.filter(x => x.agreement_number == obj.agreement_number)
           let item = res.data
           this.vehicle_registration = item[0].vehicle_registration
