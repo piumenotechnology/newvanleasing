@@ -11,7 +11,7 @@
             v-model.trim="$v.vehicleForm.vehicleRegistration.$model"
             :state="!$v.vehicleForm.vehicleRegistration.$error"
             :placeholder="'i.e GF23 WSN'"
-            v-mask="'AA## AAA'" />
+            @keyup="uppercase" />
             <div v-if="!$v.vehicleForm.vehicleRegistration.required"
               :class="{ 'invalid-feedback': true, 'd-block': $v.vehicleForm.vehicleRegistration.$error && !$v.vehicleForm.vehicleRegistration.required }"
             >This field is required!</div>
@@ -376,6 +376,9 @@ export default {
   methods: {
     formatDate(date) {
       return new Date(date).toISOString().substr(0, 10)
+    },
+    uppercase() {
+      this.vehicleForm.vehicleRegistration = this.vehicleForm.vehicleRegistration.toUpperCase();
     },
     addNotification(type, title, message) {
       this.$notify(type, title, message, { duration: 2000, permanent: false });
