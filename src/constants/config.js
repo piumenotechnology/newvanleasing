@@ -14,6 +14,7 @@ export const defaultLocale = 'en'
 export const defaultDirection = 'ltr'
 export const localeOptions = [
   { id: 'en', name: 'English LTR', direction: 'ltr' },
+  { id: 'es', name: 'Spanish LTR', direction: 'ltr' },
   { id: 'enrtl', name: 'English RTL', direction: 'rtl' }
 ]
 
