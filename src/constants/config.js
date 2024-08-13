@@ -5,7 +5,7 @@ export const adminRoot = '/app';
 export const searchPath = `${adminRoot}/#`
 export const buyUrl = 'https://1.envato.market/nEyZa'
 // export const apiUrl = 'https://hireplus.piumenosystem.com/api';
-export const apiUrl = 'https://red-shark-302941.hostingersite.com/api';
+export const apiUrl = 'https://phplaravel-1308414-4769563.cloudwaysapps.com/api';
 
 export const subHiddenBreakpoint = 1440
 export const menuHiddenBreakpoint = 768
