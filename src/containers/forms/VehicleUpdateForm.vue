@@ -68,14 +68,16 @@
           </b-form-row>
           <p class="mb-3">{{ $t('vehicle.min-contract-price') }}</p>
           <b-form-row>
-            <b-colxx sm="6">
+            <!-- <b-colxx sm="6"> -->
+            <b-colxx>
               <b-form-group :label="$t('vehicle.10k-desc')" class="has-top-label">
                 <currency-field v-model="$v.vehicleForm.minContract10k.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.minContract10k.$error" />
                 <div :class="{ 'invalid-feedback': true, 'd-block': $v.vehicleForm.minContract10k.$error && !$v.vehicleForm.minContract10k.required }"
                 >This field is required!</div>
               </b-form-group>
             </b-colxx>
-            <b-colxx sm="6">
+            <b-colxx sm="6" class="d-none">
+            <!-- <b-colxx sm="6"> -->
               <b-form-group :label="$t('vehicle.18k-desc')" class="has-top-label">
                 <currency-field v-model="$v.vehicleForm.minContract18k.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicleForm.minContract18k.$error" />
                 <div :class="{ 'invalid-feedback': true, 'd-block': $v.vehicleForm.minContract18k.$error && !$v.vehicleForm.minContract18k.required }"
@@ -349,7 +351,7 @@ export default {
       listPrice: { required },
       otrPrice: { required },
       minContract10k: { required },
-      minContract18k: { required },
+      minContract18k: {},
       serviceMaintenance: { numeric },
       rflDate: {},
       motDate: {},
