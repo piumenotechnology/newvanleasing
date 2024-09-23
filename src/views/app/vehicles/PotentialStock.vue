@@ -138,13 +138,6 @@ export default {
                dataClass: "center-aligned"
             },
             {
-               name: "min_contract_price_dua",
-               sortField: "min_contract_price_dua",
-               title: "18K MPA",
-               titleClass: "center aligned",
-               dataClass: "center-aligned"
-            },
-            {
                name: "__slot:stock_status",
                sortField: "stock_status",
                title: "Status",
