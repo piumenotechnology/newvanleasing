@@ -8,7 +8,7 @@
     <div v-if="isProcessing" class="bg-transparent pr-5 w-100 h-100 d-flex justify-content-center align-items-center position-absolute opacity-75 z-index-10">
       <b-spinner variant="black" label="Spinning" class="text-center"></b-spinner>
     </div>
-   
+
     <b-form
       id="addContractForm"
       class="av-tooltip tooltip-right-bottom"
@@ -316,7 +316,7 @@ export default {
         initial_rental: this.contractForm.initialRental,
         monthly_rental: this.contractForm.monthlyRental,
         other_income: this.contractForm.otherIncome,
-        residualValue: this.contractForm.residualValue
+        residual_value: this.contractForm.residualValue
       }
       // console.log("adding item : ", newContract);
       this.salesorders = this.objectToFormData(newContract);
@@ -376,4 +376,3 @@ export default {
   }
 };
 </script>
-
