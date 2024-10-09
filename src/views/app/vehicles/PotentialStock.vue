@@ -128,14 +128,16 @@ export default {
                sortField: "colour",
                title: "Colour",
                titleClass: "center aligned",
-               dataClass: "center-aligned"
+               dataClass: "center-aligned",
+               width: "12%"
             },
             {
                name: "min_contract_price_satu",
                sortField: "min_contract_price_satu",
                title: "10K MPA",
                titleClass: "center aligned",
-               dataClass: "center-aligned"
+               dataClass: "center-aligned",
+               width: "10%"
             },
             {
                name: "__slot:stock_status",
