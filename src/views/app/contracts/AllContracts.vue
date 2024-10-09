@@ -91,7 +91,7 @@ export default {
         {
           name: "agreement_number",
           sortField: "agreement_number",
-          title: "Aggrement Number",
+          title: "Agreement Number",
           titleClass: "center aligned",
           dataClass: "text-uppercase list-item-heading",
           width: "10%"
