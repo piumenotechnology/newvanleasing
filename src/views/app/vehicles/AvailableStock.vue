@@ -19,7 +19,7 @@
                       <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status"  :searchable="false"/>
                     </b-input-group>
                   </template>
-                 
+
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
                      variant="dark"
@@ -100,14 +100,16 @@ export default {
                sortField: "vehicle_registration",
                title: "Registration",
                titleClass: "center aligned",
-               dataClass: "list-item-heading text-uppercase center-aligned"
+               dataClass: "list-item-heading text-uppercase font-weight-medium center-aligned",
+               width: "10%"
             },
             {
                name: "vehicle_manufactur",
                sortField: "vehicle_manufactur",
                title: "Manufacturer",
                titleClass: "center aligned",
-               dataClass: "center-aligned"
+               dataClass: "center-aligned",
+               width: "12%"
             },
             {
                name: "vehicle_model",
@@ -145,13 +147,14 @@ export default {
                title: "Status",
                titleClass: "center aligned",
                dataClass: "center-aligned",
-               width: "17%"
+               width: "16%"
             },
             {
                name: "__slot:action",
                title: "",
                titleClass: "",
-               dataClass: "text-right center-aligned"
+               dataClass: "text-right center-aligned",
+               width: "12%"
             }
          ],
          sortOrder: [
