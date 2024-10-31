@@ -123,7 +123,7 @@ export default {
                title: "Funding method",
                titleClass: "center aligned",
                dataClass: "text-muted",
-               width: "18%"
+               width: "15%"
             },
             {
                name: "hire_purchase_starting_date",
@@ -154,7 +154,7 @@ export default {
                title: "",
                titleClass: "center aligned text-right",
                dataClass: "center aligned text-right",
-               width: "22%"
+               width: "24%"
             }
          ],
          sortOrder: [
