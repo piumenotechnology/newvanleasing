@@ -20,6 +20,11 @@
             pagination-path="data"
             displayEmptyDataRow
             @vuetable:pagination-data="onPaginationData">
+            <template slot="enddate" slot-scope="props">
+              <span>
+                {{ props.rowData.hire_purchase_starting_date | endate(props.rowData.hp_term) }}
+              </span>
+            </template>
             <template slot="status" slot-scope="props">
                <b-badge v-show="props.rowData.status_next_step === 'Available'" pill variant="primary">{{ props.rowData.status_next_step }}</b-badge>
                <b-badge v-show="props.rowData.status_next_step === 'Hired'" pill variant="light">{{ props.rowData.status_next_step }}</b-badge>
@@ -62,6 +67,7 @@
 </template>
 <script>
 import axios from "axios";
+import moment from "moment";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
 import { apiUrl } from "../../../constants/config";
@@ -100,8 +106,8 @@ export default {
                sortField: "vehicle_registration",
                title: "Vehicle registration",
                titleClass: "center aligned",
-               dataClass: "text-uppercase list-item-heading",
-               width: "18%"
+               dataClass: "text-uppercase font-weight-medium list-item-heading",
+               width: "10%"
             },
             {
                name: "vehicle_manufactur",
@@ -109,7 +115,7 @@ export default {
                title: "Manufacturer",
                titleClass: "center aligned",
                dataClass: "text-muted",
-               width: "auto"
+               width: "15%"
             },
             {
                name: "purchase_method",
@@ -128,6 +134,14 @@ export default {
                width: "15%"
             },
             {
+              name: "__slot:enddate",
+              sortField: "hire_purchase_starting_date",
+              title: "Purchase End Date",
+              titleClass: "center aligned",
+              dataClass: "text-muted align-middle",
+              width: "15%"
+            },
+            {
                name: "__slot:status",
                sortField: "status_next_step",
                title: "Status",
@@ -140,7 +154,7 @@ export default {
                title: "",
                titleClass: "center aligned text-right",
                dataClass: "center aligned text-right",
-               width: "20%"
+               width: "22%"
             }
          ],
          sortOrder: [
@@ -152,6 +166,14 @@ export default {
          ]
       };
    },
+   filters: {
+    endate: function (val, arg) {
+      if (arg === null) return 'N/A'
+      val = new Date(val)
+      val.setMonth(val.getMonth() + arg)
+      return moment(val).format("YYYY-MM-DD")
+    }
+  },
    methods: {
       fetchData() {
          let url = apiUrl + "/purchaseorderall?per_page=1"
