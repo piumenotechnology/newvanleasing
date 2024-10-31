@@ -12,6 +12,11 @@
         <vuetable ref="vuetable" class="order-with-arrow responsive-table" :api-url="apiBase" :query-params="makeQueryParams"
           :per-page="perPage" :reactive-api-url="true" :fields="fields" data-path="data.data" pagination-path="data"
           @vuetable:pagination-data="onPaginationData">
+          <template slot="enddate" slot-scope="props">
+            <span>
+              {{ props.rowData.contract_start_date | endate(props.rowData.term_months) }}
+            </span>
+          </template>
           <template slot="action" slot-scope="props">
             <b-button :to="{ path: `${props.rowData.id}` }"
               variant="light"
@@ -65,7 +70,7 @@ export default {
           titleClass: "center aligned",
           dataClass: "align-middle list-item-heading text-uppercase",
           width: "8%",
-          
+
         },
         {
           name: "cust_name",
@@ -92,20 +97,36 @@ export default {
           width: "15%",
         },
         {
+          name: "__slot:enddate",
+          sortField: "contract_start_date",
+          title: "Contract End Date",
+          titleClass: "center aligned",
+          dataClass: "align-middle",
+          width: "15%"
+        },
+        {
           name: "__slot:action",
           title: "",
           titleClass: "",
           dataClass: "center aligned align-text-top text-right",
-          width: "8%"
+          width: "10%"
         }
       ],
       sortOrder: [
         {
           field: 'contract_start_date',
+          sortField: "contract_start_date",
           direction: 'desc'
         }
       ]
     };
+  },
+  filters: {
+    endate: function (val, arg) {
+      let d = new Date(val)
+      d.setMonth(d.getMonth() + arg)
+      return moment(d).format("YYYY-MM-DD")
+    }
   },
   methods: {
     makeQueryParams(sortOrder, currentPage, perPage) {
@@ -116,7 +137,7 @@ export default {
             ? sortOrder[0].direction
             : "",
           sort: sortOrder[0]
-            ? sortOrder[0].field
+            ? sortOrder[0].sortField
             : "",
           page: currentPage,
           per_page: this.perPage,
@@ -126,7 +147,7 @@ export default {
           page: currentPage,
           per_page: this.perPage,
           order: this.sortOrder[0].direction,
-          sort: this.sortOrder[0].field,
+          sort: this.sortOrder[0].sortField,
           search: this.search
         };
     },
