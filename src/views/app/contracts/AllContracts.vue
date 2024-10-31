@@ -17,6 +17,11 @@
           <b-badge v-show="props.rowData.next_step_status_sales === 'Innactive'" pill variant="light">{{ props.rowData.next_step_status_sales }}</b-badge>
           <b-badge v-show="props.rowData.next_step_status_sales === 'Sold'" pill variant="dark">{{ props.rowData.next_step_status_sales }}</b-badge>
         </template>
+        <template slot="enddate" slot-scope="props">
+          <span>
+            {{ props.rowData.contract_start_date | endate(props.rowData.term_months) }}
+          </span>
+        </template>
         <template slot="actions" slot-scope="props">
           <div v-if="props.rowData.next_step_status_sales !== 'Hired'" >
             <b-button @click.prevent="showRehireModal(props.rowData.id)" variant="light" size="sm" class="mr-1"><i class="simple-icon-magnifier" /></b-button>
@@ -52,6 +57,7 @@
 </template>
 <script>
 import axios  from "axios";
+import moment from "moment";
 import { apiUrl } from "../../../constants/config";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
@@ -94,7 +100,7 @@ export default {
           title: "Agreement Number",
           titleClass: "center aligned",
           dataClass: "text-uppercase list-item-heading",
-          width: "10%"
+          width: "9%"
         },
         {
           name: "vehicle_registration",
@@ -102,7 +108,7 @@ export default {
           title: "Assigned Vehicle",
           titleClass: "center aligned",
           dataClass: "text-muted",
-          width: "15%"
+          width: "9%"
         },
         {
           name: "cust_name",
@@ -110,23 +116,29 @@ export default {
           title: "Customer Name",
           titleClass: "center aligned",
           dataClass: "text-muted",
-          width: "15%"
+          width: "20%"
         },
         {
           name: "term_months",
           sortField: "term_months",
           title: "Contract Period (Months)",
           titleClass: "center aligned",
-          dataClass: "text-muted",
-          width: "12%"
+          dataClass: "text-center text-muted",
+          width: "13%"
         },
         {
           name: "contract_start_date",
           sortField: "contract_start_date",
           title: "Start Date",
           titleClass: "center aligned",
-          dataClass: "text-muted",
-          width: "12%"
+          dataClass: "text-muted"
+        },
+        {
+          name: "__slot:enddate",
+          sortField: "contract_start_date",
+          title: "End Date",
+          titleClass: "center aligned",
+          dataClass: "text-muted"
         },
         {
           name: "__slot:status",
@@ -134,14 +146,14 @@ export default {
           title: "Status",
           titleClass: "center aligned text-center",
           dataClass: "center aligned text-center",
-          width: "12%"
+          width: "10%"
         },
         {
           name: "__slot:actions",
           title: "",
           titleClass: "",
           dataClass: "center aligned text-right",
-          width: "18%"
+          width: "15%"
         }
       ],
       sortOrder: [
@@ -152,6 +164,13 @@ export default {
         }
       ]
     };
+  },
+  filters: {
+    endate: function (val, arg) {
+      let d = new Date(val)
+      d.setMonth(d.getMonth() + arg)
+      return moment(d).format("YYYY-MM-DD")
+    }
   },
   methods: {
     fetchData() {
