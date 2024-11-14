@@ -20,6 +20,12 @@
                     </b-input-group>
                   </template>
 
+                  <template slot="eta" slot-scope="props">
+                    <b-input-group>
+                      <v-select @input="changeEta(props.rowData)" :options="etaOptions" v-model="props.rowData.eta" :value="props.rowData.eta" :searchable="false"/>
+                    </b-input-group>
+                  </template>
+
                   <template slot="action" slot-scope="props">
                      <b-button :to="{ path: `${props.rowData.id}` }"
                      variant="dark"
@@ -94,6 +100,20 @@ export default {
            "Available",
            "Booked"
          ],
+         etaOptions: [
+           "January",
+           "February",
+           "March",
+           "April",
+           "May",
+           "June",
+           "July",
+           "August",
+           "September",
+           "October",
+           "November",
+           "December"
+         ],
          fields: [
          {
                name: "vehicle_registration",
@@ -147,7 +167,15 @@ export default {
                title: "Status",
                titleClass: "center aligned",
                dataClass: "center-aligned",
-               width: "16%"
+               width: "14%"
+            },
+            {
+               name: "__slot:eta",
+               sortField: "eta",
+               title: "ETA",
+               titleClass: "center aligned",
+               dataClass: "center-aligned",
+               width: "10%"
             },
             {
                name: "__slot:action",
@@ -272,6 +300,29 @@ export default {
             this.isSaving = true;
             this.status = "success filled";
             this.message = "Your data was saved!";
+            setTimeout(() => {
+              this.isSaving = false;
+              this.updateTableRow();
+            }, 1000)
+          }).catch(_error => {
+            this.status = "error filled";
+            this.message = "An error occured while saving the data. Please try again later.";
+            this.addNotification(this.status, "Oppss!", this.message);
+          })
+      },
+      changeEta(obj) {
+        const newData = {
+          eta: obj.eta,
+        }
+        let url = apiUrl + "/changeeta/" + obj.id;
+        // console.log(`edit${obj.id} with ${newData}`);
+        axios
+          .put(url, newData)
+          .then(r => r.data)
+          .then(res => {
+            this.isSaving = true;
+            this.status = "success filled";
+            this.message = "Estimated time of arrival has been saved!";
             setTimeout(() => {
               this.isSaving = false;
               this.updateTableRow();
