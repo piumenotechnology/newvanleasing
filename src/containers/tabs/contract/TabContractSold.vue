@@ -125,7 +125,7 @@
     },
     methods: {
       fetchDefleet() {
-        let url = apiUrl + "/showagreementnumberinvehiclesold?per_page=10?per_page=8&search=";
+        let url = apiUrl + "/showagreementnumberinvehiclesold?per_page=10&search=";
         axios
           .get(url)
           .then(r => r.data)
