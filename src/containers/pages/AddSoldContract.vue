@@ -277,12 +277,13 @@ export default {
     },
     onAddContractSubmit() {
       let url = apiUrl + "/vehiclesold";
+      this.$v.form.$touch();
       let config = {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }
-      // this.$v.form.$touch();
+      
       // this.vehiclesolds.append("id_sales_order", this.form.id_sales_order.id);
       // this.vehiclesolds.append("id_purchase_order", this.form.id_purchase_order.id);
       // this.vehiclesolds.append("vehicle_sold_date", this.formatDate(this.form.vehicle_sold_date));
