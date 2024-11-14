@@ -226,10 +226,10 @@ export default {
           .get(url)
           .then(r => r.data)
           .then(res =>  {
-            let latestContract = res.data.filter(x =>
-              x.id == Math.max(...res.data.map(o => o.id))
+            let latestContract = res.data.data.filter(x =>
+              x.id == Math.max(...res.data.data.map(o => o.id))
             )
-            this.optionData = res.data
+            this.optionData = res.data.data
             // this.getSalesId(latestContract[0].agreement_number)
           }).catch(_error => {
             console.log(_error)
