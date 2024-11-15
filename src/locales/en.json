@@ -269,7 +269,7 @@
     "manufacture": "Manufacturer",
     "model": "Model",
     "variant": "Variant",
-    "colour": "Colour",
+    "colour": "Vehicle Colour",
     "list-price": "Basic List Price",
     "otr-price": "OTR Price (Excl VAT)",
     "min-contract-price": "Minimum Contact Price",
