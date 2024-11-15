@@ -101,6 +101,7 @@ export default {
            "Booked"
          ],
          etaOptions: [
+           "In Stock",
            "January",
            "February",
            "March",
