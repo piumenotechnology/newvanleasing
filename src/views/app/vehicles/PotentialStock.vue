@@ -149,7 +149,7 @@ export default {
             {
                name: "colour",
                sortField: "colour",
-               title: "Colour",
+               title: "Vehicle Colour",
                titleClass: "center aligned",
                dataClass: "center-aligned",
                width: "12%"
