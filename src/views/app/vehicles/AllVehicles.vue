@@ -136,7 +136,7 @@ export default {
             {
               name: "__slot:enddate",
               sortField: "hire_purchase_starting_date",
-              title: "Purchase End Date",
+              title: "HP End Date",
               titleClass: "center aligned",
               dataClass: "text-muted align-middle",
               width: "15%"
