@@ -30,6 +30,8 @@ import { getCurrentLanguage } from './utils'
 import VueTheMask from 'vue-the-mask'
 import VueAnime from 'vue-animejs'
 import VueObserveVisibility from 'vue-observe-visibility'
+import { abilitiesPlugin } from '@casl/vue';
+import ability from './services/ability';
 
 
 Vue.use(BootstrapVue);
@@ -50,7 +52,10 @@ Vue.use(VueLineClamp, {
 });
 Vue.use(VueTheMask);
 Vue.use(VueAnime);
-Vue.use(VueObserveVisibility) ;
+Vue.use(VueObserveVisibility);
+Vue.use(abilitiesPlugin, ability, {
+  useGlobalProperties: true
+});
 
 Vue.component('piaf-breadcrumb', Breadcrumb);
 Vue.component('b-refresh-button', RefreshButton);

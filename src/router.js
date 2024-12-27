@@ -26,7 +26,7 @@ const routes = [
     meta: { loginRequired: true },
     /*
    define with Authorizaddation :
-   meta: { loginRequired: true, roles: [UserRole.Admin, UserRole.Editor] },
+   meta: { loginRequired: true, roles: [UserRole.Administrator, UserRole.Editor] },
    */
     children: [
       {
@@ -39,6 +39,7 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "vehicles" */ "./views/app/vehicles"),
         redirect: `${adminRoot}/vehicles/all-vehicles`,
+        meta: { loginRequired: true, access: 'vehicle.read' },
         children: [
           {
             path: 'all-vehicles', component: () => import(/* webpackChunkName: "vehicles" */ './views/app/vehicles/AllVehicles')
@@ -75,7 +76,26 @@ const routes = [
         ]
       },
       {
+        path: "users",
+        component: () =>
+          import(/* webpackChunkName: "users" */ "./views/app/users"),
+        meta: { loginRequired: true, roles: [UserRole.Administrator] },
+        redirect: `${adminRoot}/users/manage-users`,
+        children: [
+          {
+            path: 'manage-users', component: () => import(/* webpackChunkName: "users" */ './views/app/users/ManageUsers')
+          },
+          {
+            path: 'manage-roles', component: () => import(/* webpackChunkName: "users" */ './views/app/users/ManageRoles')
+          },
+          {
+            path: ':slug', component: () => import(/* webpackChunkName: "users" */ './views/app/users/UserDetail')
+          }
+        ]
+      },
+      {
         path: "end-contracts",
+        meta: { loginRequired: true, access: 'return_defleet.read' },
         component: () =>
           import(/* webpackChunkName: "end-contracts" */ "./views/app/contracts/EndContracts")
       },
@@ -83,14 +103,14 @@ const routes = [
         path: "additional",
         component: () =>
           import(/* webpackChunkName: "additional" */ "./views/app/additional/Additional"),
-        meta: { loginRequired: true, roles: [UserRole.Admin] }
+        meta: { loginRequired: true }
       },
       {
         path: "performance",
         component: () =>
           import(/* webpackChunkName: "performance" */ "./views/app/performance"),
         redirect: `${adminRoot}/performance/all`,
-        meta: { loginRequired: true, roles: [UserRole.Admin] },
+        meta: { loginRequired: true },
         children: [
           {
             path: 'all', component: () => import(/* webpackChunkName: "contracts" */ './views/app/performance/VehiclePerformance')
