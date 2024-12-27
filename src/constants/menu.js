@@ -16,21 +16,25 @@ const data = [
   subs: [{
     icon: "iconsminds-car",
     label: "menu.all-vehicles",
-    to: `${adminRoot}/vehicles/all-vehicles`
+    to: `${adminRoot}/vehicles/all-vehicles`,
+    access: "vehicle.read"
   }, {
     icon: "iconsminds-check",
     label: "menu.available-stock",
-    to: `${adminRoot}/vehicles/available-stock`
+    to: `${adminRoot}/vehicles/available-stock`,
+    access: "vehicle_available.read"
   }, {
     icon: "iconsminds-sand-watch-2",
     label: "menu.potential-stock",
-    to: `${adminRoot}/vehicles/potential-stock`
+    to: `${adminRoot}/vehicles/potential-stock`,
+    access: "vehicle_potential.read"
   }, {
     icon: "iconsminds-notepad",
     label: "menu.booked-stock",
-    to: `${adminRoot}/vehicles/booked-stock`
+    to: `${adminRoot}/vehicles/booked-stock`,
+    access: "vehicle_booked.read"
   }]
-  },
+},
 {
   id: "contracts",
   icon: "simple-icon-printer",
@@ -39,33 +43,52 @@ const data = [
   subs: [{
     icon: "iconsminds-box-full",
     label: "menu.all-contracts",
-    to: `${adminRoot}/contracts/all-contracts`
+    to: `${adminRoot}/contracts/all-contracts`,
+    access: "contract.read"
   }, {
     icon: "iconsminds-timer",
     label: "menu.active-contracts",
-    to: `${adminRoot}/contracts/active-contracts`
+    to: `${adminRoot}/contracts/active-contracts`,
+    access: "contract_active.read"
   }]
 },
 {
   id: "end-contracts",
   icon: "iconsminds-clock-back",
   label: "menu.end-contracts",
-  to: `${adminRoot}/end-contracts`
+  to: `${adminRoot}/end-contracts`,
+  access: "return_defleet.read"
 },
 {
   id: "additional",
   icon: "simple-icon-calculator",
   label: "menu.additional",
   to: `${adminRoot}/additional`,
-  roles: [UserRole.Admin]
+  access: "cost_income.read"
 },
 {
   id: "performance",
   icon: "simple-icon-rocket",
   label: "menu.performance",
   to: `${adminRoot}/performance/all`,
-  roles: [UserRole.Admin]
-}
+  access: "performance.read"
+},
+{
+  id: "users",
+  icon: "simple-icon-people",
+  label: "menu.user-roles",
+  to: `${adminRoot}/users`,
+  roles: [UserRole.Administrator],
+  subs: [{
+    icon: "iconsminds-conference",
+    label: "menu.manage-users",
+    to: `${adminRoot}/users/manage-users`
+  }, {
+    icon: "iconsminds-id-card",
+    label: "menu.manage-roles",
+    to: `${adminRoot}/users/manage-roles`
+  }]
+},
 // {
 //   id: "single",
 //   icon: "iconsminds-three-arrow-fork",
