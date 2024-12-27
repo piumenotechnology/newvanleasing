@@ -138,7 +138,7 @@ export default {
       this.$refs.updateForm.onValitadeFormSubmit();
     },
     cancelForm() {
-      this.$router.go();
+      this.$router.push({ path: 'all-contracts' });
     },
     vehicleContract(status) {
       this.isProcessing = true

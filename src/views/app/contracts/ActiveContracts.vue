@@ -3,7 +3,7 @@
     <datatable-heading :title="$t('contract.active')" :changePageSize="changePageSize" :searchChange="searchChange"
       :from="from" :to="to" :total="total" :perPage="perPage" :separator="true">
       <div class="top-right-button-container">
-        <b-button v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new') }}</b-button>
+        <b-button v-if="$can('contract.create')" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new') }}</b-button>
       </div>
       <add-new-contract @added-data-table="onAddedDataTable" :key="componentKey"/>
     </datatable-heading>
@@ -18,7 +18,7 @@
             </span>
           </template>
           <template slot="action" slot-scope="props">
-            <b-button :to="{ path: `${props.rowData.id}` }"
+            <b-button v-if="$can('contract.update')" :to="{ path: `${props.rowData.id}` }"
               variant="light"
               size="sm"
             >

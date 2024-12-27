@@ -2,7 +2,7 @@
   <b-row>
     <datatable-heading :title="$t('menu.all-contracts')" :changePageSize="changePageSize" :searchChange="searchChange"
       :from="from" :to="to" :total="total" :perPage="perPage" :separator="true">
-      <div class="top-right-button-container">
+      <div v-if="$can('contract.create')" class="top-right-button-container">
         <b-button v-show="isLoad" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-new')
         }}</b-button>
       </div>
@@ -23,13 +23,10 @@
           </span>
         </template>
         <template slot="actions" slot-scope="props">
-          <div v-if="props.rowData.next_step_status_sales !== 'Hired'" >
-            <b-button @click.prevent="showRehireModal(props.rowData.id)" variant="light" size="sm" class="mr-1"><i class="simple-icon-magnifier" /></b-button>
-            <b-button @click="showDelModal(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm"><i class="simple-icon-trash mr-1" />  Delete</b-button>
-          </div>
-          <div v-else>
-            <b-button :to="{ path: `${props.rowData.id}` }" variant="light" size="sm" class="mr-1"><i class="simple-icon-pencil" /></b-button>
-            <b-button @click="showDelModal(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm"><i class="simple-icon-trash mr-1" />  Delete</b-button>
+          <div>
+            <b-button v-if="$can('contract.update')" :to="{ path: `${props.rowData.id}` }" variant="dark" size="sm" class="mr-1"><i class="simple-icon-pencil" /></b-button>
+            <b-button v-if="$can('contract.read')" @click.prevent="showRehireModal(props.rowData.id)" variant="light" size="sm" class="mr-1"><i class="simple-icon-magnifier" /></b-button>
+            <b-button v-if="$can('contract.delete')" @click="showDelModal(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm"><i class="simple-icon-trash" /></b-button>
           </div>
         </template>
       </vuetable>
@@ -47,7 +44,7 @@
               <div class="px-md-5 mt-3 mt-md-0">
                   <h2 class="font-weight-bold align-text-bottom lead">No contracts found!</h2>
                   <p class="mb-5">Start adding your first contract</p>
-                  <b-button v-b-modal.modalright size="xl" variant="light default" class="placeholder-button">{{ $t('contract.add-new') }}</b-button>
+                  <b-button v-if="$can('contract.create')" v-b-modal.modalright size="xl" variant="light default" class="placeholder-button">{{ $t('contract.add-new') }}</b-button>
               </div>
             </b-colxx>
         </b-row>
