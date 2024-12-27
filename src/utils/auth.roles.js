@@ -1,4 +1,6 @@
+
 export const UserRole = {
-  Admin: 1,
+  Administrator: 1,
   Editor: 0
 };
+

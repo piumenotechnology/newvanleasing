@@ -6,7 +6,8 @@ export default (to, from, next) => {
       const user = getCurrentUser();
       if (user) {
         const roleArrayHierarchic = to.matched.filter(x => x.meta.roles).map(x => x.meta.roles);
-        if (roleArrayHierarchic.every(x => x.includes(user.role))) {
+        // console.log(capability.includes(metaAccess[0]));
+        if (roleArrayHierarchic.every(x => x.includes(user.isAdmin))) {
           next();
         } else {
           next('/unauthorized')
@@ -15,6 +16,7 @@ export default (to, from, next) => {
         setCurrentUser(null);
         next('/login')
       }
+      // .map(({ slug, actions }) => ({ subject: slug, actions: actions }));
     } else {
       next();
     }

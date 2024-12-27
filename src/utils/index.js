@@ -168,3 +168,26 @@ export const setCurrentUser = (user) => {
     console.log(">>>> src/utils/index.js : setCurrentUser -> error", error)
   }
 }
+
+export const getCurrentCapability = () => {
+  let user = null;
+  try {
+    user = localStorage.getItem('capability') != null ? JSON.parse(localStorage.getItem('capability')) : null;
+  } catch (error) {
+    console.log(">>>> src/utils/index.js : getCurrentUser -> error", error)
+    user = null;
+  }
+  return user;
+}
+
+export const setCurrentCapability = (user) => {
+  try {
+    if (user) {
+      localStorage.setItem('capability', JSON.stringify(user))
+    } else {
+      localStorage.removeItem('capability');
+    }
+  } catch (error) {
+    console.log(">>>> src/utils/index.js : setCurrentUser -> error", error)
+  }
+}
