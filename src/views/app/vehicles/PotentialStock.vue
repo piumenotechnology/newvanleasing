@@ -15,19 +15,21 @@
                   :row-class="onRowClass"
                   @vuetable:pagination-data="onPaginationData">
                   <template slot="stock_status" slot-scope="props">
-                    <b-input-group>
+                    <b-input-group v-if="$can('vehicle_available.update')">
                       <v-select @input="changeStatus(props.rowData)" :options="statusOptions" v-model="props.rowData.stock_status" :value="props.rowData.stock_status"  :searchable="false"/>
                     </b-input-group>
+                    <span v-else>{{ props.rowData.stock_status }}</span>
                   </template>
 
                   <template slot="eta" slot-scope="props">
-                    <b-input-group>
+                    <b-input-group v-if="$can('vehicle_available.update')">
                       <v-select @input="changeEta(props.rowData)" :options="etaOptions" v-model="props.rowData.eta" :value="props.rowData.eta" :searchable="false"/>
                     </b-input-group>
+                    <span v-else>{{ props.rowData.eta }}</span>
                   </template>
 
                   <template slot="action" slot-scope="props">
-                     <b-button :to="{ path: `${props.rowData.id}` }"
+                     <b-button v-if="$can('vehicle.update')" :to="{ path: `${props.rowData.id}` }"
                      variant="dark"
                      size="sm"
                      >
@@ -101,7 +103,6 @@ export default {
            "Booked"
          ],
          etaOptions: [
-           "In Stock",
            "January",
            "February",
            "March",

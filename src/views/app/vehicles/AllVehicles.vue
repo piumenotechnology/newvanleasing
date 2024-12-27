@@ -1,8 +1,8 @@
 <template>
    <b-row>
-      <datatable-heading :title="$t('menu.all-vehicles')"  :changePageSize="changePageSize"
+      <datatable-heading :title="$t('menu.all-vehicles')" :changePageSize="changePageSize"
          :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true">
-         <div class="top-right-button-container">
+         <div v-if="$can('vehicle.create')" class="top-right-button-container">
             <b-button
                v-show="isLoad"
                v-b-modal.modallg
@@ -33,19 +33,23 @@
             <template slot="actions" slot-scope="props">
                <div>
                   <b-button :to="{ path: `${props.rowData.id}` }"
-                     variant="light"
-                     class="mr-1"
-                     size="sm"><i class="simple-icon-pencil" /></b-button>
+                    v-if="$can('vehicle.update')"
+                    variant="dark"
+                    class="mr-1"
+                    size="sm"><i class="simple-icon-pencil" /></b-button>
+                  <b-button v-if="$can('vehicle.read')" @click.prevent="showDetailModal(props.rowData.id)" variant="light" size="sm" class="mr-1"><i class="simple-icon-magnifier" /></b-button>
                   <b-button
-                     @click="showDelBox(props.rowData.id)"
-                     v-b-modal.modalDeletion
-                     variant="danger"
-                     size="sm"><i class="simple-icon-trash mr-1" />  Delete</b-button>
+                    v-if="$can('vehicle.delete')"
+                    @click="showDelBox(props.rowData.id)"
+                    v-b-modal.modalDeletion
+                    variant="danger"
+                    size="sm"><i class="simple-icon-trash mr-1" />  Delete</b-button>
                </div>
             </template>
          </vuetable>
          <vuetable-pagination-bootstrap class="mt-4" ref="pagination" @vuetable-pagination:change-page="onChangePage" />
          <delete-item-modal :selectedItem="selectedItem" :endpoint="'/purchaseorder/'" @delete-modal-hide="updateTableRow"></delete-item-modal>
+         <view-detail-vehicle ref="detailModal" @added-data-table="onAddedDataTable" :key="componentKey"/>
       </b-colxx>
       <b-colxx xxs="12" v-show="fullyLoaded">
          <b-card class="card-placeholder align-items-center" :class="(isLoad)?'':'show'">
@@ -57,7 +61,7 @@
                   <div class="px-md-5 mt-3 mt-md-0">
                      <h2 class="font-weight-bold align-text-bottom lead">No vehicles found!</h2>
                      <p class="mb-5">Start adding your first vehicle</p>
-                     <b-button v-b-modal.modallg size="xl" variant="light default" class="placeholder-button">{{ $t('vehicle.add-new') }}</b-button>
+                     <b-button v-if="$can('vehicle.create')" v-b-modal.modallg size="xl" variant="light default" class="placeholder-button">{{ $t('vehicle.add-new') }}</b-button>
                   </div>
                </b-colxx>
             </b-row>
@@ -73,6 +77,7 @@ import VuetablePaginationBootstrap from "../../../components/Common/VuetablePagi
 import { apiUrl } from "../../../constants/config";
 import DatatableHeading from "../../../containers/datatable/DatatableHeading";
 import AddNewVehicle from "../../../containers/pages/AddNewVehicle";
+import ViewDetailVehicle from "../../../containers/pages/ViewDetailVehicle";
 import DeleteItemModal from "../../../containers/pages/DeleteItemModal";
 
 export default {
@@ -82,6 +87,7 @@ export default {
       "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
       "datatable-heading": DatatableHeading,
       "add-new-vehicle": AddNewVehicle,
+      "view-detail-vehicle": ViewDetailVehicle,
       "delete-item-modal": DeleteItemModal
    },
    data() {
@@ -100,6 +106,7 @@ export default {
          lastPage: 0,
          items: [],
          selectedItem: [],
+         componentKey: 0,
          fields: [
             {
                name: "vehicle_registration",
@@ -136,7 +143,7 @@ export default {
             {
               name: "__slot:enddate",
               sortField: "hire_purchase_starting_date",
-              title: "HP End Date",
+              title: "Purchase End Date",
               titleClass: "center aligned",
               dataClass: "text-muted align-middle",
               width: "15%"
@@ -225,7 +232,10 @@ export default {
       onChangePage(page) {
          this.$refs.vuetable.changePage(page);
       },
-
+      onAddedDataTable() {
+        this.componentKey++;
+        this.updateTableRow()
+      },
       changePageSize(perPage) {
          this.perPage = perPage;
          this.$refs.vuetable.refresh();
@@ -241,6 +251,9 @@ export default {
             }
          }
          return -1;
+      },
+      showDetailModal(id) {
+        this.$refs.detailModal.fetchData(id);
       },
       showDelBox(id) {
          this.selectedItem = id;

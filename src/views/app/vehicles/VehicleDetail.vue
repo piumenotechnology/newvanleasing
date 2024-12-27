@@ -4,6 +4,7 @@
          <page-header :title="$t('vehicle.edit')">
             <div class="top-right-button-container">
                <b-button
+                 v-if="$can('vehicle.update')"
                   variant="primary"
                   size="lg"
                   class="top-right-button"
@@ -41,6 +42,7 @@
       ></vehicle-application-menu>
       <b-card class="float-save-button mx-auto z-index-10" :class="(!isVisible)?'show':''">
          <b-button
+            v-if="$can('vehicle.update')"
             variant="primary default"
             size="lg"
             @click.prevent="submitForm"
