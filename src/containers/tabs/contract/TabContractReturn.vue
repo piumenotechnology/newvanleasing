@@ -3,7 +3,7 @@
       <datatable-heading :title="$t('contract.all-return')" :changePageSize="changePageSize" :searchChange="searchChange"
         :from="from" :to="to" :total="total" :perPage="perPage" :separator="false" :noBreadcrumbs="true">
         <div class="top-right-button-container">
-          <b-button :disabled="noReturn" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-return') }}</b-button>
+          <b-button v-if="$can('return_defleet.create')" :disabled="noReturn" v-b-modal.modalright variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-return') }}</b-button>
         </div>
         <add-return-contract @added-data-table="onAddedDataTable" :key="componentKey"/>
       </datatable-heading>
@@ -16,11 +16,11 @@
               <span>
                 {{ props.rowData.vehicle_return_date | datetime }}
               </span>
-            </template> 
+            </template>
             <template slot="action" slot-scope="props">
               <div>
-                <b-button @click="openEditModal(props.rowData)" variant="light" class="mr-1" size="sm"><i class="simple-icon-pencil" /></b-button>
-                <b-button @click="getSelectedItem(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm">Delete <i class="simple-icon-trash" /></b-button>
+                <b-button v-if="$can('return_defleet.update')" @click="openEditModal(props.rowData)" variant="light" class="mr-1" size="sm"><i class="simple-icon-pencil" /></b-button>
+                <b-button v-if="$can('return_defleet.delete')" @click="getSelectedItem(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm">Delete <i class="simple-icon-trash" /></b-button>
               </div>
             </template>
           </vuetable>
@@ -41,7 +41,7 @@
   import AddReturnContract from "../../pages/AddReturnContract";
   import EditReturnContract from "../../pages/EditReturnContract";
   import DeleteItemModal from "../../pages/DeleteItemModal";
-  
+
   export default {
     props: ["title"],
     components: {

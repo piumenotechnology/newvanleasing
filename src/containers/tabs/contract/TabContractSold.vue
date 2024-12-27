@@ -3,7 +3,7 @@
       <datatable-heading :title="$t('contract.all-sold')" :changePageSize="changePageSize" :searchChange="searchChange"
         :from="from" :to="to" :total="total" :perPage="perPage" :separator="false" :noBreadcrumbs="true">
         <div class="top-right-button-container">
-          <b-button :disabled="noDefleet" v-b-modal.modalsold variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-sold') }}</b-button>
+          <b-button v-if="$can('return_defleet.create')" :disabled="noDefleet" v-b-modal.modalsold variant="primary" size="lg" class="top-right-button text-uppercase">{{ $t('contract.add-sold') }}</b-button>
         </div>
         <add-sold-contract @added-data-table="onAddedDataTable" :key="componentKey"/>
       </datatable-heading>
@@ -21,11 +21,11 @@
               <span>
                 {{ props.rowData.vehicle_sold_date | datetime }}
               </span>
-            </template> 
+            </template>
             <template slot="action" slot-scope="props">
               <div>
-                <b-button @click="openEditModal(props.rowData)" variant="light" class="mr-1" size="sm"><i class="simple-icon-pencil" /></b-button>
-                <b-button @click="getSelectedItem(props.rowData.id)" v-b-modal.deleteSold variant="danger" size="sm">Delete <i class="simple-icon-trash" /></b-button>
+                <b-button v-if="$can('return_defleet.update')" @click="openEditModal(props.rowData)" variant="light" class="mr-1" size="sm"><i class="simple-icon-pencil" /></b-button>
+                <b-button v-if="$can('return_defleet.delete')" @click="getSelectedItem(props.rowData.id)" v-b-modal.deleteSold variant="danger" size="sm">Delete <i class="simple-icon-trash" /></b-button>
               </div>
             </template>
           </vuetable>
@@ -46,7 +46,7 @@
   import AddSoldContract from "../../pages/AddSoldContract";
   import EditSoldContract from "../../pages/EditSoldContract";
   import DeleteSoldModal from "../../pages/DeleteSoldModal";
-  
+
   export default {
     props: ["title"],
     components: {
@@ -125,7 +125,7 @@
     },
     methods: {
       fetchDefleet() {
-        let url = apiUrl + "/showagreementnumberinvehiclesold?per_page=10&search=";
+        let url = apiUrl + "/showagreementnumberinvehiclesold?per_page=8&search=";
         axios
           .get(url)
           .then(r => r.data)
@@ -163,7 +163,7 @@
             sort: this.sortOrder[0].sortField,
             search: this.search
           };
-          
+
       },
       onPaginationData(paginationData) {
         this.from = paginationData.from;
