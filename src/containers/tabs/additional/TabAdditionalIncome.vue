@@ -13,8 +13,8 @@
     >
         <template slot="action" slot-scope="props">
             <div class="d-flex justify-content-end align-items-center">
-                <b-button @click="editItem(props.rowData)" variant="light" class="mr-2" size="sm"><i class="simple-icon-pencil" /></b-button>
-                <b-button @click="deleteItem(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm"><i class="simple-icon-trash" /></b-button>
+                <b-button v-if="$can('cost_income.update')" @click="editItem(props.rowData)" variant="light" class="mr-2" size="sm"><i class="simple-icon-pencil" /></b-button>
+                <b-button v-if="$can('cost_income.delete')" @click="deleteItem(props.rowData.id)" v-b-modal.modalDeletion variant="danger" size="sm"><i class="simple-icon-trash" /></b-button>
             </div>
         </template>
     </vuetable>
