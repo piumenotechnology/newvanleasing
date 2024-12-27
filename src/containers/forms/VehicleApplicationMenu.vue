@@ -10,7 +10,7 @@
                   <span class="float-right">{{ items.status_next_step }}</span>
                </li>
             </ul>
-            <b-button :to="{ path: `/app/performance/${items.id}` }" block
+            <b-button v-if="$can('performance.read')" :to="{ path: `/app/performance/${items.id}` }" block
                variant="success"
                size="sm"><i class="iconsminds-bar-chart-4 mr-2" />View Full Report</b-button>
          </div>
