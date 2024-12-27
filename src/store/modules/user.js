@@ -1,13 +1,13 @@
 import axios from 'axios'
 import { apiUrl } from '../../constants/config';
 import firebase from 'firebase/app'
-import 'firebase/auth'
-import { currentUser, isAuthGuardActive } from '../../constants/config'
-import { setCurrentUser, getCurrentUser } from '../../utils'
-
+// import 'firebase/auth'
+import { currentUser, currentCapability, isAuthGuardActive } from '../../constants/config'
+import { setCurrentUser, getCurrentUser, setCurrentCapability, getCurrentCapability } from '../../utils'
 export default {
   state: {
     currentUser: isAuthGuardActive ? getCurrentUser() : currentUser,
+    currentCapability: isAuthGuardActive ? getCurrentCapability() : currentCapability,
     loginError: null,
     processing: false,
     forgotMailSuccess: null,
@@ -15,6 +15,7 @@ export default {
   },
   getters: {
     currentUser: state => state.currentUser,
+    currentCapability: state => state.currentCapability,
     processing: state => state.processing,
     loginError: state => state.loginError,
     forgotMailSuccess: state => state.forgotMailSuccess,
@@ -26,8 +27,14 @@ export default {
       state.processing = false
       state.loginError = null
     },
+    setCapability(state, payload) {
+      state.currentCapability = payload
+      state.processing = false
+      state.loginError = null
+    },
     setLogout(state) {
       state.currentUser = null
+      state.currentCapability = null
       state.processing = false
       state.loginError = null
     },
@@ -38,17 +45,20 @@ export default {
     setError(state, payload) {
       state.loginError = payload
       state.currentUser = null
+      state.currentCapability = null
       state.processing = false
     },
     setForgotMailSuccess(state) {
       state.loginError = null
       state.currentUser = null
+      state.currentCapability = null
       state.processing = false
       state.forgotMailSuccess = true
     },
     setResetPasswordSuccess(state) {
       state.loginError = null
       state.currentUser = null
+      state.currentCapability = null
       state.processing = false
       state.resetPasswordSuccess = true
     },
@@ -58,35 +68,34 @@ export default {
   },
   actions: {
     login({ commit }, payload) {
-      const headers = {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTION",
-        "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, X-Requested-With"
-      };
-
       commit('clearError')
       commit('setProcessing', true)
       axios
         .post(apiUrl + "/login", {
           username: payload.username,
           password: payload.password
-        }, headers)
+        })
         .then(res => res.data)
         .then(
           user => {
+            // console.log(user.capability)
             const item = {
               id: user.user.id,
-              uid: user.user.id,
+              first_name: user.user.first_name,
+              last_name: user.user.last_name,
               username: user.user.username,
-              name: user.user.name,
-              role: (user.user.position == 'admin') ? 0 : 1,
+              email: user.user.email,
+              isAdmin: (user.user.position == 'Administrator') ? 1 : 0,
               ...currentUser
             }
             setCurrentUser(item)
+            setCurrentCapability(user.capability)
             commit('setUser', item)
+            commit('setCapability', user.capability)
           },
           err => {
-            setCurrentUser(null);
+            setCurrentUser(null)
+            setCurrentCapability(null)
             commit('setError', err.message)
             setTimeout(() => {
               commit('clearError')
@@ -152,8 +161,9 @@ export default {
     },
     signOut({ commit }) {
       setCurrentUser(null);
+      setCurrentCapability(null);
       commit('setLogout')
-      
+
       // firebase
       //   .auth()
       //   .signOut()
