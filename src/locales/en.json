@@ -15,12 +15,20 @@
     "password": "Password",
     "password-again": "Password Again",
     "forgot-password-question": "Forget password?",
-    "fullname": "Full Name",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "username": "Username",
+    "position": "Select Role",
     "login-button": "LOGIN",
     "register-button": "REGISTER",
     "reset-password-button": "RESET",
+    "update": "UPDATE",
     "buy": "BUY",
-    "username": "Username"
+    "add-new": "Add New User",
+    "edit": "Edit User",
+    "add-role": "Add New Role",
+    "edit-role": "Edit Role",
+    "role-name": "Role Name"
   },
   "menu": {
     "home": "Home",
@@ -28,6 +36,7 @@
     "dashboard": "Dashboard",
     "vehicles": "Vehicles",
     "contracts": "Contracts",
+    "users": "Users",
     "active-contracts": "Active Contracts",
     "available-stock": "Available Stock",
     "potential-stock": "Potential Stock",
@@ -38,6 +47,10 @@
     "base-interest": "Base Interest",
     "additional": "Cost & Income (Additional)",
     "performance": "Performance",
+    "user-roles": "Users & Roles",
+    "manage-users": "Manage Users",
+    "manage-roles": "Manage Roles",
+    "manage-permissions": "Manage Permissions",
     "all": "All",
     "welcome": "Welcome",
     "default": "Default",
@@ -269,7 +282,7 @@
     "manufacture": "Manufacturer",
     "model": "Model",
     "variant": "Variant",
-    "colour": "Vehicle Colour",
+    "colour": "Colour",
     "list-price": "Basic List Price",
     "otr-price": "OTR Price (Excl VAT)",
     "min-contract-price": "Minimum Contact Price",
@@ -301,7 +314,8 @@
     "final-fee": "Final Fee",
     "other-fee": "Other Fee",
     "summary": "Summary",
-    "residual-value": "Residual Value Projection"
+    "residual-value": "Residual Value Projection",
+    "stock-status": "Stock Status"
   },
   "contract": {
     "add-new": "New Contract",
@@ -635,8 +649,7 @@
     "firstname-message": "Please enter your first name!",
     "lastname": "Last name",
     "lastname-message": "Please enter your last name!",
-
-
+    "password-enter": "Please enter your Password",
     "password-confirm": "Confirm Password",
     "validation-bootstrap": "Bootstrap Validation",
     "validation-vuelidate": "Vuelidate Validation",
