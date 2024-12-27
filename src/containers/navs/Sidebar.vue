@@ -307,7 +307,8 @@ export default {
       return menuItems
         ? menuItems.filter(
             (x) =>
-              !x.roles || (x.roles && x.roles.includes(this.currentUser.role))
+            !x.roles && !x.access || (x.roles && x.roles.includes(this.currentUser.isAdmin)) || this.currentCapability.includes(x.access)
+              // !x.roles || (x.roles && x.roles.includes(this.currentUser.isAdmin))
           )
         : [];
     },
@@ -316,6 +317,7 @@ export default {
   computed: {
     ...mapGetters({
       currentUser: "currentUser",
+      currentCapability: "currentCapability",
       menuType: "getMenuType",
       menuClickCount: "getMenuClickCount",
       selectedMenuHasSubItems: "getSelectedMenuHasSubItems",
@@ -341,6 +343,6 @@ export default {
         window.scrollTo(0, top);
       }
     },
-  },
+  }
 };
 </script>
