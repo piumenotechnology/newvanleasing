@@ -275,7 +275,7 @@ export default {
             serviceYears: 0,
             serviceMileage: 0,
             serviceLast: null,
-            stock_status: 'Available'
+            stock_status: null
          },
          purchaseForm: {
             purchaseDate: null,
