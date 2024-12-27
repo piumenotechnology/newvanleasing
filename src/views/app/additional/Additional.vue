@@ -19,7 +19,7 @@
                      :tab="'tab-additional-cost'"
                   >
                      <div class="position-absolute card-top-buttons">
-                        <b-button @click.prevent="getTab('tab-additional-cost')"
+                        <b-button v-if="$can('cost_income.create')" @click.prevent="getTab('tab-additional-cost')"
                         v-b-modal.modalothercost variant="secondary" size="xl" class="icon-button">
                         <svg data-v-63191ed2="" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff" class="mt-n1 text-primary">
                            <g data-v-63191ed2="" id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -50,7 +50,7 @@
                      :tab="'tab-additional-income'"
                   >
                      <div class="position-absolute card-top-buttons">
-                        <b-button @click.prevent="getTab('tab-additional-income')"
+                        <b-button v-if="$can('cost_income.create')" @click.prevent="getTab('tab-additional-income')"
                         v-b-modal.modalotherincome variant="secondary" size="xl" class="icon-button">
                            <svg class="mt-n1 text-primary" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
                               <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -119,7 +119,7 @@ export default {
          incomeCount: 0,
          compCostKey: 0,
          compIncomeKey: 1
-         
+
       }
    },
    methods: {
@@ -151,7 +151,7 @@ export default {
       getIncomeCount(val) {
          this.incomeCount = val
       }
-      
+
    },
    watch: {
       costCount(newId, oldId) {
