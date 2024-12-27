@@ -8,12 +8,12 @@
     <div v-if="isProcessing" class="bg-transparent pr-5 w-100 h-100 d-flex justify-content-center align-items-center position-absolute opacity-75 z-index-10">
       <b-spinner variant="black" label="Spinning" class="text-center"></b-spinner>
     </div>
-   
+
     <b-form
       id="addContractForm"
       class="av-tooltip tooltip-right-bottom"
       label="Bottom Right"
-      @submit.prevent="onAddContractSubmit"
+      @submit.prevent="onAddSoldSubmit"
       >
       <b-form-group :label="$t('contract.agreement-number')" class="has-top-label">
         <v-select
@@ -226,6 +226,7 @@ export default {
           .get(url)
           .then(r => r.data)
           .then(res =>  {
+            // console.log(res.data.data)
             let latestContract = res.data.data.filter(x =>
               x.id == Math.max(...res.data.data.map(o => o.id))
             )
@@ -275,7 +276,7 @@ export default {
           })
       }, 1000);
     },
-    onAddContractSubmit() {
+    onAddSoldSubmit() {
       let url = apiUrl + "/vehiclesold";
       this.$v.form.$touch();
       let config = {
@@ -283,7 +284,6 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }
-      
       // this.vehiclesolds.append("id_sales_order", this.form.id_sales_order.id);
       // this.vehiclesolds.append("id_purchase_order", this.form.id_purchase_order.id);
       // this.vehiclesolds.append("vehicle_sold_date", this.formatDate(this.form.vehicle_sold_date));
