@@ -20,76 +20,58 @@
         <!-- <div class="separator mb-5"></div> -->
       </b-colxx>
     </b-row>
-    <!-- <b-row >
-      <b-colxx sm="12">
-        <b-card class="bg-dark text-white mb-3">
-          <ul class="list-unstyled">
-            <li v-for="item in items" class="nav-item">
-              <p>{{ item.id_purchase_order }}: {{ item.agreement_number }}, {{ item.cust_name }} | {{ item.contract_start_date }} => {{ item.total_income }} | 
-              {{ item.monthly_rental }}</p>
-            </li>
-          </ul>
-        </b-card>
-      </b-colxx>
-    </b-row> -->
-    <b-row>
-      <b-colxx sm="12" lg="4" class="mb-4">
-        <gradient-with-radial-progress-card
-          icon="iconsminds-inbox-out"
-          :title="`${currentHiredVehicle}`"
-          :detail="`Total Vehicles: ${totalCars}`"
-          :suffix="'Hire Contract'"
-          :percent="`${currentHiredVehicle}`*100/`${totalContract}`"
-          :progressText="`${hirePercentage}%`"
-        />
-      </b-colxx>
-      <b-colxx xs="6" lg="4" class="mb-3">
-        <gradient-with-growth-progress-card
+    <b-row v-if="items" class="icon-cards-row invert d-flex justify-content-stretch">
+      <b-colxx>
+        <icon-card
+          :title="$t('performance.income')"
           icon="iconsminds-financial"
-          :title="`${theIncome}`"
-          :status="checkStatus"
-          :prefix="'£'"
-          :detail="$t('performance.total-income')"
+          :isComa="true"
+          :value="Number(items.total_income)"
         />
       </b-colxx>
-      <b-colxx xs="6" lg="4" class="mb-3">
-        <gradient-with-growth-progress-card
+      <b-colxx>
+        <icon-card
+          :title="$t('performance.cost')"
           icon="iconsminds-billing"
-          :title="`${theCost}`"
-          :status="costStatus"
-          :prefix="'£'"
-          :detail="$t('performance.total-cost')"
+          :isComa="true"
+          :value="Number(items.actual_cost)"
         />
       </b-colxx>
-      <!-- <b-colxx xs="6" lg="2" class="mb-3">
-        <gradient-with-growth-progress-card
-          icon="iconsminds-basket-coins"
-          :title="`${potentialIncome}`"
-          :status="incomeStatus"
-          :prefix="'£'"
-          :detail="$t('performance.potential-income')"
+      <b-colxx>
+        <icon-card
+          :title="$t('performance.margin')"
+          icon="iconsminds-scale"
+          :isComa="true"
+          :value="Number(items.margin)"
+        >
+        <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
+          <b-badge v-show="items.margin > 0" pill id="annual-margin">{{items.margin_percentage}}%</b-badge>
+          <b-tooltip target="annual-margin" placement="bottom" :title="$t('performance.tooltip-margin')"/>
+        </h6>
+        </icon-card>
+      </b-colxx>
+      <b-colxx>
+        <icon-card
+          :title="$t('performance.residual')"
+          icon="iconsminds-money-bag"
+          :isComa="true"
+          :value="Number(items.total_residual)"
         />
       </b-colxx>
-      <b-colxx xs="6" lg="2" class="mb-3">
-        <gradient-with-growth-progress-card
-          icon="iconsminds-letter-open"
-          :title="`${loanOutstanding}`"
-          :status="outstandingStatus"
-          :prefix="'£'"
-          :detail="$t('performance.loan-outstanding')"
+      <!-- <b-colxx>
+        <icon-card
+          :title="$t('performance.rental-income')"
+          icon="iconsminds-pricing"
+          :isComa="true"
+          :value="Number(items.actual_income)"
         />
-      </b-colxx> -->
-      <b-colxx sm="12" lg="12" class="mb-4">
-        <hired-vehicle-chart-card :data="items"></hired-vehicle-chart-card>
-      </b-colxx>
-      <!-- <b-colxx sm="12" md="6" class="mb-4">
-        <sold-vehicle-chart-card></sold-vehicle-chart-card>
       </b-colxx> -->
     </b-row>
+
     <b-row>
       <b-colxx xxs="12" class="mb-4">
         <b-card>
-          <datatable-heading :title="$t('performance.top-hired')" :changePageSize="changePageSize" 
+          <datatable-heading :title="$t('performance.top-hired')" :changePageSize="changePageSize"
           :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" :noBreadcrumbs="true" />
           <vuetable ref="vuetable" class="responsive-table" :api-url="apiBase" :query-params="makeQueryParams"
             :per-page="perPage" :reactive-api-url="true" :fields="fields" data-path="data.data" pagination-path="data"
@@ -113,22 +95,18 @@
 import axios from 'axios'
 import { apiUrl } from "../../../constants/config";
 import Vuetable from "vuetable-2/src/components/Vuetable";
+import IconCard from "../../../components/Cards/IconCard";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
-import GradientWithRadialProgressCard from "../../../components/Cards/GradientWithRadialProgressCard";
-import GradientWithGrowthProgressCard from "../../../components/Cards/GradientWithGrowthProgressCard";
 import SoldVehicleChartCard from "../../../containers/dashboards/SoldVehicleChartCard";
-import HiredVehicleChartCard from "../../../containers/dashboards/HiredVehicleChartCard";
 import DatatableHeading from "../../../containers/datatable/DatatableHeading";
 import Datepicker from "vuejs-datepicker";
 
 export default {
   components: {
     vuetable: Vuetable,
+    "icon-card" : IconCard,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
-    "gradient-with-radial-progress-card": GradientWithRadialProgressCard,
-    "gradient-with-growth-progress-card": GradientWithGrowthProgressCard,
     "sold-vehicle-chart-card": SoldVehicleChartCard,
-    "hired-vehicle-chart-card": HiredVehicleChartCard,
     "datatable-heading": DatatableHeading,
     "datepicker": Datepicker
   },
@@ -338,10 +316,11 @@ export default {
     pastDate: {
       get (val) {
         let past = new Date();
-        return past.setDate(past.getDate() - 30)
+        past.setMonth(past.getMonth() - 1)
+        return past.toISOString()
       },
       set (val) {
-        this.startDate = val            
+        this.startDate = val
       }
     },
     availableDate() {
@@ -350,55 +329,7 @@ export default {
       }
       return dates
     },
-    rentalIncome() {
-      let income = this.items.map(x => x.monthly_payment)
-      return income.reduce(this.getSum, 0)
-    },
-    totalIncome() {
-      let total = this.items.map(x => x.total_income)
-      return total.reduce(this.getSum, 0)
-    },
-    otherIncome() {
-      let other = this.items.map(x => x.other_income)
-      return other.reduce(this.getSum, 0)
-    },
-    theIncome() {
-      return this.totalIncome + this.otherIncome
-    },
-    initialIncome() {
-      let old = this.initial.map(x => x.total_income)
-      return old.reduce(this.getSum, 0)
-    },
-    totalCost() {
-      // let total = this.items.map(x => x.total_cost)
-      let costs = [...new Map(this.items.map((x) => [x.id, x.total_cost])).values()];
-      return costs.reduce(this.getSum, 0)
-    },
-    otherCost() {
-      let oc = this.items.map(x => x.amount_oc)
-      return oc.reduce(this.getSum, 0)
-    },
-    theCost() {
-      return this.totalCost + this.otherCost
-    },
-    potentialIncome() {
-      var arr = this.items.map((x) => {
-        const remaining = this.getMonthDifference(new Date(x.contract_start_date), this.endDate, x.term_months)
-        return (remaining > 0) ? (x.term_months - remaining) * x.monthly_rental : 0
-        // this.getMonthDifference(new Date(x.contract_start_date), this.endDate, x.hp_term) * x.monthly_payment));
-      })
-      return arr.reduce(this.getSum, 0)
-    },
-    loanOutstanding() {
-      var arr = this.items.map((x) => {
-        const remaining = this.getMonthDifference(new Date(x.contract_start_date), this.endDate, x.hp_term)
-        return (remaining > 0) ? (x.hp_term - remaining) * x.monthly_payment : 0
-      })
-      return arr.reduce(this.getSum, 0)
-      // var arr = this.items.map(x => (
-      //   this.getMonthDifference(new Date(x.contract_start_date), this.endDate, x.term_months) * x.regular_monthly_payment));
-      // return arr.reduce(this.getSum, 0)
-    }
+
   },
   watch: {
     startDate(newId, oldId) {
@@ -409,42 +340,6 @@ export default {
     endDate(newId, oldId) {
       if(newId) {
         this.onEndChange(newId)
-      }
-    },
-    totalCost(newVal, oldVal) {
-      if(oldVal > 0 && newVal > oldVal) {
-        this.costStatus = "up"
-      } else if (newVal < oldVal) {
-        this.costStatus = "down"
-      } else {
-        this.costStatus = null
-      }
-    },
-    theIncome(newVal, oldVal) {
-      if(oldVal > 0 && newVal > oldVal) {
-        this.checkStatus = "up"
-      } else if (newVal < oldVal) {
-        this.checkStatus = "down"
-      } else {
-        this.checkStatus = null
-      }
-    },
-    potentialIncome(newVal, oldVal) {
-      if(newVal > oldVal && oldVal > 0) {
-        this.incomeStatus = "up"
-      } else if (newVal < oldVal && newVal > 0) {
-        this.incomeStatus = "down"
-      } else {
-        this.incomeStatus = null
-      }
-    },
-    loanOutstanding(newVal, oldVal) {
-      if(newVal > oldVal && oldVal > 0) {
-        this.outstandingStatus = "up"
-      } else if (newVal < oldVal && newVal > 0) {
-        this.outstandingStatus = "down"
-      } else {
-        this.outstandingStatus = null
       }
     }
   },
