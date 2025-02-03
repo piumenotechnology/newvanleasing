@@ -45,7 +45,7 @@
           :value="Number(items.margin)"
         >
         <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
-          <b-badge v-show="items.margin > 0" pill id="annual-margin">{{items.margin_percentage}}%</b-badge>
+          <b-badge pill id="annual-margin">{{items.margin_percentage}}%</b-badge>
           <b-tooltip target="annual-margin" placement="bottom" :title="$t('performance.tooltip-margin')"/>
         </h6>
         </icon-card>
