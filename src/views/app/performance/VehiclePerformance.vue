@@ -26,7 +26,7 @@
           icon="iconsminds-file-clipboard-file---text"
           :title="$t('performance.active-contracts')"
           :isComa="true"
-          :value="Number(items.total_contract)"
+          :value="`${items.total_contract}`"
         />
       </b-colxx>
       <b-colxx>
@@ -34,7 +34,7 @@
           icon="iconsminds-key"
           :title="$t('performance.total-vehicles')"
           :isComa="true"
-          :value="Number(items.total_vehicle)"
+          :value="`${items.total_vehicle}`"
         />
       </b-colxx>
       <b-colxx>
