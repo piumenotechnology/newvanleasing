@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-row class="icon-cards-row invert d-flex justify-content-stretch">
+    <b-row class="icon-cards-row invert d-flex justify-content-stretch mb-4">
       <b-colxx xxs="12" class="px-3">
         <h3 v-if="vehicle.next_step_status_sales == 'Sold'" class="list-heading mb-3">Actual Value</h3>
         <h3 v-else class="list-heading mb-3">Projected Performance</h3>
@@ -10,6 +10,7 @@
           :title="$t('performance.income')"
           icon="iconsminds-financial"
           :isComa="true"
+          :isMoney="true"
           :value="Number(theIncome)"
         />
       </b-colxx>
@@ -18,6 +19,7 @@
           :title="$t('performance.cost')"
           icon="iconsminds-billing"
           :isComa="true"
+          :isMoney="true"
           :value="Number(theCost)"
         />
       </b-colxx>
@@ -26,6 +28,7 @@
           :title="$t('performance.margin')"
           icon="iconsminds-scale"
           :isComa="true"
+          :isMoney="true"
           :value="Number(theMargin)"
         >
         <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
@@ -39,6 +42,7 @@
           :title="$t('performance.residual')"
           icon="iconsminds-money-bag"
           :isComa="true"
+          :isMoney="true"
           :value="Number(residualValue)"
         />
       </b-colxx>
@@ -47,6 +51,7 @@
           :title="$t('performance.sold-price')"
           icon="iconsminds-pricing"
           :isComa="true"
+          :isMoney="true"
           :value="Number(soldPrice)"
         />
       </b-colxx>
@@ -55,11 +60,12 @@
           :title="$t('performance.rental-income')"
           icon="iconsminds-pricing"
           :isComa="true"
+          :isMoney="true"
           :value="Number(rentalIncome)"
         />
       </b-colxx>
     </b-row>
-    <b-row v-if="vehicle.next_step_status_sales !== 'Sold'" class="icon-cards-row d-flex justify-content-stretch">
+    <b-row v-if="vehicle.next_step_status_sales !== 'Sold'" class="icon-cards-row d-flex justify-content-stretch mb-4">
       <b-colxx xxs="12" class="px-3">
         <h3 class="list-heading mb-3">Current Performance (today)</h3>
       </b-colxx>
@@ -68,6 +74,7 @@
           :title="$t('performance.income')"
           icon="iconsminds-financial"
           :isComa="true"
+          :isMoney="true"
           :value="Number(actualIncome)"
         />
       </b-colxx>
@@ -76,6 +83,7 @@
           :title="$t('performance.cost')"
           icon="iconsminds-billing"
           :isComa="true"
+          :isMoney="true"
           :value="Number(actualCost)"
         />
       </b-colxx>
@@ -84,6 +92,7 @@
           :title="$t('performance.margin')"
           icon="iconsminds-scale"
           :isComa="true"
+          :isMoney="true"
           :value="Number(actualMargin)"
         >
           <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
@@ -97,6 +106,7 @@
           :title="$t('performance.residual')"
           icon="iconsminds-money-bag"
           :isComa="true"
+          :isMoney="true"
           :value="Number(residualValue)"
         />
       </b-colxx>
@@ -105,10 +115,11 @@
           :title="$t('performance.sold-price')"
           icon="iconsminds-pricing"
           :isComa="true"
+          :isMoney="true"
           :value="Number(soldPrice)"
         />
       </b-colxx>
-      
+
     </b-row>
   </div>
 </template>
@@ -248,7 +259,7 @@ export default {
       // const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date()) -1
       const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date())
       // console.log(`month: ${ongoing} ${this.subTotal} `);
-      
+
       return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_rental + this.vehicle.first_payment + this.subTotal
       : this.theIncome - this.residualValue
     },
