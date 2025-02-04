@@ -415,8 +415,12 @@
     "annual-mileage": "Annual Mileage",
     "annum-payment": "Annum Payment",
     "loan-outstanding": "Loan Outstanding",
-    "potential-income": "Potential Income"
-
+    "potential-income": "Potential Income",
+    "monthly-revenue": "Monthly Recurring Revenue",
+    "monthly-payment": "Monthly HP Payment",
+    "monthly-freecash": "Monthly Free Cash",
+    "total-vehicles": "Total Vehicles",
+    "active-contracts": "Active Contracts"
   },
   "chat": {
     "messages": "Messages",
