@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-row>
-      <b-colxx xxs="12" class="mb-4">
+      <b-colxx xxs="12">
         <piaf-breadcrumb :heading="$t('performance.header')" />
         <div class="d-flex justify-content-stretch align-items-center top-right-button-container">
           <i class="h5 simple-icon-calendar mb-0 mr-2" />
@@ -20,28 +20,47 @@
         <!-- <div class="separator mb-5"></div> -->
       </b-colxx>
     </b-row>
-    <b-row v-if="items" class="icon-cards-row invert d-flex justify-content-stretch">
+    <b-row v-if="items" class="icon-cards-row invert d-flex mb-4">
       <b-colxx>
         <icon-card
-          :title="$t('performance.income')"
+          icon="iconsminds-file-clipboard-file---text"
+          :title="$t('performance.active-contracts')"
+          :isComa="true"
+          :value="Number(items.total_contract)"
+        />
+      </b-colxx>
+      <b-colxx>
+        <icon-card
+          icon="iconsminds-key"
+          :title="$t('performance.total-vehicles')"
+          :isComa="true"
+          :value="Number(items.total_vehicle)"
+        />
+      </b-colxx>
+      <b-colxx>
+        <icon-card
+          :title="$t('performance.monthly-revenue')"
           icon="iconsminds-financial"
           :isComa="true"
+          :isMoney="true"
           :value="Number(items.total_income)"
         />
       </b-colxx>
       <b-colxx>
         <icon-card
-          :title="$t('performance.cost')"
+          :title="$t('performance.monthly-payment')"
           icon="iconsminds-billing"
           :isComa="true"
+          :isMoney="true"
           :value="Number(items.actual_cost)"
         />
       </b-colxx>
       <b-colxx>
         <icon-card
-          :title="$t('performance.margin')"
+          :title="$t('performance.monthly-freecash')"
           icon="iconsminds-scale"
           :isComa="true"
+          :isMoney="true"
           :value="Number(items.margin)"
         >
         <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
@@ -55,6 +74,7 @@
           :title="$t('performance.residual')"
           icon="iconsminds-money-bag"
           :isComa="true"
+          :isMoney="true"
           :value="Number(items.total_residual)"
         />
       </b-colxx>
@@ -69,7 +89,7 @@
     </b-row>
 
     <b-row>
-      <b-colxx xxs="12" class="mb-4">
+      <b-colxx xxs="12">
         <b-card>
           <datatable-heading :title="$t('performance.top-hired')" :changePageSize="changePageSize"
           :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" :noBreadcrumbs="true" />
@@ -97,6 +117,7 @@ import { apiUrl } from "../../../constants/config";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import IconCard from "../../../components/Cards/IconCard";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
+import GradientWithRadialProgressCard from "../../../components/Cards/GradientWithRadialProgressCard";
 import SoldVehicleChartCard from "../../../containers/dashboards/SoldVehicleChartCard";
 import DatatableHeading from "../../../containers/datatable/DatatableHeading";
 import Datepicker from "vuejs-datepicker";
@@ -106,6 +127,7 @@ export default {
     vuetable: Vuetable,
     "icon-card" : IconCard,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
+    "gradient-with-radial-progress-card": GradientWithRadialProgressCard,
     "sold-vehicle-chart-card": SoldVehicleChartCard,
     "datatable-heading": DatatableHeading,
     "datepicker": Datepicker
@@ -188,7 +210,7 @@ export default {
   },
   methods: {
     formatDate(date) {
-      return new Date(date).toISOString().substr(0, 10)
+      return new Date(date).toISOString().slice(0, 10)
     },
     getSum(total, num) {
       return total + Math.round(num);
