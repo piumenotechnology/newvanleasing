@@ -1,9 +1,9 @@
 <template>
-  <b-card class="mb-4 text-center">
+  <b-card class="text-center">
     <slot/>
     <i :class="icon" class="mb-2"/>
-    <p v-show="isComa" class="lead text-center">£ {{ count | addComa }}</p>
-    <p v-show="!isComa" class="lead text-center">£ {{ count }}</p>
+    <p v-show="isComa" class="lead text-center"><span v-if="isMoney">£ </span>{{ count | addComa }}</p>
+    <p v-show="!isComa" class="lead text-center"><span v-if="isMoney">£ </span>{{ count }}</p>
     <p class="card-text mt-2 text-extra-small text-uppercase">{{ title }}</p>
   </b-card>
 </template>
@@ -13,7 +13,8 @@ export default {
     title: { type: String, default: 'icon-card-title' },
     icon: { type: String, default: 'iconsminds-clock' },
     value: { type: Number, default: 0 },
-    isComa: { type: Boolean, default: false }
+    isComa: { type: Boolean, default: false },
+    isMoney: { type: Boolean, default: false }
   },
   data() {
     return {
