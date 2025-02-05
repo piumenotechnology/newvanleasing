@@ -54,6 +54,9 @@ const routes = [
             path: 'booked-stock', component: () => import(/* webpackChunkName: "vehicles" */ './views/app/vehicles/BookedStock')
           },
           {
+            path: 'confirmed-stock', component: () => import(/* webpackChunkName: "vehicles" */ './views/app/vehicles/ConfirmedStock')
+          },
+          {
             path: ':id', component: () => import(/* webpackChunkName: "vehicles" */ './views/app/vehicles/VehicleDetail')
           },
         ]
