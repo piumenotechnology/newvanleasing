@@ -21,6 +21,10 @@
                     <span v-else>{{ props.rowData.stock_status }}</span>
                   </template>
 
+                  <template slot="mpa" slot-scope="props">
+                    <span>£ {{ props.rowData.min_contract_price_satu }}</span>
+                  </template>
+
                   <template slot="eta" slot-scope="props">
                     <b-input-group v-if="$can('vehicle_available.update')">
                       <v-select @input="changeEta(props.rowData)" :options="etaOptions" v-model="props.rowData.eta" :value="props.rowData.eta" :searchable="false"/>
@@ -99,7 +103,7 @@ export default {
          isSaving: false,
          statusOptions: [
            "Potential",
-           "Available",
+           "Confirmed Return",
            "Booked"
          ],
          etaOptions: [
@@ -156,12 +160,11 @@ export default {
                width: "8%"
             },
             {
-               name: "min_contract_price_satu",
+               name: "__slot:mpa",
                sortField: "min_contract_price_satu",
-               title: "10K MPA",
+               title: "Minimum Contract Price",
                titleClass: "center aligned",
-               dataClass: "center-aligned",
-               width: "8%"
+               dataClass: "center-aligned"
             },
             {
                name: "__slot:stock_status",
@@ -240,12 +243,14 @@ export default {
         // const itemId = dataItem.id;
         // let itemsForToggle = this.items;
         // var rowClass = this.getIndex(itemId, itemsForToggle, "id");
-        if(dataItem.stock_status == "Available") {
+        if(dataItem.stock_status == "Confirmed Return") {
           return "light-success";
         } else if (dataItem.stock_status == "Booked") {
           return "light-danger";
+        } else if (dataItem.stock_status == "Potential") {
+          return "light-warning";
         }
-        return "light-warning";
+        return "bg-light";
         // console.log(rowClass);
         // if (this.selectedItems.includes(dataItem.id)) {
         //   return "selected";
