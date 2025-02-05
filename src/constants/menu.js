@@ -24,15 +24,20 @@ const data = [
     to: `${adminRoot}/vehicles/available-stock`,
     access: "vehicle_available.read"
   }, {
-    icon: "iconsminds-sand-watch-2",
+    icon: "iconsminds-timer",
     label: "menu.potential-stock",
     to: `${adminRoot}/vehicles/potential-stock`,
     access: "vehicle_potential.read"
   }, {
-    icon: "iconsminds-notepad",
+    icon: "iconsminds-file-clipboard",
     label: "menu.booked-stock",
     to: `${adminRoot}/vehicles/booked-stock`,
     access: "vehicle_booked.read"
+  }, {
+    icon: "iconsminds-yes",
+    label: "menu.confirmed-stock",
+    to: `${adminRoot}/vehicles/confirmed-stock`,
+    access: "vehicle_confirmed.read"
   }]
 },
 {
