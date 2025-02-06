@@ -43,7 +43,7 @@
           icon="iconsminds-financial"
           :isComa="true"
           :isMoney="true"
-          :value="Number(items.total_income)"
+          :value="Number(items.actual_income)"
         />
       </b-colxx>
       <b-colxx>
