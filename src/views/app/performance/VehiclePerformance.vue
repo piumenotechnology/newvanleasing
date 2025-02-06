@@ -65,7 +65,7 @@
         >
         <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
           <b-badge pill id="annual-margin">{{items.margin_percentage}}%</b-badge>
-          <b-tooltip target="annual-margin" placement="bottom" :title="$t('performance.tooltip-margin')"/>
+          <b-tooltip target="annual-margin" placement="bottom" :title="$t('performance.tooltip-margin-2')"/>
         </h6>
         </icon-card>
       </b-colxx>
