@@ -63,13 +63,13 @@
               <b-form-checkbox ref="checkbox" :checked="checkRoleExist(`${item.slug}.read`)"  data-action="read" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
             </b-col>
             <b-col>
-              <b-form-checkbox ref="checkbox" :checked="checkRoleExist(`${item.slug}.create`)" :disabled="item.slug === 'performance' || item.slug === 'performance_detail'" data-action="create" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
+              <b-form-checkbox ref="checkbox" :checked="checkRoleExist(`${item.slug}.create`)" :disabled="item.slug === 'performance' || item.slug === 'calculator'" data-action="create" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
             </b-col>
             <b-col>
-              <b-form-checkbox :checked="checkRoleExist(`${item.slug}.update`)" :disabled="item.slug === 'performance' || item.slug === 'performance_detail'" data-action="update" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
+              <b-form-checkbox :checked="checkRoleExist(`${item.slug}.update`)" :disabled="item.slug === 'performance' || item.slug === 'calculator'" data-action="update" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
             </b-col>
             <b-col>
-              <b-form-checkbox :checked="checkRoleExist(`${item.slug}.delete`)" :disabled="item.slug === 'performance' || item.slug === 'performance_detail'" data-action="delete" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
+              <b-form-checkbox :checked="checkRoleExist(`${item.slug}.delete`)" :disabled="item.slug === 'performance' || item.slug === 'calculator'" data-action="delete" :data-subject="`${item.slug}`" class="itemCheck mb-0"/>
             </b-col>
           </b-row>
         </b-card>
