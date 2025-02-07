@@ -66,7 +66,7 @@ const data = [
 },
 {
   id: "additional",
-  icon: "simple-icon-calculator",
+  icon: "iconsminds-cash-register-2",
   label: "menu.additional",
   to: `${adminRoot}/additional`,
   access: "cost_income.read"
@@ -94,6 +94,14 @@ const data = [
     to: `${adminRoot}/users/manage-roles`
   }]
 },
+{
+  id: "calculator",
+  icon: "iconsminds-calculator",
+  label: "menu.calculator",
+  to: `${adminRoot}/calculator`,
+  access: "calculator.read"
+},
+
 // {
 //   id: "single",
 //   icon: "iconsminds-three-arrow-fork",
