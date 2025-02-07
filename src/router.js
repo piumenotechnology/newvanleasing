@@ -123,6 +123,12 @@ const routes = [
           }
         ]
       },
+      {
+        path: "calculator",
+        component: () =>
+          import(/* webpackChunkName: "calculator" */ "./views/app/calculator"),
+        meta: { loginRequired: true }
+      },
       // {
       //   path: "single",
       //   component: () =>
