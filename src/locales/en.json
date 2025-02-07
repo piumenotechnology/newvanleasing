@@ -58,6 +58,7 @@
     "analytics": "Analytics",
     "ecommerce": "Ecommerce",
     "content": "Content",
+    "calculator": "Calculator",
     "pages": "Pages",
     "data-list": "Data List",
     "thumb-list": "Thumb List",
@@ -422,6 +423,10 @@
     "monthly-freecash": "Monthly Free Cash",
     "total-vehicles": "Total Vehicles",
     "active-contracts": "Active Contracts"
+  },
+  "calculator": {
+    "tab-1": "Contract Pricing Calculator",
+    "tab-2": "Result"
   },
   "chat": {
     "messages": "Messages",
