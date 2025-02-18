@@ -47,7 +47,7 @@ Table of Contents
 */
 
 /* 00.Variables and Imports */
-@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,400i,600,700");
+@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700");
 
 $main-menu-item-height: 110px;
 $main-menu-width: 120px;
@@ -817,6 +817,9 @@ button {
     background-color: darken($theme-color-1, 8%);
     border-color: darken($theme-color-1, 8%);
   }
+}
+.btn-square {
+  border-radius: 10px;
 }
 
 .check-button {
@@ -3313,10 +3316,11 @@ body.default-transition main {
   [class*="col-"] {
     padding-left: 10px;
     padding-right: 10px;
+    height: auto;
   }
 
   .card-body {
-    padding: 1rem 0.5rem 1.7rem;
+    padding: 1.7rem 0.5rem;
   }
 
   .card-text {
