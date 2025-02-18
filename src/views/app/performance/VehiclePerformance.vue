@@ -69,7 +69,7 @@
         </h6>
         </icon-card>
       </b-colxx>
-      <b-colxx>
+      <!-- <b-colxx>
         <icon-card
           :title="$t('performance.residual')"
           icon="iconsminds-money-bag"
@@ -77,7 +77,7 @@
           :isMoney="true"
           :value="Number(items.total_residual)"
         />
-      </b-colxx>
+      </b-colxx> -->
       <!-- <b-colxx>
         <icon-card
           :title="$t('performance.rental-income')"
