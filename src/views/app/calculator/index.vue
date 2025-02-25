@@ -17,7 +17,7 @@
               >
 
               <b-form-group label="Vehicle Type" class="has-top-label">
-                <v-select :options="vehicleType" v-model="vehicle.type" :value="vehicle.type" :searchable="false"/>
+                <v-select :options="vehicleType" v-model="vehicle.type" :value="vehicle.type" :searchable="false" />
               </b-form-group>
 
               <b-form-group label="Contract Length" class="has-top-label">
@@ -63,77 +63,67 @@
                   :class="{ 'invalid-feedback': true, 'd-block': $v.vehicle.initial_rental.$error && !$v.vehicle.initial_rental.maxValue }"
                 >Value must be greater than zero</div>
               </b-form-group>
-
-              <h4 class="mt-5 mb-3">Dealer Code</h4>
-
-              <b-form-group label="Monthly Rental (Confirmed)" class="has-top-label">
-                <b-input-group>
-                  <currency-field v-model="$v.vehicle.monthly_rental.$model" :options="{ currency: 'GBP'}" :state="!$v.vehicle.monthly_rental.$error" />
-                </b-input-group>
-                <div v-if="!$v.vehicle.monthly_rental.required"
-                  :class="{ 'invalid-feedback': true, 'd-block': $v.vehicle.monthly_rental.$error && !$v.vehicle.monthly_rental.required }"
-                >This field is required!</div>
-                <div v-if="!$v.vehicle.monthly_rental.maxValue"
-                  :class="{ 'invalid-feedback': true, 'd-block': $v.vehicle.monthly_rental.$error && !$v.vehicle.monthly_rental.maxValue }"
-                >Value must be greater than zero</div>
-              </b-form-group>
+              <b-button
+                class="btn-lg btn-square w-100"
+                :class="{
+                  'btn-multiple-state': true,
+                  'show-spinner': status === 'processing',
+                  'show-success': status === 'success',
+                  'show-fail': status === 'fail'
+                }"
+                variant="primary" type="submit" form="calculatorForm"
+                :disabled="status != 'default' || this.$v.$anyError">
+                <span class="spinner d-inline-block">
+                  <span class="bounce1"></span>
+                  <span class="bounce2"></span>
+                  <span class="bounce3"></span>
+                </span>
+                <span class="icon success">
+                  <i class="simple-icon-check"></i>
+                </span>
+                <span class="icon fail">
+                  <i class="simple-icon-exclamation"></i>
+                </span>
+                <span v-if="buttonTitle" class="label">
+                  {{ buttonTitle }}
+                </span>
+                <span v-else class="label">Calculate</span>
+              </b-button>
             </b-form>
 
           </b-card>
       </b-colxx>
       <b-colxx xxs="12" lg="6">
-        <b-button
-          class="btn-lg btn-square w-100"
-          :class="{
-            'btn-multiple-state': true,
-            'show-spinner': status === 'processing',
-            'show-success': status === 'success',
-            'show-fail': status === 'fail'
-          }"
-          variant="primary" type="submit" form="calculatorForm"
-          :disabled="status != 'default' || this.$v.$anyError">
-          <span class="spinner d-inline-block">
-            <span class="bounce1"></span>
-            <span class="bounce2"></span>
-            <span class="bounce3"></span>
-          </span>
-          <span class="icon success">
-            <i class="simple-icon-check"></i>
-          </span>
-          <span class="icon fail">
-            <i class="simple-icon-exclamation"></i>
-          </span>
-          <span v-if="buttonTitle" class="label">
-            {{ buttonTitle }}
-          </span>
-          <span v-else class="label">Calculate</span>
-        </b-button>
-
-        <b-card class="mt-4" :title="$t('calculator.tab-2')" v-if="isCalculated === true">
+        <b-card :title="$t('calculator.tab-2')" v-if="isCalculated === true">
           <ul class="list-unstyled mb-4">
-              <li class="nav-item mb-3">
-                <span class="d-inline-block text-muted">Minimum Monthly Rental</span>
-                <span class="float-right text-one">£ {{ Math.round(result.mmr) | withcoma }}</span>
-              </li>
-              <li class="nav-item mb-3">
-                <span class="d-inline-block text-muted">Target Monthly Rental</span>
-                <span class="float-right text-one">£ {{ result.tmr | withcoma }}</span>
-              </li>
-              <li class="nav-item mb-3">
-                <span class="d-inline-block text-muted">Target Monthly Rental (Adverse)</span>
-                <span class="float-right text-one">£ {{ result.tmra | withcoma }}</span>
-              </li>
-              <li class="nav-item mt-3 pt-3 border-top border-1 font-weight-bold">
-                <span class="d-inline-block text-muted">Monthly Rental</span>
-                <span ref="resultValue" class="float-right text-one">
-                  £ {{ result.dealerCode | withcoma }}
-                </span>
-
-              </li>
-              <button class="btn btn-dark btn-square mt-3" @click="copyTextNoInput()">
-                {{ copy_text }}<i class="iconsminds-duplicate-layer ml-2"></i>
-              </button>
+            <li class="nav-item mb-3">
+              <span class="d-inline-block text-muted">Minimum Monthly Rental</span>
+              <span class="float-right text-one">£ {{ Math.round(mmr) | withcoma }}</span>
+            </li>
+            <li class="nav-item mb-3">
+              <span class="d-inline-block text-muted">Target Monthly Rental</span>
+              <span class="float-right text-one">£ {{ tmr | withcoma }}</span>
+            </li>
+            <li class="nav-item mb-3">
+              <span class="d-inline-block text-muted">Target Monthly Rental (Adverse)</span>
+              <span class="float-right text-one">£ {{ tmra | withcoma }}</span>
+            </li>
           </ul>
+          <b-form-group label="Monthly Rental (Confirmed)" class="has-top-label">
+            <b-input-group>
+              <currency-field v-model="$v.vehicle.monthly_rental.$model" :options="{ currency: 'GBP'}" />
+            </b-input-group>
+          </b-form-group>
+          <hr>
+          <div class="font-weight-bold">
+            <span class="h3 mb-0 d-inline-block text-black">Monthly Rental</span>
+            <span ref="resultValue" class="float-right h4">
+              £ {{ dealerCode | withcoma }}
+            </span>
+          </div>
+          <!-- <button class="btn btn-dark btn-square mt-3" @click="copyTextNoInput()">
+            {{ copy_text }}<i class="iconsminds-duplicate-layer ml-2"></i>
+          </button> -->
         </b-card>
       </b-colxx>
     </b-row>
@@ -221,15 +211,8 @@ export default {
         required,
         maxValue: greaterThanZero
       },
-      monthly_rental: {
-        required,
-        maxValue: greaterThanZero
-      }
+      monthly_rental: { required }
     },
-    initialDealerCode: {
-      required,
-      maxValue: greaterThanZero
-    }
   },
   methods: {
     onCalculateSubmit() {
@@ -245,7 +228,7 @@ export default {
         }, 1000)
       } else {
         this.isCalculated = false;
-        this.getNumber();
+        // this.getNumber();
         setTimeout(() => {
           this.isProcessing = false;
           this.isCalculated = true;
@@ -274,10 +257,18 @@ export default {
       storage.setSelectionRange(0, 99999);
       document.execCommand('copy');
       this.$el.removeChild(storage);
+      setTimeout(() => {
+        this.copy_text = "Copy"
+      }, 3000);
     }
   },
   computed: {
     mmr() {
+      if(this.vehicle.type == "Used") {
+        this.millRate = 0.07
+      } else {
+        this.millRate = 0.125
+      }
       let res = 0
       if(this.vehicle.annual_mileage <= 10000){
         res = (this.vehicle.minimum_contract - this.vehicle.initial_rental) / this.vehicle.contract_length
