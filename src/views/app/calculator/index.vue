@@ -116,8 +116,8 @@
           </b-form-group>
           <hr>
           <div class="font-weight-bold">
-            <span class="h3 mb-0 d-inline-block text-black">Monthly Rental</span>
-            <span ref="resultValue" class="float-right h4">
+            <span class="h4 mb-0 d-inline-block text-black">Monthly Rental</span>
+            <span ref="resultValue" class="float-right h4 mb-0">
               £ {{ dealerCode | withcoma }}
             </span>
           </div>
