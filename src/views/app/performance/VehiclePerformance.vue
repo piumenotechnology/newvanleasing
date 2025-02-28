@@ -21,23 +21,23 @@
       </b-colxx>
     </b-row>
     <b-row v-if="items" class="icon-cards-row invert d-flex mb-4">
-      <b-colxx>
+      <b-colxx xxs="12" md="4" class="mt-xs-3">
         <icon-card
           icon="iconsminds-file-clipboard-file---text"
           :title="$t('performance.active-contracts')"
           :isComa="true"
-          :value="`${items.total_contract}`"
+          :value="Number(items.total_contract)"
         />
       </b-colxx>
-      <b-colxx>
+      <b-colxx xxs="12" md="4" class="mt-xs-3">
         <icon-card
           icon="iconsminds-key"
           :title="$t('performance.total-vehicles')"
           :isComa="true"
-          :value="`${items.total_vehicle}`"
+          :value="Number(items.total_vehicle)"
         />
       </b-colxx>
-      <b-colxx>
+      <b-colxx xxs="12" md="4" class="mt-xs-3">
         <icon-card
           :title="$t('performance.monthly-revenue')"
           icon="iconsminds-financial"
@@ -46,7 +46,7 @@
           :value="Number(items.actual_income)"
         />
       </b-colxx>
-      <b-colxx>
+      <b-colxx xxs="12" md="4" class="mt-3">
         <icon-card
           :title="$t('performance.monthly-payment')"
           icon="iconsminds-billing"
@@ -55,10 +55,10 @@
           :value="Number(items.actual_cost)"
         />
       </b-colxx>
-      <b-colxx>
+      <b-colxx xxs="12" md="4" class="mt-3">
         <icon-card
           :title="$t('performance.monthly-freecash')"
-          icon="iconsminds-scale"
+          icon="iconsminds-safe-box"
           :isComa="true"
           :isMoney="true"
           :value="Number(items.margin)"
@@ -66,6 +66,20 @@
         <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
           <b-badge pill id="annual-margin">{{items.margin_percentage}}%</b-badge>
           <b-tooltip target="annual-margin" placement="bottom" :title="$t('performance.tooltip-margin-2')"/>
+        </h6>
+        </icon-card>
+      </b-colxx>
+      <b-colxx xxs="12" md="4" class="mt-3">
+        <icon-card
+          :title="$t('performance.projected-contracts-margin')"
+          icon="iconsminds-statistic"
+          :isComa="true"
+          :isMoney="true"
+          :value="Number(items.avg_forecasting_income)"
+        >
+        <h6 class="position-absolute font-weight-normal card-top-buttons text-white">
+          <b-badge pill id="projected-margin">{{items.percentage_forecasting}}%</b-badge>
+          <b-tooltip target="projected-margin" placement="bottom" :title="$t('performance.tooltip-margin-projected')"/>
         </h6>
         </icon-card>
       </b-colxx>
