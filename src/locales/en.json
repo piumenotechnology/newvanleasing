@@ -408,7 +408,7 @@
     "tooltip-cost": "(p*r*t)/100. Amount (p), interest rate (r) and time period (t).",
     "tooltip-margin": "Annual Margin Percentage.",
     "tooltip-margin-2": "Margin Percentage.",
-    "tooltip-margin-projected": "Project Average Contracts Percentage.",
+    "tooltip-margin-projected": "Project Average Contract Percentage.",
     "nso": "Original Sales Order Number",
     "customer-name": "Customer Name",
     "contract-status": "Contract Status",
@@ -421,7 +421,7 @@
     "loan-outstanding": "Loan Outstanding",
     "potential-income": "Potential Income",
     "monthly-revenue": "Monthly Recurring Revenue",
-    "monthly-payment": "Monthly HP Payment",
+    "monthly-payment": "Monthly HP Payments",
     "monthly-freecash": "Monthly Free Cash",
     "total-vehicles": "Total Vehicles",
     "active-contracts": "Active Contracts"
