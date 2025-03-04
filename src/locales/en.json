@@ -408,7 +408,7 @@
     "tooltip-cost": "(p*r*t)/100. Amount (p), interest rate (r) and time period (t).",
     "tooltip-margin": "Annual Margin Percentage.",
     "tooltip-margin-2": "Margin Percentage.",
-    "tooltip-margin-projected": "Project Average Contract Percentage.",
+    "tooltip-margin-projected": "Projected Average Contract Percentage.",
     "nso": "Original Sales Order Number",
     "customer-name": "Customer Name",
     "contract-status": "Contract Status",
