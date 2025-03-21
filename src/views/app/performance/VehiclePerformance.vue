@@ -224,7 +224,9 @@ export default {
   },
   methods: {
     formatDate(date) {
-      return new Date(date).toISOString().replace('.000Z', '');
+      let newDate = new Date(date).toISOString().replace('.000Z', '');
+      console.log(newDate)
+      return newDate;
     },
     getSum(total, num) {
       return total + Math.round(num);
