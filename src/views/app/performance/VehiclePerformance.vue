@@ -128,6 +128,7 @@
 <script>
 import axios from 'axios'
 import { apiUrl } from "../../../constants/config";
+import moment from "moment"
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import IconCard from "../../../components/Cards/IconCard";
 import VuetablePaginationBootstrap from "../../../components/Common/VuetablePaginationBootstrap";
