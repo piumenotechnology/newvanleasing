@@ -260,6 +260,7 @@ export default {
         })
     },
     async onStartChange(date1) {
+      console.log(date1)
       let newDate1 = this.formatDate(date1),
       date2 = this.formatDate(this.endDate),
       url = apiUrl + `/showdashboard/${newDate1},${date2}`;
@@ -273,6 +274,7 @@ export default {
         })
     },
     async onEndChange(date2) {
+      console.log(date2)
       let date1 = this.formatDate(this.startDate),
       newDate2 = this.formatDate(date2),
       url = apiUrl + `/showdashboard/${date1},${newDate2}`;
