@@ -105,7 +105,7 @@
               </router-link>
             </div>
           </b-dropdown>
-        </div> -->
+        </div>
 
         <div class="position-relative d-inline-block">
           <b-dropdown
@@ -142,7 +142,7 @@
               </div>
             </vue-perfect-scrollbar>
           </b-dropdown>
-        </div>
+        </div> -->
         <div class="position-relative d-none d-sm-inline-block">
           <div class="btn-group">
             <b-button variant="empty" class="header-icon btn-sm" @click="toggleFullScreen">
@@ -169,11 +169,11 @@
               <img v-else alt="Profile picture" src="/assets/img/profiles/no-picture.jpg" />
             </span>
           </template>
-          <b-dropdown-item>Account</b-dropdown-item>
+          <!-- <b-dropdown-item>Account</b-dropdown-item>
           <b-dropdown-item>Features</b-dropdown-item>
           <b-dropdown-item>History</b-dropdown-item>
           <b-dropdown-item>Support</b-dropdown-item>
-          <b-dropdown-divider />
+          <b-dropdown-divider /> -->
           <b-dropdown-item @click="logout">Sign out</b-dropdown-item>
         </b-dropdown>
       </div>
