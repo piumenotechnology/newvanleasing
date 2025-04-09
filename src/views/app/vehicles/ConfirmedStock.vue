@@ -102,6 +102,7 @@ export default {
          items: [],
          isSaving: false,
          statusOptions: [
+           "Available",
            "Potential",
            "Confirmed Return",
            "Booked"
@@ -241,7 +242,7 @@ export default {
             };
       },
       onRowClass(dataItem, index) {
-        return "light-success";
+        return "bg-light";
       },
       onPaginationData(paginationData) {
          this.from = paginationData.from;
