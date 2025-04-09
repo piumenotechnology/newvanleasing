@@ -102,9 +102,10 @@ export default {
          items: [],
          isSaving: false,
          statusOptions: [
-           "Potential",
-           "Confirmed Return",
-           "Booked"
+          "Available",
+          "Potential",
+          "Confirmed Return",
+          "Booked"
          ],
          etaOptions: [
            "January",
@@ -243,9 +244,7 @@ export default {
         // const itemId = dataItem.id;
         // let itemsForToggle = this.items;
         // var rowClass = this.getIndex(itemId, itemsForToggle, "id");
-        if(dataItem.stock_status == "Confirmed Return") {
-          return "light-success";
-        } else if (dataItem.stock_status == "Booked") {
+        if (dataItem.stock_status == "Booked") {
           return "light-danger";
         } else if (dataItem.stock_status == "Potential") {
           return "light-warning";
