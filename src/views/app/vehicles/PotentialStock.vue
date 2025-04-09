@@ -102,6 +102,7 @@ export default {
          items: [],
          isSaving: false,
          statusOptions: [
+           "Available",
            "Potential",
            "Confirmed Return",
            "Booked"
