@@ -141,6 +141,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "unauthorized" */ "./views/Unauthorized")
   },
   {
+    path: "/forgot-password",
+    component: () => import(/* webpackChunkName: "forgot-password" */ "./views/ForgotPassword")
+  },
+  {
+    path: "/reset",
+    component: () => import(/* webpackChunkName: "reset" */ "./views/Reset")
+  },
+  {
     path: "/error",
     component: () => import(/* webpackChunkName: "error" */ "./views/Error")
   },
