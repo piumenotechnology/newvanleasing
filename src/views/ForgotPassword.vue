@@ -88,7 +88,6 @@ export default {
       isSent: false,
       status: "default",
       message: "",
-      token: '',
       form: {
         email: ''
       }
@@ -148,8 +147,6 @@ export default {
     }
   },
   mounted() {
-    this.token = this.$route.query.token;
-    this.email = this.$route.query.email;
     document.body.classList.add("background");
   },
   beforeDestroy() {
