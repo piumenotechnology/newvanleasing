@@ -821,6 +821,12 @@ button {
 .btn-square {
   border-radius: 10px;
 }
+.btn-absolute {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 .check-button {
   cursor: default !important;
