@@ -2,7 +2,7 @@
   <div>
     <b-row class="icon-cards-row invert d-flex justify-content-stretch mb-4">
       <b-colxx xxs="12" class="px-3">
-        <h3 v-if="vehicle.next_step_status_sales == 'Sold'" class="list-heading mb-3">Actual Value</h3>
+        <h3 v-if="isSold" class="list-heading mb-3">Actual Value</h3>
         <h3 v-else class="list-heading mb-3">Projected Performance</h3>
       </b-colxx>
       <b-colxx>
@@ -65,7 +65,7 @@
         />
       </b-colxx>
     </b-row>
-    <b-row v-if="vehicle.next_step_status_sales !== 'Sold'" class="icon-cards-row d-flex justify-content-stretch mb-4">
+    <b-row v-if="!isSold" class="icon-cards-row d-flex justify-content-stretch mb-4">
       <b-colxx xxs="12" class="px-3">
         <h3 class="list-heading mb-3">Current Performance (today)</h3>
       </b-colxx>
