@@ -38,6 +38,7 @@
                 <div v-if="!$v.vehicle.annual_mileage.required"
                   :class="{ 'invalid-feedback': true, 'd-block': $v.vehicle.annual_mileage.$error && !$v.vehicle.annual_mileage.required }"
                 >This field is required!</div>
+                <p v-show="manualApprove" class="alert-danger rounded-small mt-2 px-3 py-2">Manual approval required for mileage above 18,000</p>
               </b-form-group>
 
               <b-form-group label="Minimum Contract Total" class="has-top-label">
@@ -311,6 +312,9 @@ export default {
         }
       }
       return Math.round(res)
+    },
+     manualApprove() {
+      return this.vehicle.annual_mileage > 18000
     }
   }
 }
