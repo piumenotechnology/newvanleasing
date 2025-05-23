@@ -611,6 +611,10 @@ p {
   border-radius: 50px !important;
 }
 
+.rounded-small {
+  border-radius: 10px;
+}
+
 .img-thumbnail {
   border-radius: $border-radius;
   padding: 0;
