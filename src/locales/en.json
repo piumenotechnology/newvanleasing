@@ -366,7 +366,9 @@
     "cost": "Additional Cost",
     "income": "Additional Income",
     "add-cost": "Add Additional cost",
+    "edit-cost": "Edit Additional cost",
     "add-income": "Add Additional income",
+    "edit-income": "Edit Additional income",
     "date": "Created date",
     "vehicle": "Selected vehicle number",
     "cost-description": "Additional cost description",
@@ -374,7 +376,6 @@
     "vendor": "Customer name",
     "payment-profile": "Payment profile",
     "amount": "Amount (GBP)"
-
   },
   "performance": {
     "header": "Vehicle Performance",
