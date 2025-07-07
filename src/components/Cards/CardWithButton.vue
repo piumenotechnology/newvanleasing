@@ -4,8 +4,8 @@
             <a @click.prevent="$emit('changeTab', tab)" href="#">
                 <i :class="`${icon} display-4 ml-sm-n3 ml-0 mb-3 text-white align-text-bottom d-inline-block`" />
                 <div>
-                    <p class="lead text-white">{{ count }}</p>
-                    <p class="text-small text-white">{{ detail }}</p>
+                    <p class="lead text-white">{{ title }}</p>
+                    <!-- <p class="text-small text-white">{{ detail }}</p> -->
                 </div>
             </a>
             <slot />
@@ -14,6 +14,6 @@
 </template>
 <script>
 export default {
-    props: ['icon', 'detail', 'count', 'tab']
+    props: ['icon', 'detail', 'title', 'tab']
 }
 </script>
