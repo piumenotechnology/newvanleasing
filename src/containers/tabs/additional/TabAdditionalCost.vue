@@ -98,7 +98,7 @@ export default {
         ],
         sortOrder: [
           {
-            field: 'updated_at',
+            field: 'created_at',
             direction: 'desc'
           }
         ]
