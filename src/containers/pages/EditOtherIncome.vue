@@ -2,13 +2,13 @@
   <b-modal
     id="editotherincome"
     ref="editotherincome"
-    :title="$t('additional.add-cost')"
+    :title="$t('additional.edit-income')"
     modal-class="modal-right"
   >
     <div v-if="isProcessing" class="bg-transparent pr-5 w-100 h-100 d-flex justify-content-center align-items-center position-absolute opacity-75 z-index-10">
       <b-spinner variant="black" label="Spinning" class="text-center"></b-spinner>
     </div>
-   
+
     <b-form
       id="editIncomeForm"
       class="av-tooltip tooltip-right-bottom"
@@ -52,6 +52,12 @@
         <div v-if="!$v.id_purchase_order.required"
           :class="{ 'invalid-feedback': true, 'd-block': $v.id_purchase_order.$error && !$v.id_purchase_order.required }"
         >This field is required</div>
+      </b-form-group>
+      <b-form-group :label="$t('contract.agreement-number')" class="has-top-label">
+        <v-select v-model="$v.id_sales_order.$model" :filterable="false" :options="contracts"
+        :dir="direction" />
+        <div :class="{ 'invalid-feedback': true, 'd-block': $v.id_sales_order.$error && !$v.id_sales_order.required }"
+        >Please select an agreement number</div>
       </b-form-group>
       <b-form-group :label="$t('additional.income-description')" class="has-top-label">
         <b-textarea v-model.trim="$v.description_income.$model" :state="!$v.description_income.$error"></b-textarea>
@@ -145,6 +151,8 @@ export default {
       editId: "",
       date: null,
       id_purchase_order: "",
+      id_sales_order: "",
+      contracts: [],
       description_income: "",
       amount_oi: "",
       payment_profile: "",
@@ -155,6 +163,7 @@ export default {
   validations: {
     date: { required },
     id_purchase_order: { required },
+    id_sales_order: { required },
     description_income: { required },
     amount_oi: {
       required,
@@ -192,26 +201,48 @@ export default {
       }, 1000);
     },
     getEditData(items) {
+      console.log(items);
       this.$refs.editotherincome.show();
       this.editId = items.id
       this.date = items.date
       this.id_purchase_order = items.vehicle_registration
+      this.id_sales_order = items.agreement_number
       this.description_income = items.description_income
       this.amount_oi = items.amount_oi
       this.payment_profile = items.payment_profile
       this.tempPurchaseId = items.id_purchase_order
+      this.tempSalesId = items.id_sales_order
+      this.getAgreementNumber(this.tempPurchaseId)
+    },
+    getAgreementNumber(id) {
+      let url = apiUrl + "/showContractNumberInOtherIncome/" + id
+      axios
+        .get(url)
+        .then(r => r.data)
+        .then(res =>  {
+          let contractData = res.data.map(({ agreement_number, id }) => ({ label: agreement_number, id: id }));
+          if(contractData.length > 0){
+            if(this.tempPurchaseId !== id){
+              this.id_sales_order = contractData[0].label
+              this.tempSalesId = contractData[0].id
+            }
+            this.contracts = contractData
+          }
+        })
     },
     onEditFormSubmit() {
       let url = apiUrl + "/otherincome/" + this.editId;
       let purchaseId = this.id_purchase_order.id;
+      let salesId = this.id_sales_order.id;
       const addedCost = {
         date: this.formatDate(this.date),
         id_purchase_order: (purchaseId == undefined) ? this.tempPurchaseId : purchaseId,
+        id_sales_order: (salesId == undefined) ? this.tempSalesId : salesId,
         description_income: this.description_income,
         amount_oi: this.amount_oi,
         payment_profile: this.payment_profile,
       }
-      
+
       this.$v.$touch();
       // console.log("adding item : ", addedCost);
       this.isProcessing = true;
@@ -251,8 +282,18 @@ export default {
       } else {
         return this.id_purchase_order
       }
+    },
+    purchaseOrderId() {
+      return this.id_purchase_order
     }
-  }
+  },
+  watch: {
+    purchaseOrderId(newVal, oldVal) {
+      if(typeof newVal === 'object' && newVal !== undefined){
+        this.getAgreementNumber(newVal.id)
+      }
+    },
+  },
 };
 </script>
 
