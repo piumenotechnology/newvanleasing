@@ -8,7 +8,7 @@
     <div v-if="isProcessing" class="bg-transparent pr-5 w-100 h-100 d-flex justify-content-center align-items-center position-absolute opacity-75 z-index-10">
       <b-spinner variant="black" label="Spinning" class="text-center"></b-spinner>
     </div>
-   
+
     <b-form
       id="addIncomeForm"
       class="av-tooltip tooltip-right-bottom"
@@ -34,7 +34,7 @@
           @search="fetchCars"
           :dir="direction"
         >
-          <template slot="no-options">type to search Aggrement number..</template>
+          <template slot="no-options">type to search vehicle number..</template>
           <template slot="option" slot-scope="option">
             <div class="d-center">
               {{ option.vehicle_registration }}
@@ -52,6 +52,12 @@
         <div v-if="!$v.id_purchase_order.required"
           :class="{ 'invalid-feedback': true, 'd-block': $v.id_purchase_order.$error && !$v.id_purchase_order.required }"
         >This field is required</div>
+      </b-form-group>
+      <b-form-group :label="$t('contract.agreement-number')" class="has-top-label">
+        <v-select v-model="$v.id_sales_order.$model" :filterable="false" :options="contracts"
+        :dir="direction" />
+        <div :class="{ 'invalid-feedback': true, 'd-block': $v.id_sales_order.$error && !$v.id_sales_order.required }"
+        >Please select an agreement number</div>
       </b-form-group>
       <b-form-group :label="$t('additional.income-description')" class="has-top-label">
         <b-textarea v-model.trim="$v.description_income.$model" :state="!$v.description_income.$error"></b-textarea>
@@ -144,8 +150,10 @@ export default {
       direction: getDirection().direction,
       date: null,
       id_purchase_order: "",
+      id_sales_order: "",
       description_income: "",
-      amount_oi: "",
+      contracts: [],
+      amount_oi: undefined,
       payment_profile: ""
     };
   },
@@ -153,12 +161,23 @@ export default {
   validations: {
     date: { required },
     id_purchase_order: { required },
+    id_sales_order: { required },
     description_income: { required },
     amount_oi: {
       required,
       maxValue: greaterThanZero
     },
     payment_profile: { required }
+  },
+  computed: {
+    vehicleRegistrationNumber() {
+      return this.id_purchase_order
+    }
+  },
+  watch: {
+    vehicleRegistrationNumber(newVal, oldVal) {
+      this.getSalesId(newVal.id)
+    },
   },
   methods: {
     formatDate(date) {
@@ -189,6 +208,18 @@ export default {
           })
       }, 1000);
     },
+    async getSalesId(val) {
+      let url = apiUrl + "/showContractNumberInOtherIncome/" + val
+      axios
+        .get(url)
+        .then(r => r.data)
+        .then(res =>  {
+          let contractData = res.data.map(({ agreement_number, id }) => ({ label: agreement_number, id: id }));
+          if(contractData.length > 0){
+            this.contracts = contractData
+          }
+        })
+    },
     onAddContractSubmit() {
       let url = apiUrl + "/otherincome";
       let config = {
@@ -196,10 +227,11 @@ export default {
           'Content-Type': 'multipart/form-data'
         }
       }
-      this.$v.$touch();
+      if(this.$v.$touch()) return
       const addedIncome = {
         date: this.formatDate(this.date),
         id_purchase_order: this.id_purchase_order.id,
+        id_sales_order: this.id_sales_order.id,
         description_income: this.description_income,
         amount_oi: this.amount_oi,
         payment_profile: this.payment_profile,
