@@ -15,7 +15,7 @@
                      @changeTab="getTab"
                      icon="iconsminds-billing"
                      :detail="$t('additional.has-found')"
-                     :count="`${ costCount } ${$t('additional.cost')}`"
+                     :title="$t('additional.cost')"
                      :tab="'tab-additional-cost'"
                   >
                      <div class="position-absolute card-top-buttons">
@@ -46,7 +46,7 @@
                      @changeTab="getTab"
                      icon="iconsminds-financial"
                      :detail="$t('additional.has-found')"
-                     :count="`${ incomeCount } ${$t('additional.income')}`"
+                     :title="$t('additional.income')"
                      :tab="'tab-additional-income'"
                   >
                      <div class="position-absolute card-top-buttons">
@@ -75,7 +75,7 @@
          </b-colxx>
          <b-colxx md="12" xl="8">
             <Transition name="fade" mode="out-in">
-               <component :is="activeComponent" ref="tableData" @mounted-income-length="getIncomeCount" @mounted-cost-length="getCostCount"></component>
+               <component :is="activeComponent" ref="tableData"></component>
             </Transition>
          </b-colxx>
       </b-row>
@@ -115,11 +115,8 @@ export default {
    data() {
       return {
          activeComponent: 'tab-additional-cost',
-         costCount: 0,
-         incomeCount: 0,
          compCostKey: 0,
          compIncomeKey: 1
-
       }
    },
    methods: {
@@ -133,25 +130,7 @@ export default {
       onAddedIncomeTable() {
         this.compIncomeKey++;
         this.$refs.tableData.refreshTable();
-      },
-      fetchIncomeData() {
-         let url = apiUrl + "/otherincome?per_page=99"
-         axios
-            .get(url)
-            .then(r => r.data)
-            .then(res =>  {
-               this.incomeCount = res.data.data.length
-            }).catch(_error => {
-               console.log(_error)
-            })
-      },
-      getCostCount(val) {
-         this.costCount = val
-      },
-      getIncomeCount(val) {
-         this.incomeCount = val
       }
-
    },
    watch: {
       costCount(newId, oldId) {
@@ -164,9 +143,6 @@ export default {
             return newId;
          }
       }
-  },
-  mounted() {
-   this.fetchIncomeData()
   }
 }
 </script>
