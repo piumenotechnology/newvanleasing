@@ -25,21 +25,24 @@
       <b-colxx xxs="12" lg="12">
         <performance-card :vehicle="vehicle" :subTotal="subTotal" />
       </b-colxx>
-      <b-colxx xxs="12" lg="5">
-        <b-row>
-          <b-colxx xxs="6" class="mb-4">
-            <b-card class="mb-lg-3" no-body>
-              <vehicle-detail-card v-if="vehicle" :vehicle="vehicle" />
-            </b-card>
-          </b-colxx>
-          <b-colxx xxs="6" class="mb-4">
-            <b-card class="mb-lg-3" no-body>
-              <vehicle-cost-card v-if="vehicle" :vehicle="vehicle" />
-            </b-card>
-          </b-colxx>
-        </b-row>
+      <b-colxx lg="3">
+        <b-card class="mb-4" no-body>
+          <vehicle-detail-card v-if="vehicle" :vehicle="vehicle" />
+        </b-card>
       </b-colxx>
-      <b-colxx xxs="12" lg="7" class="mb-4">
+      <b-colxx lg="3">
+        <b-card class="mb-4" no-body>
+          <b-tabs card no-fade>
+            <b-tab title="COST" active title-item-class="w-50 text-center">
+              <vehicle-cost-card v-if="vehicle" :vehicle="vehicle" />
+            </b-tab>
+            <b-tab title="INCOME" title-item-class="w-50 text-center">
+              <vehicle-income-card v-if="vehicles" :vehicles="vehicles" />
+            </b-tab>
+          </b-tabs>
+        </b-card>
+      </b-colxx>
+      <b-colxx lg="6">
         <b-card class="mb-lg-3" no-body>
           <contract-history-card v-if="vehicle" :id="$route.params.id" />
         </b-card>
@@ -52,6 +55,7 @@ import axios from 'axios';
 import { apiUrl } from '../../../constants/config';
 import VehicleDetailCard from '../../../containers/dashboards/VehicleDetailCard';
 import VehicleCostCard from '../../../containers/dashboards/VehicleCostCard';
+import VehicleIncomeCard from '../../../containers/dashboards/VehicleIncomeCard';
 import PerformanceCard from '../../../containers/dashboards/PerformanceCard';
 import ContractHistoryCard from '../../../containers/dashboards/ContractHistoryCard';
 
@@ -59,6 +63,7 @@ export default {
   components: {
     'vehicle-detail-card': VehicleDetailCard,
     'vehicle-cost-card': VehicleCostCard,
+    'vehicle-income-card': VehicleIncomeCard,
     'performance-card': PerformanceCard,
     'contract-history-card': ContractHistoryCard
   },
@@ -66,6 +71,7 @@ export default {
   return {
     isLoading: true,
     subTotal: 0,
+    vehicles: [],
     vehicle: [],
     report: []
   }
@@ -88,7 +94,8 @@ export default {
           } else {
             this.subTotal = 0
           }
-          this.vehicle = res.data.pop()
+          this.vehicles = res.data
+          this.vehicle = res.data.at(-1)
         })
         .catch(err => {
           console.log(err.message)
