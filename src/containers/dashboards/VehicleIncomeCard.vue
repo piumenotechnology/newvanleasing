@@ -54,10 +54,16 @@
     </div>
 
     <div class="separator mb-4" />
-    <p class="font-weight-semibold">
-      <span class="text-muted font-weight-light d-inline mr-1">Residual Value
+    <p v-if="vehicles[0].status_next_step == 'Sold'" class="font-weight-semibold">
+      <span class="text-muted font-weight-light d-inline mr-1">Sold price
+      </span>£ {{ vehicles[0].sold_price | withcoma}}
+    </p>
+
+    <p v-else class="font-weight-semibold">
+      <span class="text-muted font-weight-light d-inline mr-1">Residual value
       </span>£ {{ vehicles[0].residual_value | withcoma}}
     </p>
+
   </div>
 </template>
 <script>
