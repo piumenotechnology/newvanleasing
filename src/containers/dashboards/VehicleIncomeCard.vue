@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <p class="list-heading text-uppercase mb-4">Rental income</p>
+    <!-- <p class="list-heading text-uppercase mb-3">Rental income</p>
     <table class="table">
       <thead>
         <tr>
@@ -42,7 +42,7 @@
           </tr>
         </tbody>
       </table> -->
-      <div class="separator mb-4" />
+      <div class="separator mb-3" />
       <p v-if="totalOtherIncome != null" class="font-weight-semibold">
         <span class="text-muted font-weight-light d-inline mr-1">Other income
         </span>£ {{totalOtherIncome | withcoma}}
@@ -53,7 +53,7 @@
       </p>
     </div>
 
-    <div class="separator mb-4" />
+    <div class="separator mb-3" />
     <p v-if="vehicles[0].status_next_step == 'Sold'" class="font-weight-semibold">
       <span class="text-muted font-weight-light d-inline mr-1">Sold price
       </span>£ {{ vehicles[0].sold_price | withcoma}}
