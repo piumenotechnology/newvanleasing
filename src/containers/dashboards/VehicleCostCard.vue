@@ -1,6 +1,5 @@
 <template>
-  <b-card-body>
-    <p class="list-heading text-uppercase mb-4">{{ $t("performance.cost") }}</p>
+  <div>
     <p class="font-weight-semibold">
       <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.otr-price") }}
       </span>£ {{ vehicle.price_otr | withcoma }}
@@ -20,7 +19,7 @@
       <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.total-cost") }}
       </span>£ {{ theCost | withcoma }}
     </p>
-    
+
     <div class="separator mb-4" />
     <p class="list-heading text-uppercase mb-4">{{ $t("performance.funding") }}</p>
     <p class="font-weight-semibold">
@@ -63,7 +62,7 @@
       <span class="text-muted text-small font-weight-light d-block">{{ $t("vehicle.final-payment") }}
       </span>£ {{ vehicle.final_payment | withcoma }}
     </p>
-  </b-card-body>
+  </div>
 </template>
 <script>
 import axios from 'axios';
