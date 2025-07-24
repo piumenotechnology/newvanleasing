@@ -1,22 +1,25 @@
 <template>
   <div>
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.otr-price") }}
+      <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.otr-price") }}
       </span>£ {{ vehicle.price_otr | withcoma }}
     </p>
+    <div class="separator mb-3" />
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.installment") }}
+      <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.installment") }}
       </span>£ {{ vehicle.total_cost | withcoma }}
       <!-- </span><i id="other-cost" >£ {{ getInterest(vehicle.price_otr, vehicle.hp_interest_per_annum, period) | withcoma }}</i>
       <b-tooltip target="other-cost" placement="left" :title="$t('performance.tooltip-cost')">
       </b-tooltip> -->
     </p>
+    <div class="separator mb-3" />
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.other-cost") }}
+      <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.other-cost") }}
       </span>£ {{ otherCost| withcoma }}
     </p>
+    <div class="separator mb-3" />
     <p class="font-weight-semibold">
-      <span class="text-muted text-small font-weight-light d-block">{{ $t("performance.total-cost") }}
+      <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.total-cost") }}
       </span>£ {{ theCost | withcoma }}
     </p>
 
