@@ -65,6 +65,7 @@
         />
       </b-colxx>
     </b-row>
+
     <b-row v-if="!isSold" class="icon-cards-row d-flex justify-content-stretch mb-4">
       <b-colxx xxs="12" class="px-3">
         <h3 class="list-heading mb-3">Current Performance (today)</h3>
@@ -119,8 +120,8 @@
           :value="Number(soldPrice)"
         />
       </b-colxx>
-
     </b-row>
+
   </div>
 </template>
 <script>
@@ -181,7 +182,7 @@ export default {
       .get(url)
         .then(r => r.data)
         .then(res => {
-          this.otherIncome = res.data.sum_other_income
+          this.otherIncome = res.sum_other_income
         })
     },
     async getTotalCost(id) {
@@ -270,7 +271,7 @@ export default {
       let subTotal = v.regular_monthly_payment + v.vehicle_tracking
 
       const ongoing = this.getMonthDifference(new Date(v.hire_purchase_starting_date), new Date())
-      console.log(ongoing);
+      // console.log(ongoing);
       return (ongoing > 0 && ongoing < v.hp_term) ? (ongoing * subTotal) + v.hp_deposit_amount + this.baseInterest : this.theCost
     },
     actualMargin() {
