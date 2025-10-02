@@ -261,7 +261,7 @@ export default {
       const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date())
       // console.log(`month: ${ongoing} ${this.subTotal} `);
 
-      return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_rental + this.vehicle.first_payment + this.subTotal
+      return (ongoing <= this.vehicle.term_months) ? ongoing * this.vehicle.monthly_rental + this.vehicle.first_payment + this.vehicle.other_income + this.subTotal
       : this.theIncome - this.residualValue
     },
     actualCost() {
