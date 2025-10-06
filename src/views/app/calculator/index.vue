@@ -117,7 +117,7 @@
           </b-form-group>
           <hr>
           <div class="font-weight-bold">
-            <span class="h4 mb-0 d-inline-block text-black">Dealer Code</span>
+            <span class="h4 mb-0 d-inline-block text-black">Target Contribution</span>
             <span ref="resultValue" class="float-right h4 mb-0">
               £ {{ dealerCode | withcoma }}
             </span>
