@@ -1,5 +1,7 @@
 <template>
-  <b-card :title="$t('additional.income')">
+  <b-card>
+    <datatable-heading :title="$t('additional.income')" :changePageSize="changePageSize"
+    :searchChange="searchChange" :from="from" :to="to" :total="total" :perPage="perPage" :separator="true" :noBreadcrumbs="true" />
     <vuetable
         ref="vuetable"
         class="responsive-table"
@@ -29,6 +31,7 @@ import VuetablePaginationBootstrap from "../../../components/Common/VuetablePagi
 import { apiUrl } from "../../../constants/config";
 import DeleteItemModal from "../../pages/DeleteItemModal";
 import EditOtherIncome from "../../pages/EditOtherIncome";
+import DatatableHeading from "../../../containers/datatable/DatatableHeading";
 
 export default {
   props: ["title"],
@@ -36,7 +39,8 @@ export default {
     vuetable: Vuetable,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
     "delete-item-modal": DeleteItemModal,
-    "edit-other-income": EditOtherIncome
+    "edit-other-income": EditOtherIncome,
+    "datatable-heading": DatatableHeading
   },
   data() {
     return {
@@ -45,6 +49,7 @@ export default {
         order: "",
         page: 1,
         perPage: 8,
+        search: "",
         from: 0,
         to: 0,
         total: 0,
@@ -116,13 +121,15 @@ export default {
                 ? sortOrder[0].field
                 : "",
             page: currentPage,
-            per_page: this.perPage
+            per_page: this.perPage,
+            search: this.search
         }
         : {
             page: currentPage,
             per_page: this.perPage,
             order: this.sortOrder[0].direction,
-            sort: this.sortOrder[0].field
+            sort: this.sortOrder[0].field,
+            search: this.search
         };
     },
     onPaginationData(paginationData) {
@@ -132,6 +139,14 @@ export default {
     },
     onChangePage(page) {
         this.$refs.vuetable.changePage(page);
+    },
+    changePageSize(perPage) {
+      this.perPage = perPage;
+      this.$refs.vuetable.refresh();
+    },
+    searchChange(val) {
+      this.search = val;
+      this.refreshTable();
     },
     onAddedDataTable() {
         this.incomeKey++;
