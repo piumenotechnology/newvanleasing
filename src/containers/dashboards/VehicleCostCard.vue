@@ -111,7 +111,7 @@ export default {
       .get(url)
         .then(r => r.data)
         .then(res => {
-          this.otherCost = res.data.sum_other_cost
+          this.otherCost = res.sum_other_cost
         })
     }
   },
