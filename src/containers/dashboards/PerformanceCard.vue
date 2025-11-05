@@ -132,14 +132,14 @@ export default {
   components: {
       'icon-card': IconCard
   },
-  props: ['vehicle', 'subTotal'],
+  props: ['vehicle', 'costs', 'subTotal'],
   data() {
     return {
       baseInterest: 0,
       totalIncome: 0,
       otherIncome: 0,
       totalCost: 0,
-      otherCost: 0,
+      // otherCost: 0,
       residualValue: 0,
       rentalIncome: 0,
       soldPrice: 0,
@@ -194,15 +194,15 @@ export default {
           this.totalCost = res.data.sum_total_cost
         })
     },
-    async getOtherCost(id) {
-      let url = apiUrl + "/listothercost/" + id
-      axios
-      .get(url)
-        .then(r => r.data)
-        .then(res => {
-          this.otherCost = res.sum_other_cost
-        })
-    },
+    // async getOtherCost(id) {
+    //   let url = apiUrl + "/listothercost/" + id
+    //   axios
+    //   .get(url)
+    //     .then(r => r.data)
+    //     .then(res => {
+    //       this.otherCost = res.sum_other_cost
+    //     })
+    // },
     async getResidualValue(id) {
       let url = apiUrl + "/listresidualvalue/" + id
       axios
@@ -250,7 +250,7 @@ export default {
       if(this.vehicle.purchase_method == "Cash") {
         return Number(this.vehicle.price_otr)
       } else {
-        return (this.otherCost !== null) ? Math.abs(Number(this.totalCost) + Number(this.otherCost) + Number(this.baseInterest)) : this.totalCost + this.baseInterest
+        return (this.costs.sum_other_cost !== null) ? Math.abs(Number(this.totalCost) + Number(this.costs.sum_other_cost) + Number(this.baseInterest)) : this.totalCost + this.baseInterest
       }
     },
     theMargin() {
@@ -289,7 +289,7 @@ export default {
     this.getTotalIncome(this.$route.params.id)
     this.getOtherIncome(this.$route.params.id)
     this.getTotalCost(this.$route.params.id)
-    this.getOtherCost(this.$route.params.id)
+    // this.getOtherCost(this.$route.params.id)
     this.getResidualValue(this.$route.params.id)
     this.getRentalIncome(this.$route.params.id)
     this.getSoldPrice(this.$route.params.id)
