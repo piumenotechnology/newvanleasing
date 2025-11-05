@@ -72,10 +72,9 @@ import axios from 'axios';
 import { apiUrl } from '../../constants/config';
 import moment from 'moment';
 export default {
-  props: ["vehicle"],
+  props: ['vehicle', 'costs'],
   data() {
     return {
-      costs: [],
       otherCost: 0,
       totalCost: 0
     }
@@ -105,13 +104,14 @@ export default {
     //       },0) : 0
     //     })
     // }
+
     getOtherCost(id) {
       let url = apiUrl + "/listothercost/" + id
       axios
       .get(url)
         .then(r => r.data)
         .then(res => {
-          this.otherCost = res.sum_other_cost
+          this.otherCost = res.data.sum_other_cost
         })
     }
   },
@@ -123,12 +123,13 @@ export default {
       return (this.vehicle.hp_finance_provider !== null) ? this.vehicle.hp_finance_provider : "n/a"
     },
     theCost() {
+      this.otherCost = this.costs.sum_other_cost
       return (this.otherCost > 0) ? Math.abs(Number(this.otherCost) + Number(this.vehicle.total_cost))
       : this.vehicle.total_cost
     }
   },
-  mounted() {
-    this.getOtherCost(this.$route.params.id)
-  }
+  // mounted() {
+  //   this.getOtherCost(this.$route.params.id)
+  // }
 };
 </script>
