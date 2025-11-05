@@ -41,7 +41,7 @@
     <div v-if="costItems.length === 0">
       No additional cost found in this vehicle.
     </div>
-    <b-table v-else striped :items="costItems" />
+    <b-table v-else class="table-scrollable" striped :items="costItems" />
     <div class="separator my-4"></div>
     <p class="list-heading text-uppercase font-weight-semibold mb-3">Other income</p>
     <div v-if="incomeItems.length === 0">
@@ -54,6 +54,11 @@
 .theader {
   font-size: 0.825rem;
   line-height: 1.2;
+}
+.table-scrollable {
+  display: block;
+  max-height: 210px;
+  overflow-y: auto;
 }
 </style>
 <script>
