@@ -23,7 +23,7 @@
     </b-row>
     <b-row>
       <b-colxx xxs="12" lg="12">
-        <performance-card :vehicle="vehicle" :subTotal="subTotal" />
+        <performance-card :vehicle="vehicle" :costs="costs" :subTotal="subTotal" />
       </b-colxx>
       <b-colxx lg="3">
         <b-card class="mb-4" no-body>
@@ -34,7 +34,7 @@
         <b-card class="mb-4" no-body>
           <b-tabs card no-fade>
             <b-tab title="COST" active title-item-class="w-50 text-center">
-              <vehicle-cost-card v-if="vehicle" :vehicle="vehicle" />
+              <vehicle-cost-card v-if="vehicle" :vehicle="vehicle" :costs="costs" />
             </b-tab>
             <b-tab title="INCOME" title-item-class="w-50 text-center">
               <vehicle-income-card v-if="vehicles" :vehicles="vehicles" />
@@ -72,6 +72,7 @@ export default {
     isLoading: true,
     subTotal: 0,
     vehicles: [],
+    costs: [],
     vehicle: [],
     report: []
   }
@@ -100,10 +101,19 @@ export default {
         .catch(err => {
           console.log(err.message)
         })
+    },
+    fetchOtherCosts(id) {
+      let url = apiUrl + "/listothercost/" + id
+      axios
+      .get(url)
+        .then(r => {
+          this.costs = r.data
+        })
     }
   },
   mounted() {
     this.fetchCar(this.$route.params.id)
+    this.fetchOtherCosts(this.$route.params.id)
   }
 }
 </script>
