@@ -2,7 +2,7 @@
   <b-card>
     <p class="list-heading text-uppercase mb-4">{{ $t("performance.contract-history") }}</p>
     <vuetable
-      table-height="350px"
+      table-height="280px"
       ref="vuetable-scrollable"
       :api-url="apiBase"
       :fields="fields"
@@ -37,6 +37,17 @@
       </template>
     </vuetable>
     <view-performance-details ref="performanceDetail"/>
+    <p class="list-heading text-uppercase font-weight-semibold my-3">{{ $t("performance.other-cost") }}</p>
+    <div v-if="costItems.length === 0">
+      No additional cost found in this vehicle.
+    </div>
+    <b-table v-else striped :items="costItems" />
+    <div class="separator my-4"></div>
+    <p class="list-heading text-uppercase font-weight-semibold mb-3">Other income</p>
+    <div v-if="incomeItems.length === 0">
+      No additional income found in this vehicle.
+    </div>
+    <b-table v-else striped :items="incomeItems" />
   </b-card>
 </template>
 <style scoped>
@@ -47,13 +58,14 @@
 </style>
 <script>
 import moment from "moment"
+import axios from 'axios';
 import { apiUrl } from "../../constants/config";
 import Vuetable from "vuetable-2/src/components/Vuetable";
 import VuetablePaginationBootstrap from "../../components/Common/VuetablePaginationBootstrap";
 import ViewPerformanceDetails from "../pages/ViewPerformanceDetail";
 
 export default {
-  props: ["id"],
+  props: ['id'],
   components: {
     vuetable: Vuetable,
     "vuetable-pagination-bootstrap": VuetablePaginationBootstrap,
@@ -115,6 +127,8 @@ export default {
         //   width: "20%"
         // }
       ],
+      costItems: [],
+      incomeItems: [],
       sortOrder: [
         {
           field: 'vehicle_return_date',
@@ -140,7 +154,47 @@ export default {
       const total = Math.abs(val1 + val2);
       const totalComa = Number(total).toLocaleString();
       return `£ ${totalComa}`;
+    },
+    getOtherCost(id) {
+      let url = apiUrl + "/listothercost/" + id
+      axios
+      .get(url)
+        .then(r => {
+          // console.log(r.data.data);
+          let costs = r.data.data
+          if (costs.length === 0) return
+          for (let i = 0; i < costs.length; i++) {
+            const costObject = {
+              no: i + 1,
+              amount: `£ ${costs[i].amount_oc}`,
+              description: costs[i].description_expenses,
+            };
+            this.costItems.push(costObject);
+          }
+        })
+    },
+    getOtherIncome(id) {
+      let url = apiUrl + "/listotherincome/" + id
+      axios
+      .get(url)
+        .then(r => {
+          // console.log(r.data.data);
+          let incomes = r.data.data
+          if (incomes.length === 0) return
+          for (let i = 0; i < incomes.length; i++) {
+            const incomeObject = {
+              no: i + 1,
+              amount: `£ ${incomes[i].amount_oi}`,
+              description: incomes[i].description_income,
+            };
+            this.incomeItems.push(incomeObject);
+          }
+        })
     }
+  },
+  mounted() {
+    this.getOtherCost(this.$route.params.id)
+    this.getOtherIncome(this.$route.params.id)
   }
 }
 </script>
