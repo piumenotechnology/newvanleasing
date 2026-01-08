@@ -240,22 +240,11 @@ export default {
       }, 1000);
     },
     async getSalesId(val) {
-      // let url = apiUrl + "/salesorder?per_page=250"
-      // axios
-      //   .get(url)
-      //   .then(r => r.data)
-      //   .then(res =>  {
-      //     let salesId = res.data.data.filter(x => x.agreement_number == val)
-      //     this.newSalesIdOrder = salesId[0].id
-      //     this.newPurchaseIdOrder = salesId[0].id_purchase_order
-      //     this.getMinDate(salesId[0].id_purchase_order)
-      //   })
       let url = apiUrl + "/showbyagreement/" + val
       axios
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          console.log(res.data[0].tgl_available)
           this.availableDate.to = new Date(res.data[0].tgl_available)
           
           // let salesId = res.data.data.filter(x => x.agreement_number == val)
@@ -264,15 +253,15 @@ export default {
           // this.getMinDate(salesId[0].id_purchase_order)
         })
     },
-    async getMinDate(id) {
-      let url = apiUrl + "/purchaseorder/" + id
-      axios
-        .get(url)
-        .then(r => r.data)
-        .then(res =>  {
-          this.availableDate.to = new Date(res.data.tgl_available)
-        })
-    },
+    // async getMinDate(id) {
+    //   let url = apiUrl + "/purchaseorder/" + id
+    //   axios
+    //     .get(url)
+    //     .then(r => r.data)
+    //     .then(res =>  {
+    //       this.availableDate.to = new Date(res.data.tgl_available)
+    //     })
+    // },
     fetchCars(search, loading) {
       let url = apiUrl + "/showvehiclenumberexceptsold?per_page=99&search=" + encodeURI(search);
       loading(true);
