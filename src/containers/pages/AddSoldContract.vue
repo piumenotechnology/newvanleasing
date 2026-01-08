@@ -255,8 +255,8 @@ export default {
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          console.log(res.data)
-          // this.availableDate.to = new Date(res.data.tgl_available)
+          console.log(res.data.tgl_available)
+          this.availableDate.to = new Date(res.data.tgl_available)
           
           // let salesId = res.data.data.filter(x => x.agreement_number == val)
           // this.newSalesIdOrder = salesId[0].id
