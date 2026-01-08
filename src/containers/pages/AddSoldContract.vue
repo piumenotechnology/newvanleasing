@@ -239,15 +239,16 @@ export default {
       }, 1000);
     },
     async getSalesId(val) {
-      let url = apiUrl + "/salesorder?per_page=250"
+      let url = apiUrl + "/salesorder/" + val
       axios
         .get(url)
         .then(r => r.data)
         .then(res =>  {
-          let salesId = res.data.data.filter(x => x.agreement_number == val)
-          this.newSalesIdOrder = salesId[0].id
-          this.newPurchaseIdOrder = salesId[0].id_purchase_order
-          this.getMinDate(salesId[0].id_purchase_order)
+          console.log(res.data.data)
+          // let salesId = res.data.data.filter(x => x.agreement_number == val)
+          // this.newSalesIdOrder = salesId[0].id
+          // this.newPurchaseIdOrder = salesId[0].id_purchase_order
+          // this.getMinDate(salesId[0].id_purchase_order)
         })
     },
     async getMinDate(id) {
