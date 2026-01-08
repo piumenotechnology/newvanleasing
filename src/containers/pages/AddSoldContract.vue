@@ -250,12 +250,14 @@ export default {
       //     this.newPurchaseIdOrder = salesId[0].id_purchase_order
       //     this.getMinDate(salesId[0].id_purchase_order)
       //   })
-      let url = apiUrl + "/salesorder/" + val
+      let url = apiUrl + "/showbyagreement/" + val
       axios
         .get(url)
         .then(r => r.data)
         .then(res =>  {
           console.log(res.data.data)
+          // this.availableDate.to = new Date(res.data.tgl_available)
+          
           // let salesId = res.data.data.filter(x => x.agreement_number == val)
           // this.newSalesIdOrder = salesId[0].id
           // this.newPurchaseIdOrder = salesId[0].id_purchase_order
