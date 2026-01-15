@@ -246,6 +246,8 @@ export default {
         .then(r => r.data)
         .then(res =>  {
           this.availableDate.to = new Date(res.data[0].tgl_available)
+          this.newSalesIdOrder = res.data[0].id
+          this.newPurchaseIdOrder = res.data[0].id_purchase_order
           
           // let salesId = res.data.data.filter(x => x.agreement_number == val)
           // this.newSalesIdOrder = salesId[0].id
