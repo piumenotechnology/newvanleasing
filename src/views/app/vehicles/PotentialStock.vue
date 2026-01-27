@@ -178,7 +178,7 @@ export default {
                title: "Defleet Price (Excl VAT)",
                titleClass: "center aligned",
                dataClass: "center-aligned",
-               width: "8%"
+               width: "10%"
             },
             {
                name: "__slot:stock_status",
