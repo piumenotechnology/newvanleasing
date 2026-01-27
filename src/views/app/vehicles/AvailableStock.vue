@@ -25,6 +25,10 @@
                     <span>£ {{ props.rowData.min_contract_price_satu }}</span>
                   </template>
 
+                  <template slot="residual" slot-scope="props">
+                    <span>£ {{ props.rowData.residual_value }}</span>
+                  </template>
+
                   <template slot="eta" slot-scope="props">
                     <b-input-group v-if="$can('vehicle_available.update')">
                       <v-select @input="changeEta(props.rowData)" :options="etaOptions" v-model="props.rowData.eta" :value="props.rowData.eta" :searchable="false"/>
@@ -166,6 +170,14 @@ export default {
                title: "Minimum Contract Price",
                titleClass: "center aligned",
                dataClass: "center-aligned"
+            },
+            {
+               name: "__slot:residual",
+               sortField: "residual_value",
+               title: "Defleet Price (Excl VAT)",
+               titleClass: "center aligned",
+               dataClass: "center-aligned",
+               width: "8%"
             },
             {
                name: "__slot:stock_status",
