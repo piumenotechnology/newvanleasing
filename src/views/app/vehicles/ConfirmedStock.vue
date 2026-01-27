@@ -32,6 +32,10 @@
                     <span>£ {{ props.rowData.min_contract_price_satu }}</span>
                   </template>
 
+                  <template slot="residual" slot-scope="props">
+                    <span>£ {{ props.rowData.residual_value }}</span>
+                  </template>
+
                   <template slot="action" slot-scope="props">
                      <b-button v-if="$can('vehicle.update')" :to="{ path: `${props.rowData.id}` }"
                      variant="dark"
@@ -167,6 +171,14 @@ export default {
                titleClass: "center aligned",
                dataClass: "center-aligned",
                width: "13%"
+            },
+            {
+               name: "__slot:residual",
+               sortField: "residual_value",
+               title: "Defleet Price (Excl VAT)",
+               titleClass: "center aligned",
+               dataClass: "center-aligned",
+               width: "8%"
             },
             {
                name: "__slot:stock_status",
