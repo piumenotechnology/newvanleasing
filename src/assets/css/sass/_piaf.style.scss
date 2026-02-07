@@ -825,6 +825,7 @@ button {
 .btn-square {
   border-radius: 10px;
 }
+
 .btn-absolute {
   height: 100%;
   position: absolute;
@@ -1278,11 +1279,11 @@ button {
     }
   }
 
-  &.btn-primary:disabled {
-    opacity: 1;
-    background: darken($theme-color-1, 10%);
-    border-color: darken($theme-color-1, 10%);
-  }
+  // &.btn-primary:disabled {
+  //   opacity: 1;
+  //   background: darken($theme-color-1, 10%);
+  //   border-color: darken($theme-color-1, 10%);
+  // }
 
   &.btn-secondary:disabled {
     opacity: 1;
@@ -5270,6 +5271,14 @@ input:-webkit-autofill {
     p.h2 {
       font-size: 1.4rem;
     }
+  }
+}
+
+.otp-card {
+  display: flex;
+  flex-direction: column;
+  .otp-input--wrapper > :not(:first-child) {
+    margin-left: 7px; /* Sets margin-left and margin-right to 5px */
   }
 }
 
