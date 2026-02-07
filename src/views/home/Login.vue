@@ -29,30 +29,32 @@
           <div class="d-flex justify-content-between align-items-center">
             <router-link to="/forgot-password">{{ $t('user.forgot-password-question')}}</router-link>
             <b-button type="submit" variant="primary" size="lg" :disabled="processing" :class="{'btn-multiple-state btn-shadow': true,
-            'show-spinner': processing,
-            'show-success': !processing && loginError===false,
-            'show-fail': !processing && loginError }">
-            <span class="spinner d-inline-block">
-              <span class="bounce1"></span>
-              <span class="bounce2"></span>
-              <span class="bounce3"></span>
-            </span>
-            <span class="icon success">
-              <i class="simple-icon-check"></i>
-            </span>
-            <span class="icon fail">
-              <i class="simple-icon-exclamation"></i>
-            </span>
-            <span class="label">{{ $t('user.login-button') }}</span>
-          </b-button>
-        </div>
-      </b-form>
-    </div>
-  </b-colxx>
-</b-row>
+              'show-spinner': processing,
+              'show-success': !processing && loginError===false,
+              'show-fail': !processing && loginError }">
+              <span class="spinner d-inline-block">
+                <span class="bounce1"></span>
+                <span class="bounce2"></span>
+                <span class="bounce3"></span>
+              </span>
+              <span class="icon success">
+                <i class="simple-icon-check"></i>
+              </span>
+              <span class="icon fail">
+                <i class="simple-icon-exclamation"></i>
+              </span>
+              <span class="label">{{ $t('user.login-button') }}</span>
+            </b-button>
+          </div>
+        </b-form>
+      </div>
+    </b-colxx>
+  </b-row>
 </template>
 
 <script>
+import axios from "axios";
+import { apiUrl, currentUser } from "../../constants/config";
 import { AbilityBuilder, Ability } from '@casl/ability';
 import {
   mapGetters,
@@ -89,26 +91,21 @@ export default {
         required,
         maxLength: maxLength(16),
         minLength: minLength(4)
-      },
-      // email: {
-      //     required,
-      //     email,
-      //     minLength: minLength(4)
-      // }
+      }
     }
   },
   computed: {
     ...mapGetters(["currentUser", "processing", "loginError"])
   },
   methods: {
-    ...mapActions(["login"]),
-    formSubmit() {
+    ...mapActions(["attemptOtp"]),
+
+    async formSubmit() {
       this.$v.$touch();
       this.$v.form.$touch();
-      // this.form.email = "piaf-vue@coloredstrategies.com";
-      // this.form.password = "piaf123";
+
       if (!this.$v.form.$anyError) {
-        this.login({
+        this.attemptOtp({
           username: this.form.username,
           password: this.form.password
         });
@@ -117,21 +114,24 @@ export default {
   },
   watch: {
     currentUser(val) {
-      // if (val && val.id && val.id.length > 0) {
       if (val && val.id) {
-        setTimeout(() => {
-          // this.$router.push(adminRoot);
-          this.$router.replace(
-            { path: adminRoot },
-            () => {
-              this.$router.go(0);
-            }
-          )
-        }, 50);
+        if(val.isAdmin) {
+          setTimeout(() => {
+            this.$router.replace(
+              { path: adminRoot },
+              () => {
+                this.$router.go(0);
+              }
+            )
+          }, 50);
+        } else {
+          this.$router.push({ name: 'verifyOtp' })
+        }
       }
     },
     loginError(val) {
       if (val != null) {
+
         this.$notify("error", "Login Error", val, {
           duration: 3000,
           permanent: false
