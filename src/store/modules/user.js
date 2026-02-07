@@ -27,6 +27,7 @@ export default {
       state.processing = false
       state.loginError = null
     },
+
     setCapability(state, payload) {
       state.currentCapability = payload
       state.processing = false
@@ -67,7 +68,7 @@ export default {
     }
   },
   actions: {
-    login({ commit }, payload) {
+    attemptOtp({ commit }, payload) {
       commit('clearError')
       commit('setProcessing', true)
       axios
@@ -78,20 +79,29 @@ export default {
         .then(res => res.data)
         .then(
           user => {
-            // console.log(user.capability)
-            const item = {
-              id: user.user.id,
-              first_name: user.user.first_name,
-              last_name: user.user.last_name,
-              username: user.user.username,
-              email: user.user.email,
-              isAdmin: (user.user.position == 'Administrator') ? 1 : 0,
-              ...currentUser
+            if(!user.access_token) {
+              const item = {
+                id: user.user.id,
+                isAdmin: (user.user.position == 'Administrator') ? 1 : 0,
+                ...currentUser
+              }
+              setCurrentUser(item)
+              commit('setUser', item)
+            } else {
+              const item = {
+                id: user.user.id,
+                first_name: user.user.first_name,
+                last_name: user.user.last_name,
+                username: user.user.username,
+                email: user.user.email,
+                isAdmin: (user.user.position == 'Administrator') ? 1 : 0,
+                ...currentUser
+              }
+              setCurrentUser(item)
+              setCurrentCapability(user.capability)
+              commit('setUser', item)
+              commit('setCapability', user.capability)
             }
-            setCurrentUser(item)
-            setCurrentCapability(user.capability)
-            commit('setUser', item)
-            commit('setCapability', user.capability)
           },
           err => {
             setCurrentUser(null)
@@ -102,24 +112,23 @@ export default {
             }, 3000)
           }
         )
-
-      // firebase
-      //   .auth()
-      //   .signInWithEmailAndPassword(payload.email, payload.password)
-      //   .then(
-      //     user => {
-      //       const item = { uid: user.user.uid, ...currentUser }
-      //       setCurrentUser(item)
-      //       commit('setUser', item)
-      //     },
-      //     err => {
-      //       setCurrentUser(null);
-      //       commit('setError', err.message)
-      //       setTimeout(() => {
-      //         commit('clearError')
-      //       }, 3000)
-      //     }
-      //   )
+    },
+    verifyAccount({ commit }, payload) {
+      commit('clearError')
+      commit('setProcessing', true)
+      const item = {
+        id: payload.user.id,
+        first_name: payload.user.first_name,
+        last_name: payload.user.last_name,
+        username: payload.user.username,
+        email: payload.user.email,
+        isAdmin: (payload.user.position == 'Administrator') ? 1 : 0,
+        ...currentUser
+      }
+      setCurrentUser(item)
+      setCurrentCapability(payload.capability)
+      commit('setUser', item)
+      commit('setCapability', payload.capability)
     },
     forgotPassword({ commit }, payload) {
       commit('clearError')
@@ -163,14 +172,6 @@ export default {
       setCurrentUser(null);
       setCurrentCapability(null);
       commit('setLogout')
-
-      // firebase
-      //   .auth()
-      //   .signOut()
-      //   .then(() => {
-      //     setCurrentUser(null);
-      //     commit('setLogout')
-      //   }, _error => { })
     }
   }
 }
