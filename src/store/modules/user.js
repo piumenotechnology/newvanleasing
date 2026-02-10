@@ -70,7 +70,7 @@ export default {
   actions: {
     attemptOtp({ commit }, payload) {
       commit('clearError')
-      // commit('setProcessing', true)
+      commit('setProcessing', true)
       axios
         .post(apiUrl + "/login", {
           username: payload.username,
