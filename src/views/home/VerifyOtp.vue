@@ -142,10 +142,7 @@ export default {
         otp_code: code
       })
         .then(response => {
-          setTimeout(() => {
-            this.verifyAccount(response.data)
-          }, 50)
-
+          this.verifyAccount(response.data)
         })
         .catch(error => {
           this.$store.commit('setProcessing', false)
