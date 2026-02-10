@@ -115,7 +115,7 @@ export default {
     },
     verifyAccount({ commit }, payload) {
       commit('clearError')
-      commit('setProcessing', true)
+      // commit('setProcessing', true)
       const item = {
         id: payload.user.id,
         first_name: payload.user.first_name,
