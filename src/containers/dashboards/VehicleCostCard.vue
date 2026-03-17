@@ -22,6 +22,13 @@
       <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.total-cost") }}
       </span>£ {{ theCost | withcoma }}
     </p>
+    <div v-show="this.vehicle.purchase_method === 'Hire Purchase'">
+      <div class="separator mb-3" />
+      <p class="font-weight-semibold">
+        <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.current-settlement") }}
+        </span>£ {{ currentSettlement | withcoma }}
+      </p>
+    </div>
 
     <div class="separator mb-4" />
     <p class="list-heading text-uppercase mb-4">{{ $t("performance.funding") }}</p>
@@ -92,6 +99,12 @@ export default {
       let A = (p * r * t) / 100
       return Math.ceil(A)
     },
+    getMonthDifference(startDate, endDate) {
+      let outstanding = endDate.getMonth() -
+          startDate.getMonth() +
+          12 * (endDate.getFullYear() - startDate.getFullYear());
+      return outstanding
+    },
     // getOtherCost(id) {
     //   let url = apiUrl + "/othercost?per_page=500"
     //   axios
@@ -126,6 +139,11 @@ export default {
       this.otherCost = this.costs.sum_other_cost
       return (this.otherCost > 0) ? Math.abs(Number(this.otherCost) + Number(this.vehicle.total_cost))
       : this.vehicle.total_cost
+    },
+    currentSettlement() {
+      const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date()) +1
+      const running_payment = (this.vehicle.monthly_payment * ongoing) + this.vehicle.hp_deposit_amount
+      return this.vehicle.total_cost - running_payment
     }
   },
   // mounted() {
