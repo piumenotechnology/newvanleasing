@@ -120,6 +120,15 @@
           :value="Number(soldPrice)"
         />
       </b-colxx>
+      <b-colxx v-show="this.vehicle.purchase_method === 'Hire Purchase'">
+        <icon-card
+          :title="$t('performance.nbv')"
+          icon="iconsminds-pricing"
+          :isComa="true"
+          :isMoney="true"
+          :value="Number(nbvValue)"
+        />
+      </b-colxx>
     </b-row>
 
   </div>
@@ -282,6 +291,22 @@ export default {
     },
     marginPercentage() {
       return parseFloat(this.actualMargin / this.actualIncome * 100).toFixed(2);
+    },
+    nbvValue() {
+      const { price_otr, hp_term, contract_start_date } = this.vehicle;
+
+      if (!hp_term || !price_otr || !contract_start_date) return 0;
+
+      const monthsElapsed = Math.min(
+        this.getMonthDifference(new Date(contract_start_date), new Date()) + 1,
+        hp_term
+      );
+
+      const monthlyDepreciation = price_otr / hp_term;
+
+      const nbv = price_otr - (monthsElapsed * monthlyDepreciation);
+
+      return Math.max(0, Number(nbv.toFixed(2)));
     }
   },
   mounted() {
