@@ -293,18 +293,20 @@ export default {
       return parseFloat(this.actualMargin / this.actualIncome * 100).toFixed(2);
     },
     nbvValue() {
-      const { price_otr, hp_term, contract_start_date } = this.vehicle;
+      const { price_otr, hp_term, hire_purchase_starting_date } = this.vehicle;
 
-      if (!hp_term || !price_otr || !contract_start_date) return 0;
+      if (!hp_term || !price_otr || !hire_purchase_starting_date) return 0;
 
       const monthsElapsed = Math.min(
-        this.getMonthDifference(new Date(contract_start_date), new Date()) + 1,
+        this.getMonthDifference(new Date(hire_purchase_starting_date), new Date()) + 1,
         hp_term
       );
 
-      const monthlyDepreciation = price_otr / hp_term;
+      const netOtr = price_otr * 0.36;
 
-      const nbv = price_otr - (monthsElapsed * monthlyDepreciation);
+      const monthlyDepreciation = netOtr / 36;
+
+      const nbv = price_otr - (monthlyDepreciation * monthsElapsed);
 
       return Math.max(0, Number(nbv.toFixed(2)));
     }
