@@ -141,7 +141,7 @@ export default {
       : this.vehicle.total_cost
     },
     currentSettlement() {
-      const ongoing = this.getMonthDifference(new Date(this.vehicle.contract_start_date), new Date()) +1
+      const ongoing = this.getMonthDifference(new Date(this.vehicle.hire_purchase_starting_date), new Date()) +1
       const running_payment = (this.vehicle.monthly_payment * ongoing) + this.vehicle.hp_deposit_amount
       return this.vehicle.total_cost - running_payment
     }
