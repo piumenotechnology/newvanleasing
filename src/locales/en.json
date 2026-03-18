@@ -426,8 +426,8 @@
     "monthly-freecash": "Monthly Free Cash",
     "total-vehicles": "Total Vehicles",
     "active-contracts": "Active Contracts",
-    "nbv": "Est NBV",
-    "current-settlement": "Current Settlement"
+    "nbv": "EST NET BOOK VALUE",
+    "current-settlement": "Est Current Settlement"
   },
   "calculator": {
     "tab-1": "Contract Pricing Calculator",
