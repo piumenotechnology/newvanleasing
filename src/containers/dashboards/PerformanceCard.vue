@@ -295,16 +295,17 @@ export default {
     nbvValue() {
       const { price_otr, hp_term, hire_purchase_starting_date } = this.vehicle;
 
-      if (!hp_term || !price_otr || !hire_purchase_starting_date) return 0;
+      if (!price_otr || !hp_term || !hire_purchase_starting_date) return 0;
 
       const monthsElapsed = Math.min(
-        this.getMonthDifference(new Date(hire_purchase_starting_date), new Date()) + 1,
-        hp_term
+        this.getMonthDifference(
+          new Date(hire_purchase_starting_date),
+          new Date()
+        ) + 1,
+        36
       );
 
-      const netOtr = price_otr * 0.36;
-
-      const monthlyDepreciation = netOtr / 36;
+      const monthlyDepreciation = (price_otr * 0.36) / 36;
 
       const nbv = price_otr - (monthlyDepreciation * monthsElapsed);
 
