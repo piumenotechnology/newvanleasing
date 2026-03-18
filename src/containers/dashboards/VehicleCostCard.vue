@@ -141,9 +141,28 @@ export default {
       : this.vehicle.total_cost
     },
     currentSettlement() {
-      const ongoing = this.getMonthDifference(new Date(this.vehicle.hire_purchase_starting_date), new Date()) +1
-      const running_payment = (this.vehicle.monthly_payment * ongoing) + this.vehicle.hp_deposit_amount
-      return this.vehicle.total_cost - running_payment
+      const {
+        hp_term,
+        monthly_payment,
+        hp_deposit_amount,
+        total_cost,
+        hire_purchase_starting_date
+      } = this.vehicle;
+
+      if (!hp_term || !monthly_payment || !total_cost) return 0;
+
+      const ongoing =
+        this.getMonthDifference(
+          new Date(hire_purchase_starting_date),
+          new Date()
+        ) + 1;
+
+      if (ongoing > hp_term) return 0;
+
+      const running_payment =
+        (monthly_payment * ongoing) + hp_deposit_amount;
+
+      return Math.max(0, Number((total_cost - running_payment).toFixed(2)));
     }
   },
   // mounted() {
