@@ -297,13 +297,15 @@ export default {
 
       if (!price_otr || !hp_term || !hire_purchase_starting_date) return 0;
 
-      const monthsElapsed = Math.min(
+      const months =
         this.getMonthDifference(
           new Date(hire_purchase_starting_date),
           new Date()
-        ) + 1,
-        36
-      );
+        ) + 1;
+
+      const monthsElapsed = months > 36 ? 0 : months;
+
+      if (monthsElapsed === 0) return 0;
 
       const monthlyDepreciation = (price_otr * 0.36) / 36;
 
