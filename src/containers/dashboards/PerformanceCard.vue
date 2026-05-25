@@ -148,6 +148,7 @@ export default {
       totalIncome: 0,
       otherIncome: 0,
       totalCost: 0,
+      currentTotalCost: 0,
       // otherCost: 0,
       residualValue: 0,
       rentalIncome: 0,
@@ -201,6 +202,7 @@ export default {
         .then(r => r.data)
         .then(res => {
           this.totalCost = res.data.sum_total_cost
+          this.currentTotalCost = res.data.current_total_cost
         })
     },
     // async getOtherCost(id) {
@@ -259,7 +261,7 @@ export default {
       if(this.vehicle.purchase_method == "Cash") {
         return Number(this.vehicle.price_otr)
       } else {
-        return (this.costs.sum_other_cost !== null) ? Math.abs(Number(this.totalCost) + Number(this.costs.sum_other_cost) + Number(this.baseInterest)) : this.totalCost + this.baseInterest
+        return Number(this.totalCost)
       }
     },
     theMargin() {
@@ -274,14 +276,14 @@ export default {
       : this.theIncome - this.residualValue
     },
     actualCost() {
-      let v = this.vehicle
-      // let interest = 1 + (v.hp_interest_per_annum / 100)
-      // let subTotal = v.monthly_payment * interest
-      let subTotal = v.regular_monthly_payment + v.vehicle_tracking
-
-      const ongoing = this.getMonthDifference(new Date(v.hire_purchase_starting_date), new Date())
-      // console.log(ongoing);
-      return (ongoing > 0 && ongoing < v.hp_term) ? (ongoing * subTotal) + v.hp_deposit_amount + this.baseInterest : this.theCost
+      // let v = this.vehicle
+      // // let interest = 1 + (v.hp_interest_per_annum / 100)
+      // // let subTotal = v.monthly_payment * interest
+      // let subTotal = v.regular_monthly_payment + v.vehicle_tracking
+      // const ongoing = this.getMonthDifference(new Date(v.hire_purchase_starting_date), new Date())
+      // return (ongoing > 0 && ongoing < v.hp_term) ? (ongoing * subTotal) + v.hp_deposit_amount + this.baseInterest : this.theCost
+      console.log(this.currentTotalCost);
+      return this.currentTotalCost
     },
     actualMargin() {
       return this.actualIncome - this.actualCost
