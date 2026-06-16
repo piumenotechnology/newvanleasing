@@ -258,11 +258,12 @@ export default {
       }
     },
     theCost() {
-      if(this.vehicle.purchase_method == "Cash") {
-        return Number(this.vehicle.price_otr)
-      } else {
-        return Number(this.totalCost)
-      }
+      return Number(this.totalCost)
+      // if(this.vehicle.purchase_method == "Cash") {
+      //   return Number(this.vehicle.price_otr)
+      // } else {
+      //   return Number(this.totalCost)
+      // }
     },
     theMargin() {
       return Number(this.theIncome) - Number(this.theCost)
