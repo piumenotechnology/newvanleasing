@@ -26,7 +26,7 @@
       <div class="separator mb-3" />
       <p class="font-weight-semibold">
         <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.current-settlement") }}
-        </span>£ {{ currentSettlement | withcoma }}
+        </span>£ {{ currentSettlement }}
       </p>
     </div>
 
@@ -134,7 +134,7 @@ export default {
       .get(url)
         .then(r => r.data)
         .then(res => {
-          console.log(res.data);
+          console.log(res.data.est_current_settlement);
           this.currentSettlement = res.data.est_current_settlement
         })
     },
