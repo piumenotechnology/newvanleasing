@@ -84,7 +84,7 @@ export default {
     return {
       otherCost: 0,
       totalCost: 0,
-      est_current_settlement: 0
+      currentSettlement: 0
     }
   },
   filters: {
@@ -134,7 +134,6 @@ export default {
       .get(url)
         .then(r => r.data)
         .then(res => {
-          console.log(res.data.est_current_settlement);
           this.currentSettlement = res.data.est_current_settlement
         })
     },
