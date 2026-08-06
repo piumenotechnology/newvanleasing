@@ -83,7 +83,8 @@ export default {
   data() {
     return {
       otherCost: 0,
-      totalCost: 0
+      totalCost: 0,
+      est_current_settlement: 0
     }
   },
   filters: {
@@ -126,7 +127,16 @@ export default {
         .then(res => {
           this.otherCost = res.data.sum_other_cost
         })
-    }
+    },
+    async getCurrentSettlement(id) {
+      let url = apiUrl + "/listtotalcost/" + id
+      axios
+      .get(url)
+        .then(r => r.data)
+        .then(res => {
+          this.currentSettlement = res.data.est_current_settlement
+        })
+    },
   },
   computed: {
     period() {
@@ -140,7 +150,7 @@ export default {
       return (this.otherCost > 0) ? Math.abs(Number(this.otherCost) + Number(this.vehicle.total_cost))
       : this.vehicle.total_cost
     },
-    currentSettlement() {
+    // currentSettlement() {
       // const {
       //   hp_term,
       //   monthly_payment,
@@ -163,11 +173,11 @@ export default {
       //   (monthly_payment * ongoing) + hp_deposit_amount;
 
       // return Math.max(0, Number((total_cost - running_payment).toFixed(2)));
-      return this.costs.est_current_settlement
-    }
+      // return this.costs.est_current_settlement
+    // }
   },
-  // mounted() {
-  //   this.getOtherCost(this.$route.params.id)
-  // }
+  mounted() {
+    this.getCurrentSettlement(this.$route.params.id)
+  }
 };
 </script>
