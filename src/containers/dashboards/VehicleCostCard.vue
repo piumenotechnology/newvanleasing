@@ -15,7 +15,7 @@
     <div class="separator mb-3" />
     <p class="font-weight-semibold">
       <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.other-cost") }}
-      </span>£ {{ otherCost| withcoma }}
+      </span>£ {{ otherCost | withcoma }}
     </p>
     <div class="separator mb-3" />
     <p class="font-weight-semibold">
@@ -26,7 +26,7 @@
       <div class="separator mb-3" />
       <p class="font-weight-semibold">
         <span class="text-muted font-weight-light d-inline mr-1">{{ $t("performance.current-settlement") }}
-        </span>£ {{ currentSettlement }}
+        </span>£ {{ currentSettlement | withcoma }}
       </p>
     </div>
 
