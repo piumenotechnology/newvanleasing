@@ -105,7 +105,7 @@
       <b-colxx>
         <icon-card
           :title="$t('performance.current-settlement')"
-          icon="iconsminds-receipt-3"
+          icon="iconsminds-receipt-4"
           :isComa="true"
           :isMoney="true"
           :value="Number(estCurrentSettlement)"
