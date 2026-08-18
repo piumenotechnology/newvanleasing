@@ -102,6 +102,15 @@
           </h6>
         </icon-card>
       </b-colxx>
+      <b-colxx>
+        <icon-card
+          :title="$t('performance.current-settlement')"
+          icon="iconsminds-financial"
+          :isComa="true"
+          :isMoney="true"
+          :value="Number(actualIncome)"
+        />
+      </b-colxx>
       <b-colxx v-show="!isSold">
         <icon-card
           :title="$t('performance.residual')"
@@ -149,6 +158,7 @@ export default {
       otherIncome: 0,
       totalCost: 0,
       currentTotalCost: 0,
+      estCurrentSettlement: 0,
       // otherCost: 0,
       residualValue: 0,
       rentalIncome: 0,
@@ -203,6 +213,7 @@ export default {
         .then(res => {
           this.totalCost = res.data.sum_total_cost
           this.currentTotalCost = res.data.current_total_cost
+          this.estCurrentSettlement = res.data.est_current_settlement
         })
     },
     // async getOtherCost(id) {
@@ -283,7 +294,6 @@ export default {
       // let subTotal = v.regular_monthly_payment + v.vehicle_tracking
       // const ongoing = this.getMonthDifference(new Date(v.hire_purchase_starting_date), new Date())
       // return (ongoing > 0 && ongoing < v.hp_term) ? (ongoing * subTotal) + v.hp_deposit_amount + this.baseInterest : this.theCost
-      console.log(this.currentTotalCost);
       return this.currentTotalCost
     },
     actualMargin() {
