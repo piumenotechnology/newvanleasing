@@ -108,7 +108,7 @@
           icon="iconsminds-financial"
           :isComa="true"
           :isMoney="true"
-          :value="Number(actualIncome)"
+          :value="Number(estCurrentSettlement)"
         />
       </b-colxx>
       <b-colxx v-show="!isSold">
